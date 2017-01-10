@@ -8,5 +8,6 @@
      "CriticalHitRatePerSkillPoint" : 0.015,
      "StartingHealthPotions" : 5,
      "VisionRange" : 7,
-     "CriticalHitDamageMod" : 2
+     "CriticalHitDamageMod" : 2,
+     "SpeedToMovementRatio" : 0.5
 }

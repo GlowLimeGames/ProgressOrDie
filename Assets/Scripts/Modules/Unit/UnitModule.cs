@@ -20,6 +20,7 @@ public class UnitModule : Module
 	StatModule stats;
 
 	const string PLAYER_KEY = "P";
+
 	List<Unit> units = new List<Unit>();
 	EnemyNPC[] highlightedEnemyTargets = new EnemyNPC[0];
 
@@ -28,6 +29,7 @@ public class UnitModule : Module
 			return stats.BulkToHPRatio;
 		}
 	}
+
 
 	public void Init(MapModule map, 
 		SpriteModule sprites, 

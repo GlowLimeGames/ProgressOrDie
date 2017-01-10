@@ -73,6 +73,13 @@ public class StatModule : Module
 			return tuning.CriticalHitDamageMod;
 		}
 	}
+
+	public float SpeedToMovementRatio {
+		get {
+			return tuning.SpeedToMovementRatio;
+		}
+	}
+
 	public int GetMeleeDamage (IUnit unit) {
 		return unit.GetStrength() * DamagePerStrengthPoint;
 	}
@@ -85,4 +92,5 @@ public class StatModule : Module
 		float critChance = CriticalHitRatePerSkillPoint * unit.GetSkill();
 		return Random.Range(0.0f, 1.0f) < critChance;
 	}
+
 }

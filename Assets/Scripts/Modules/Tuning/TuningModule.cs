@@ -66,6 +66,12 @@ public class TuningModule : Module
 		}
 	}
 
+	public float SpeedToMovementRatio {
+		get {
+			return data.SpeedToMovementRatio;
+		}
+	}
+
 	TuningData data;
 
 	public void Init (TuningData data) {
@@ -87,5 +93,6 @@ public class TuningData : SerializableData
 	public int StartingHealthPotions;
 	public int VisionRange;
 	public float CriticalHitDamageMod;
+	public float SpeedToMovementRatio;
 
 }

@@ -29,6 +29,10 @@ public class UnitModule : Module
 		}
 	}
 
+	PlayerCharacter player() {
+		return GetMainPlayer().GetCharacter();
+	}
+
 	public void Init(MapModule map, 
 		SpriteModule sprites, 
 		string[,] units,
@@ -47,8 +51,9 @@ public class UnitModule : Module
 		placeUnits(map, sprites, this.units.ToArray(), turns, movement, combat, stats, abilities);
 	}
 		
-	public void HandleUnitDestroed(Unit unit) {
-		// TODO: Implement this functionality
+	public void HandleUnitDestroyed(Unit unit) {
+		// TODO: Implement real functionality
+
 	}
 
 	void handleAgentMove (Agent agent) {
@@ -82,6 +87,14 @@ public class UnitModule : Module
 		} else if (turn == AgentType.Enemy) {
 			unhighlightEnemies();
 		}
+	}
+
+	public void MeleeAttack (IUnit attacker, IUnit target) {
+		combat.MeleeAttack(attacker, target);
+	}
+
+	public void MagicAttack (IUnit attacker, IUnit target) {
+		combat.MagicAttack(attacker, target);
 	}
 
 	public PlayerCharacterBehaviour GetMainPlayer () {
@@ -182,4 +195,45 @@ public class UnitModule : Module
 		}
 		return lookup;
 	}
+
+	public void ChangePlayerStrength(int delta) {
+		player().ModStrength(delta);	
+	}
+
+	public void ChangePlayerSpeed(int delta) {
+		player().ModSpeed(delta);	
+	}
+
+	public void ChangePlayerConstitution(int delta) {
+		player().ModConstitution(delta);	
+	}
+
+	public void ChangePlayerMagic(int delta) {
+		player().ModMagic(delta);
+	}
+
+	public void ChangePlayerSkill(int delta) {
+		player().ModSkill(delta);
+	}
+		
+	void modStrength(Unit unit, int delta) {
+		unit.ModStrength(delta);
+	}
+
+	void modSpeed(Unit unit, int delta) {
+		unit.ModSpeed(delta);
+	}
+
+	void modConstitution(Unit unit, int delta) {
+		unit.ModConstitution(delta);
+	}
+
+	void modMagic(Unit unit, int delta) {
+		unit.ModMagic(delta);
+	}
+
+	void modSkill(Unit unit, int delta) {
+		unit.ModSkill(delta);
+	}
+
 }

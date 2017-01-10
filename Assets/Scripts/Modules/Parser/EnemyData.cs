@@ -23,6 +23,20 @@ public class EnemyDescriptor : SerializableData
 	public int Magic;
 	public int[] Size;
 	public int TurnPriority;
+
+	public EnemyDescriptor Copy() {
+		EnemyDescriptor desc = new EnemyDescriptor();
+		desc.Key = this.Key;
+		desc.Types = this.Types;
+		desc.Speed = this.Speed;
+		desc.Strength = this.Strength;
+		desc.Skill = this.Skill;
+		desc.Constitution = this.Constitution;
+		desc.Magic = this.Magic;
+		desc.Size = this.Size;
+		desc.TurnPriority = this.TurnPriority;
+		return desc;
+	}
 }
 
 [System.Serializable]

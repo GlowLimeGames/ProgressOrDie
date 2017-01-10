@@ -15,11 +15,11 @@ public abstract class Unit
 	}
 
 	protected Agent agent;
-	protected int remainingHealth {get; private set;}
+	public int RemainingHealth {get; private set;}
 
 	public bool IsDead {
 		get {
-			return remainingHealth <= 0;
+			return RemainingHealth <= 0;
 		}
 	}
 
@@ -43,6 +43,26 @@ public abstract class Unit
 	public abstract int GetStrength ();
 	public abstract int GetSkill ();
 
+	public virtual int ModSpeed(int delta) {
+		return GetSpeed();
+	}
+
+	public virtual int ModMagic (int delta) {
+		return GetMagic();
+	}
+
+	public virtual int ModConstitution(int delta) {
+		return GetConstitution();
+	}
+
+	public virtual int ModStrength (int delta) {
+		return GetStrength();
+	}
+
+	public virtual int ModSkill (int delta) {
+		return GetSkill();
+	}
+
 	public int X {
 		get {
 			return this.GetLocation().X;
@@ -65,7 +85,7 @@ public abstract class Unit
 	}
 
 	public void ResetStats () {
-		this.remainingHealth = getMaxHealth;
+		this.RemainingHealth = getMaxHealth;
 	}
 
 	public void HighlightToAttack () {
@@ -94,7 +114,7 @@ public abstract class Unit
 	}
 
 	public void Damage (int damage) {
-		this.remainingHealth -= damage;
+		this.RemainingHealth -= damage;
 		if (IsDead) {
 			Kill();
 		}
@@ -129,14 +149,17 @@ public abstract class Unit
 	}
 
 	public void MeleeAttack(IUnit unit) {
-		throw new System.NotImplementedException();
+		parentModule.MeleeAttack(this as IUnit, unit);
 	}
 
 	public void MagicAttack(IUnit unit) {
-		throw new System.NotImplementedException();
+		parentModule.MagicAttack(this as IUnit, unit);
 	}
 
 	public void Kill () {
-		
+		parentModule.HandleUnitDestroyed(this);		
+		if (HasAgentLink) {
+			UnityEngine.Object.Destroy(agent.gameObject);
+		}
 	}
 }

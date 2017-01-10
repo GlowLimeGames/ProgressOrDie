@@ -148,7 +148,7 @@ public abstract class Agent : MobileObjectBehaviour {
 		
 	void OnMouseUp () {
 		if (canBeAttacked) {
-			
+			combat.HandleAttackByPlayer(GetUnit() as IUnit);
 		}
 	}
 }

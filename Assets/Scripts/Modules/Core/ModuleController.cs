@@ -54,6 +54,9 @@ public class ModuleController : SingletonController<ModuleController> {
 	[SerializeField]
 	TuningModule tuning;
 
+	[SerializeField]
+	LegendModule legends;
+
 	protected override void SetReferences ()
 	{
 		base.SetReferences ();
@@ -73,6 +76,9 @@ public class ModuleController : SingletonController<ModuleController> {
 		ui.Init(turn, unit);
 		movement.Init(turn);
 		combat.Init(unit, map, abilities, stats, gameEnd);
+
+		LegendData legendData = parser.ParseJSONFromResources<LegendData>("Legends");
+		legends.Init(stats, unit, legendData);
 
 		AbilityData abilityData = parser.ParseJSONFromResources<AbilityData>("Abilities");
 		abilities.Init(abilityData);

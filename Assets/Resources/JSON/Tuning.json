@@ -1,4 +1,12 @@
 {
      "MaxRange" : 5,
-     "BulkToHPRatio" : 10
+     "BulkToHPRatio" : 10,
+     "MaxSpeed" : 10,
+     "DamagePerMagicPoint" : 3,
+     "DamagePerStrengthPoint" : 5,
+     "MaxSkill" : 50,
+     "CriticalHitRatePerSkillPoint" : 0.015,
+     "StartingHealthPotions" : 5,
+     "VisionRange" : 7,
+     "CriticalHitDamageMod" : 2
 }

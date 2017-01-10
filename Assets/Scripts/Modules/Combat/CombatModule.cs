@@ -32,9 +32,9 @@ public class CombatModule : Module, ICombatModule
 	public void HandleAttackByPlayer (IUnit unit) {
 		PlayerCharacter player = units.GetMainPlayer().GetCharacter();
 		if(ableToPerformMeleeAttack(player, unit)) {
-				
+			player.MeleeAttack(unit);
 		} else {
-
+			player.MagicAttack(unit);
 		}
 	}
 
@@ -79,11 +79,11 @@ public class CombatModule : Module, ICombatModule
 	}
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
-
+		target.Damage(stats.GetMeleeDamage(attacker));
 	}
 
-	public void RangedAttack (IUnit attacker, IUnit target) {
-
+	public void MagicAttack (IUnit attacker, IUnit target) {
+		target.Damage(stats.GetMagicDamage(attacker));
 	}
 
 	public void FleeAttempt (IStatModule playerstats, IUnit unit) {

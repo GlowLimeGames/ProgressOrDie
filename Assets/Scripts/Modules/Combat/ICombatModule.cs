@@ -11,7 +11,7 @@ public interface ICombatModule {
 
 	void MeleeAttack (IUnit attacker, IUnit target);
 
-	void RangedAttack (IUnit attacker, IUnit target);
+	void MagicAttack (IUnit attacker, IUnit target);
 
 	void FleeAttempt (IStatModule playerstats, IUnit unit);
 

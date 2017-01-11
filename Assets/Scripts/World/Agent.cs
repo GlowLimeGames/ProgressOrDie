@@ -8,6 +8,9 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class Agent : MobileObjectBehaviour {
+
+	public bool HasAttackedDuringTurn{get; protected set;}
+
 	protected bool canBeAttacked;
 	Color canAttackColor = Color.red;
 	SpriteRenderer spriteR;
@@ -36,7 +39,7 @@ public abstract class Agent : MobileObjectBehaviour {
 		this.stats = stats;
 		this.abilities = abilities;
 		turns.SubscribeToTurnSwitch(delegate(AgentType type)
-			{ReplenishAgility(type);});
+			{ReplenishAtTurnStart(type);});
 	}
 
 	public bool HasUnit {
@@ -45,9 +48,10 @@ public abstract class Agent : MobileObjectBehaviour {
 		}
 	}
 
-	public virtual bool ReplenishAgility (AgentType type) {
+	public virtual bool ReplenishAtTurnStart (AgentType type) {
 		if (GetAgentType() == type) {
 			remainingAgilityForTurn = GetUnit().GetSpeed();
+			HasAttackedDuringTurn = false;
 			return true;
 		} else {
 			return false;
@@ -70,6 +74,10 @@ public abstract class Agent : MobileObjectBehaviour {
 	{
 		base.SetReferences();
 		spriteR = GetComponent<SpriteRenderer>();
+	}
+
+	public virtual void Attack () {
+		HasAttackedDuringTurn = true;
 	}
 
 	public void SetSprite(Sprite sprite) {

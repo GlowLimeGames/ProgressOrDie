@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 224605819310576212}
   - component: {fileID: 222087560283994564}
   - component: {fileID: 114714145169773420}
+  - component: {fileID: 114677165288889202}
   m_Layer: 5
   m_Name: NotificationFrame
   m_TagString: Untagged
@@ -2111,8 +2112,8 @@ MonoBehaviour:
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 1
-    m_HorizontalOverflow: 0
-    m_VerticalOverflow: 0
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
 --- !u!114 &114168906207172502
@@ -3969,6 +3970,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114677165288889202
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1094255634742172}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c81d64dc44c4bcd895fd7bc856821b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: Notifications
+  notificationLifetime: 3
 --- !u!114 &114679355398253918
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4314,6 +4328,8 @@ MonoBehaviour:
   constitutionBar: {fileID: 114195549862180102}
   speedBar: {fileID: 114786970548100056}
   critBar: {fileID: 114005762722433524}
+  meleeIcon: {fileID: 114680008293586030}
+  magicIcon: {fileID: 114797004415137632}
 --- !u!114 &114752761636488072
 MonoBehaviour:
   m_ObjectHideFlags: 1

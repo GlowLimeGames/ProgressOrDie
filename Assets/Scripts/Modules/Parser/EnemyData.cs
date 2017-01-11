@@ -9,7 +9,16 @@ using System;
 [Serializable]
 public class EnemyData : SerializableData
 {
-	public EnemyDescriptor[] Enemies;
+	public EnemyDescriptor[] EnemiesLV1;
+	public EnemyDescriptor[] EnemiesLV2;
+	public EnemyDescriptor[] EnemiesLV3;
+	public EnemyDescriptor[] Enemies {
+		get {
+			return ArrayUtil.Concat(ArrayUtil.Concat(EnemiesLV1, EnemiesLV2), EnemiesLV3);
+		}
+	}
+	public BossDescriptor[] BossMonsters;
+
 	public StatPrefix[] Prefxies;
 }
 
@@ -28,12 +37,24 @@ public class EnemyDescriptor : SerializableData
 	public int SphereOfInfluence;
 	public int TerritoryRadius;
 	public float ChanceOfMelee;
+	public int Level;
 
 	public EnemyDescriptor GetInstance()
 	{
 		return Copy() as EnemyDescriptor;
 	}
 }
+
+[Serializable]
+public class BossDescriptor : EnemyDescriptor
+{
+
+	public BossDescriptor GetBoss()
+	{
+		return GetInstance() as BossDescriptor;
+	}
+}
+
 
 [Serializable]
 public class StatPrefix

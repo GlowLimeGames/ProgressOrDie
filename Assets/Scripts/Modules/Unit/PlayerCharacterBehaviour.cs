@@ -28,7 +28,7 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	public void SetCharacter (PlayerCharacter character) {
 		this.character = character;
 		this.character.LinkToAgent(this);
-		ReplenishAgility(AgentType.Player);
+		ReplenishAtTurnStart(AgentType.Player);
 	}
 
 	public void SubscribeToAgilityChange (MonoActionf action) {
@@ -37,6 +37,11 @@ public class PlayerCharacterBehaviour : PlayerAgent
 
 	public void UnsubscribeFromAgilityChange (MonoActionf action) {
 		onAgilityChange -= action;
+	}
+
+	public override void Attack () {
+		base.Attack ();
+		EventModule.Event(PODEvent.PlayerAttacked);
 	}
 
 	void Update () {
@@ -52,10 +57,11 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
-	public override bool ReplenishAgility(AgentType type)
+	public override bool ReplenishAtTurnStart(AgentType type)
 	{
-		if (base.ReplenishAgility(type)) {
+		if (base.ReplenishAtTurnStart(type)) {
 			callAgilityChange(remainingAgilityForTurn);
+			EventModule.Event(PODEvent.PlayerTurnStart);
 			return true;
 		} else {
 			return false;

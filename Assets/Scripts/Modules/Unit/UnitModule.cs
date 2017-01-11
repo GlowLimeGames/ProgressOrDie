@@ -15,7 +15,7 @@ public class UnitModule : Module
 	PlayerCharacterBehaviour playerPrefab;
 	[SerializeField]
 	EnemyNPCBehaviour enemyPrefab;
-
+	int level = 1;
 	CombatModule combat;
 	StatModule stats;
 
@@ -29,9 +29,13 @@ public class UnitModule : Module
 			return stats.BulkToHPRatio;
 		}
 	}
-
+		
 	PlayerCharacter player() {
 		return GetMainPlayer().GetCharacter();
+	}
+
+	public void SetLevel(int level) {
+		this.level = level;
 	}
 
 	public void Init(MapModule map, 
@@ -119,7 +123,7 @@ public class UnitModule : Module
 		Dictionary<string, EnemyDescriptor> lookup = getEnemyLookup(enemyInfo);
 		for (int x = 0; x < map.Width; x++) {	
 			for (int y = 0; y < map.Width; y++) {
-				string tileUnit = units[x, y];
+				string tileUnit = string.Concat(units[x, y], level);
 				if (isUnit(tileUnit)) {
 					Unit unit = null;
 					MapLocation startLocation = new MapLocation(x, y);
@@ -186,13 +190,13 @@ public class UnitModule : Module
 	}
 
 	bool isPlayer(string unitKey) {
-		return unitKey.Equals(PLAYER_KEY);
+		return unitKey.Equals(string.Concat(PLAYER_KEY, level));
 	}
 
 	Dictionary<string, EnemyDescriptor> getEnemyLookup (EnemyData enemyInfo) {
 		Dictionary<string, EnemyDescriptor> lookup = new Dictionary<string, EnemyDescriptor>();
 		foreach (EnemyDescriptor descriptor in enemyInfo.Enemies) {
-			lookup.Add(descriptor.Key, descriptor);
+			lookup.Add(string.Concat(descriptor.Key, descriptor.Level), descriptor);
 		}
 		return lookup;
 	}

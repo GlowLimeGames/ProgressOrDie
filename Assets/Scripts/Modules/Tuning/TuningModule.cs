@@ -54,6 +54,12 @@ public class TuningModule : Module
 		}
 	}
 
+	public int StartingStatPoints {
+		get {
+			return data.StartingStatPoints;
+		}
+	}
+
 	public int StartingHealthPotions {
 		get {
 			return data.StartingHealthPotions;
@@ -101,6 +107,7 @@ public class TuningData : SerializableData
 	public float DamagePerStrengthPoint;
 	public int MaxSkill;
 	public float CriticalHitRatePerSkillPoint;
+	public int StartingStatPoints;
 	public int StartingHealthPotions;
 	public int VisionRange;
 	public float CriticalHitDamageMod;

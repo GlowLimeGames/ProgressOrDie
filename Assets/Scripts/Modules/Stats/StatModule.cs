@@ -62,6 +62,12 @@ public class StatModule : Module
 		}
 	}
 
+	public int StartingStatPoints {
+		get {
+			return tuning.StartingStatPoints;
+		}
+	}
+
 	public int StartingHealthPotions {
 		get {
 			return tuning.StartingHealthPotions;

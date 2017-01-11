@@ -1,16 +1,19 @@
 {
      "ConstitutionToHPRatio" : 10,
-     "MaxSpeed" : 10,
+     "MaxSpeedinCharacterCreation" : 10,
      "DamagePerMagicPoint" : 3,
      "DamagePerStrengthPoint" : 5,
      "MaxSkill" : 50,
      "CriticalHitRatePerSkillPoint" : 0.015,
+     "BaseCriticalHitRate" : 0,
      "VisionRange" : 7,
-     "CriticalHitDamageMod" : 2,
-     "SpeedToMovementPoints" : 0.5,
+     "BaseCriticalHitDamageMultiplier" : 0.04,
+     "CriticalHitDamagePerSkillPoint" : 0.04,
+     "SpeedToMovementPoints" : 1,
      "StartingStatPoints" : 50,
      "NumberOfPotions" : 5,
      "HealthPercentGainFromPotion" : 1,
      "MeleeAttackMaxRange" : 1,
-     "RangeAttackMaxRange" : 5
+     "RangeAttackMaxRange" : 5,
+     "TimeToMove" : 1
 }

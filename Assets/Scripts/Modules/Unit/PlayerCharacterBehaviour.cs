@@ -43,6 +43,23 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		EventModule.Event(PODEvent.PlayerAttacked);
 	}
 
+	public override bool MoveToPos (Vector3 pos)
+	{
+		// If animated
+		if(base.MoveToPos (pos)) {
+			QueryAnimator(AnimParam.Bool, IS_MOVING, true);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	protected override void stopMoving ()
+	{
+		base.stopMoving ();
+		QueryAnimator(AnimParam.Bool, IS_MOVING, false);
+	}
+
 	void Update () {
 		if (Input.GetKeyDown(KeyCode.W)) {
 			MoveY(1);

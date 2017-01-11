@@ -90,6 +90,12 @@ public class TuningModule : Module
 		}
 	}
 
+	public float TimeToMove {
+		get {
+			return data.TimeToMove;
+		}
+	}
+
 	TuningData data;
 
 	public void Init (TuningData data) {
@@ -115,4 +121,5 @@ public class TuningData : SerializableData
 	public float HealthPercentGainFromPotion;
 	public int MeleeAttackMaxRange;
 	public int RangeAttackMaxRange;
+	public int TimeToMove;
 }

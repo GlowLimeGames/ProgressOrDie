@@ -5,6 +5,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIModule : Module, IUIModule
 {	
@@ -23,9 +24,16 @@ public class UIModule : Module, IUIModule
 	UIFillBar constitutionBar;
 	[SerializeField]
 	UIFillBar speedBar;
+
 	[Space(25)]
 	[SerializeField]
 	UIFillBar critBar;
+
+	[Space(25)]
+	[SerializeField]
+	Image meleeIcon;
+	[SerializeField]
+	Image magicIcon;
 
 	PlayerCharacterBehaviour playerAgent;
 	PlayerCharacter playerUnit;
@@ -46,5 +54,30 @@ public class UIModule : Module, IUIModule
 
 	void handleTurnChange (string turnName) {
 		turnText.SetText(turnName);
+	}
+
+	protected override void SubscribeEvents ()
+	{
+		base.SubscribeEvents ();
+		EventModule.Subscribe(handlePODEvent);
+	}
+
+	protected override void UnusbscribeEvents ()
+	{
+		base.UnusbscribeEvents ();
+		EventModule.Unsubscribe(handlePODEvent);
+	}
+
+	void handlePODEvent(PODEvent gameEvent) {
+		switch(gameEvent) {
+			case PODEvent.PlayerAttacked:
+				meleeIcon.color = Color.red;
+				magicIcon.color = Color.red;
+				break;
+			case PODEvent.PlayerTurnStart:
+				meleeIcon.color = Color.white;
+				magicIcon.color = Color.white;
+				break;
+		}
 	}
 }

@@ -68,3 +68,4 @@ MonoBehaviour:
   stats: {fileID: 0}
   tuning: {fileID: 0}
   legends: {fileID: 0}
+  notifications: {fileID: 0}

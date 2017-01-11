@@ -24,6 +24,6 @@ public class EnemyNPCBehaviour : AIAgent
 	public void SetEnemy (EnemyNPC enemy) {
 		this.enemy = enemy;
 		this.enemy.LinkToAgent(this);
-		ReplenishAgility(AgentType.Enemy);
+		ReplenishAtTurnStart(AgentType.Enemy);
 	}
 }

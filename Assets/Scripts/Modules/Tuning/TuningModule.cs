@@ -6,15 +6,21 @@
 
 public class TuningModule : Module
 {
-	public int MaxRange {
+	public int MaxMagicRange {
 		get {
-			return data.MaxRange;
+			return data.RangeAttackMaxRange;
+		}
+	}
+
+	public int MaxMeleeRange {
+		get {
+			return data.MeleeAttackMaxRange;
 		}
 	}
 
 	public float BulkToHPRatio { 
 		get {
-			return data.BulkToHPRatio;
+			return data.ConstitutionToHPRatio;
 		}
 	}
 
@@ -24,13 +30,13 @@ public class TuningModule : Module
 		}
 	}
 
-	public int DamagePerMagicPoint {
+	public float DamagePerMagicPoint {
 		get {
 			return data.DamagePerMagicPoint;
 		}
 	}
 
-	public int DamagePerStrengthPoint {
+	public float DamagePerStrengthPoint {
 		get {
 			return data.DamagePerStrengthPoint;
 		}
@@ -45,6 +51,12 @@ public class TuningModule : Module
 	public float CriticalHitRatePerSkillPoint {
 		get {
 			return data.CriticalHitRatePerSkillPoint;
+		}
+	}
+
+	public int StartingStatPoints {
+		get {
+			return data.StartingStatPoints;
 		}
 	}
 
@@ -66,6 +78,18 @@ public class TuningModule : Module
 		}
 	}
 
+	public float SpeedToMovementRatio {
+		get {
+			return data.SpeedToMovementPoints;
+		}
+	}
+
+	public float HealthPerecentGainFromPotion {
+		get {
+			return data.HealthPercentGainFromPotion;
+		}
+	}
+
 	TuningData data;
 
 	public void Init (TuningData data) {
@@ -77,15 +101,18 @@ public class TuningModule : Module
 [System.Serializable]
 public class TuningData : SerializableData
 {
-	public int MaxRange;
-	public float BulkToHPRatio;
+	public float ConstitutionToHPRatio;
 	public int MaxSpeed;
-	public int DamagePerMagicPoint;
-	public int DamagePerStrengthPoint;
+	public float DamagePerMagicPoint;
+	public float DamagePerStrengthPoint;
 	public int MaxSkill;
 	public float CriticalHitRatePerSkillPoint;
+	public int StartingStatPoints;
 	public int StartingHealthPotions;
 	public int VisionRange;
 	public float CriticalHitDamageMod;
-
+	public float SpeedToMovementPoints;
+	public float HealthPercentGainFromPotion;
+	public int MeleeAttackMaxRange;
+	public int RangeAttackMaxRange;
 }

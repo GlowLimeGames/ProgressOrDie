@@ -4,14 +4,25 @@
  * Usage: [no notes]
  */
 
-[System.Serializable]
+using System;
+
+[Serializable]
 public class EnemyData : SerializableData
 {
-	public EnemyDescriptor[] Enemies;
+	public EnemyDescriptor[] EnemiesLV1;
+	public EnemyDescriptor[] EnemiesLV2;
+	public EnemyDescriptor[] EnemiesLV3;
+	public EnemyDescriptor[] Enemies {
+		get {
+			return ArrayUtil.Concat(ArrayUtil.Concat(EnemiesLV1, EnemiesLV2), EnemiesLV3);
+		}
+	}
+	public BossDescriptor[] BossMonsters;
+
 	public StatPrefix[] Prefxies;
 }
 
-[System.Serializable]
+[Serializable]
 public class EnemyDescriptor : SerializableData
 {
 	public string Key;
@@ -21,25 +32,31 @@ public class EnemyDescriptor : SerializableData
 	public int Skill;
 	public int Constitution;
 	public int Magic;
-	public int[] Size;
 	public int TurnPriority;
+	public int StatsOnKill;
+	public int SphereOfInfluence;
+	public int TerritoryRadius;
+	public float ChanceOfMelee;
+	public int Level;
 
-	public EnemyDescriptor Copy() {
-		EnemyDescriptor desc = new EnemyDescriptor();
-		desc.Key = this.Key;
-		desc.Types = this.Types;
-		desc.Speed = this.Speed;
-		desc.Strength = this.Strength;
-		desc.Skill = this.Skill;
-		desc.Constitution = this.Constitution;
-		desc.Magic = this.Magic;
-		desc.Size = this.Size;
-		desc.TurnPriority = this.TurnPriority;
-		return desc;
+	public EnemyDescriptor GetInstance()
+	{
+		return Copy() as EnemyDescriptor;
 	}
 }
 
-[System.Serializable]
+[Serializable]
+public class BossDescriptor : EnemyDescriptor
+{
+
+	public BossDescriptor GetBoss()
+	{
+		return GetInstance() as BossDescriptor;
+	}
+}
+
+
+[Serializable]
 public class StatPrefix
 {
 	public string Prefix;

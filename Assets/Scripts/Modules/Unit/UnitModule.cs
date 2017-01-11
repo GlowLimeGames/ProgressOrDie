@@ -30,6 +30,9 @@ public class UnitModule : Module
 		}
 	}
 
+	PlayerCharacter player() {
+		return GetMainPlayer().GetCharacter();
+	}
 
 	public void Init(MapModule map, 
 		SpriteModule sprites, 
@@ -193,4 +196,45 @@ public class UnitModule : Module
 		}
 		return lookup;
 	}
+
+	public void ChangePlayerStrength(int delta) {
+		player().ModStrength(delta);	
+	}
+
+	public void ChangePlayerSpeed(int delta) {
+		player().ModSpeed(delta);	
+	}
+
+	public void ChangePlayerConstitution(int delta) {
+		player().ModConstitution(delta);	
+	}
+
+	public void ChangePlayerMagic(int delta) {
+		player().ModMagic(delta);
+	}
+
+	public void ChangePlayerSkill(int delta) {
+		player().ModSkill(delta);
+	}
+		
+	void modStrength(Unit unit, int delta) {
+		unit.ModStrength(delta);
+	}
+
+	void modSpeed(Unit unit, int delta) {
+		unit.ModSpeed(delta);
+	}
+
+	void modConstitution(Unit unit, int delta) {
+		unit.ModConstitution(delta);
+	}
+
+	void modMagic(Unit unit, int delta) {
+		unit.ModMagic(delta);
+	}
+
+	void modSkill(Unit unit, int delta) {
+		unit.ModSkill(delta);
+	}
+
 }

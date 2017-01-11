@@ -44,4 +44,30 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	public override int GetSkill () {
 		return skill;
 	}
+
+
+	public override int ModSpeed(int delta) {
+		speed += delta;
+		return base.ModSpeed(delta);
+	}
+
+	public override int ModMagic (int delta) {
+		magic += delta;
+		return base.ModMagic(delta);
+	}
+
+	public override int ModConstitution(int delta) {
+		constitution += delta;
+		return base.ModConstitution(delta);
+	}
+
+	public override int ModStrength (int delta) {
+		strength += delta;
+		return base.ModStrength(delta);
+	}
+
+	public override int ModSkill (int delta) {
+		skill += delta;
+		return base.ModSkill(delta);
+	}
 }

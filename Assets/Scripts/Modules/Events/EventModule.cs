@@ -29,6 +29,9 @@ public class EventModule : Module, IEventModule {
     public delegate void AudioEventAction(AudioActionType actionType, AudioType audioType);
     public event AudioEventAction OnAudioEvent;
 
+	public delegate void PODMessageEventAction(PODEvent gameEvent, string message);
+	public event PODMessageEventAction OnPODMessageEvent;
+
 	#endregion
 
 	#region MonoBehaviourExtended Overrides
@@ -60,6 +63,12 @@ public class EventModule : Module, IEventModule {
 		}
 	}
 
+	public void InstanceEvent(PODEvent gameEvent, string message) {
+		if (OnPODMessageEvent != null) {
+			OnPODMessageEvent(gameEvent, message);
+		}
+	}
+
 	#endregion
 
 	#region Instance Event Subscription
@@ -76,6 +85,10 @@ public class EventModule : Module, IEventModule {
 		OnAudioEvent += action;
 	}
 
+	public void InstanceSubscribe (PODMessageEventAction action) {
+		OnPODMessageEvent += action;
+	}
+		
 	public void InstanceUnsubscribe (NamedEventAction action) {
 		OnNamedEvent -= action;
 	}
@@ -86,6 +99,10 @@ public class EventModule : Module, IEventModule {
 
 	public void InstanceUnsubscribe (AudioEventAction action) {
 		OnAudioEvent -= action;
+	}
+
+	public void InstanceUnsubscribe (PODMessageEventAction action) {
+		OnPODMessageEvent -= action;
 	}
 
 	#endregion
@@ -110,6 +127,12 @@ public class EventModule : Module, IEventModule {
 		}
     }
 
+	public static void Event(PODEvent gameEvent, string message) {
+		if (HasInstance) {
+			Instance.InstanceEvent(gameEvent, message);
+		}
+	}
+
 	#endregion
 
 	#region Static Event Subscription
@@ -127,6 +150,12 @@ public class EventModule : Module, IEventModule {
 	}
 
 	public static void Subscribe (AudioEventAction action) {
+		if (HasInstance) {
+			Instance.InstanceSubscribe(action);
+		}
+	}
+
+	public static void Subscribe (PODMessageEventAction action) {
 		if (HasInstance) {
 			Instance.InstanceSubscribe(action);
 		}
@@ -150,6 +179,16 @@ public class EventModule : Module, IEventModule {
 		}
 	}
 
+	public static void Unsubscribe (PODMessageEventAction action) {
+		if (HasInstance) {
+			Instance.InstanceUnsubscribe(action);
+		}
+	}
+
 	#endregion
 
+}
+
+public enum PODEvent {
+	Notification,
 }

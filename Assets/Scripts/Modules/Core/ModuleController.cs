@@ -57,6 +57,9 @@ public class ModuleController : SingletonController<ModuleController> {
 	[SerializeField]
 	LegendModule legends;
 
+	[SerializeField]
+	NotificationModule notifications;
+
 	protected override void SetReferences ()
 	{
 		base.SetReferences ();

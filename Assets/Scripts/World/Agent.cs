@@ -12,6 +12,7 @@ public abstract class Agent : MobileObjectBehaviour {
 	protected const string BACK = "Back";
 	protected const string LEFT = "Left";
 	protected const string RIGHT = "Right";
+	protected const string IS_MOVING = "IsMoving";
 
 	public bool HasAttackedDuringTurn{get; protected set;}
 
@@ -99,13 +100,23 @@ public abstract class Agent : MobileObjectBehaviour {
 
 	public void SetLocation(MapTileBehaviour tile) {
 		this.GetUnit().SetTile(tile.Tile);
-		SetPos(tile.WorldPos());
+		MoveToPos(tile.WorldPos());
 	}
 
-	public void SetPos(Vector3 pos) {
-		this.transform.position = pos;
+	// Returns true if animated
+	public virtual bool MoveToPos(Vector3 pos) {
+		if(movement && movement.IsSetup) {
+			moveTo(pos, movement.TimeToMove, stopMoving);
+			return remainingAgilityForTurn > 0;
+		} else {
+			this.transform.position = pos;
+			return false;
+		}
 	}
 		
+	protected virtual void stopMoving(){
+		// NOTHING
+	}
 	public virtual bool MoveX(int dir) { 
 		return move(dir, 0);
 	}

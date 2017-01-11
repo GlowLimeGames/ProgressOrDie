@@ -8,7 +8,26 @@ public class MovementModule : Module
 {
 	AgentAction onAgentMove;
 	TurnModule turn;
+	TuningModule tuning;
+	bool isSetup = false;
+	public float TimeToMove {
+		get {
+			return tuning.TimeToMove;
+		}
+	}
 
+	public bool IsSetup {
+		get {
+			return isSetup;
+		}
+	}
+
+	public void Init (TurnModule turn, TuningModule tuning) {
+		this.turn = turn;
+		this.tuning = tuning;
+		this.isSetup = true;
+	}
+			
 	void callOnAgentMove (Agent agent) {
 		if (onAgentMove != null) {
 			onAgentMove(agent);
@@ -21,10 +40,6 @@ public class MovementModule : Module
 
 	public void UnsubscribeFromAgentMove (AgentAction action) {
 		onAgentMove -= action;
-	}
-
-	public void Init (TurnModule turn) {
-		this.turn = turn;
 	}
 
 	public bool CanMove (Agent agent) {

@@ -1,6 +1,5 @@
 {
-     "MaxRange" : 5,
-     "BulkToHPRatio" : 10,
+     "ConstitutionToHPRatio" : 10,
      "MaxSpeed" : 10,
      "DamagePerMagicPoint" : 3,
      "DamagePerStrengthPoint" : 5,
@@ -9,5 +8,9 @@
      "StartingHealthPotions" : 5,
      "VisionRange" : 7,
      "CriticalHitDamageMod" : 2,
-     "SpeedToMovementRatio" : 0.5
+     "SpeedToMovementPoints" : 0.5,
+     "NumberOfPotions" : 5,
+     "HealthPercentGainFromPotion" : 1,
+     "MeleeAttackMaxRange" : 1,
+     "RangeAttackMaxRange" : 5
 }

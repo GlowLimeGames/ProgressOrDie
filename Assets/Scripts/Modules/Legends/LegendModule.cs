@@ -15,7 +15,6 @@ public class LegendModule : Module
 	public void Init(StatModule stats, UnitModule units, LegendData legends) {
 		this.units = units;
 		this.legends = legends;
-		print("The player has " + getPlayer().GetSpeed() + " speed");
 	}
 
 	void changePlayerSkill(int change) {

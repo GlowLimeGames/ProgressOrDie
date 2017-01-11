@@ -8,6 +8,10 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class Agent : MobileObjectBehaviour {
+	protected const string FRONT = "Front";
+	protected const string BACK = "Back";
+	protected const string LEFT = "Left";
+	protected const string RIGHT = "Right";
 
 	public bool HasAttackedDuringTurn{get; protected set;}
 
@@ -102,11 +106,11 @@ public abstract class Agent : MobileObjectBehaviour {
 		this.transform.position = pos;
 	}
 		
-	public bool MoveX(int dir) { 
+	public virtual bool MoveX(int dir) { 
 		return move(dir, 0);
 	}
 
-	public bool MoveY(int dir) {
+	public virtual bool MoveY(int dir) {
 		return move(0, dir);
 	}
 

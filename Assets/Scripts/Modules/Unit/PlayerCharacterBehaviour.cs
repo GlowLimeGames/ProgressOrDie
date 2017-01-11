@@ -9,7 +9,6 @@ using UnityEngine;
 public class PlayerCharacterBehaviour : PlayerAgent 
 {	
 	MonoActionf onAgilityChange;
-
 	PlayerCharacter character;
 
 	public override AgentType GetAgentType()
@@ -57,6 +56,26 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
+	public override bool MoveX (int dir)
+	{
+		if(dir > 0) {
+			QueryAnimator(AnimParam.Trigger, RIGHT);
+		} else if (dir < 0) {
+			QueryAnimator(AnimParam.Trigger, LEFT);
+		}
+		return base.MoveX (dir);
+	}
+
+	public override bool MoveY (int dir)
+	{
+		if(dir > 0) {
+			QueryAnimator(AnimParam.Trigger, BACK);
+		} else if (dir < 0) {
+			QueryAnimator(AnimParam.Trigger, FRONT);
+		}
+		return base.MoveY (dir);
+	}
+
 	public override bool ReplenishAtTurnStart(AgentType type)
 	{
 		if (base.ReplenishAtTurnStart(type)) {
@@ -67,7 +86,7 @@ public class PlayerCharacterBehaviour : PlayerAgent
 			return false;
 		}
 	}
-
+		
 	protected override bool trySpendAgility(int agilityPointsReq)
 	{
 		if (base.trySpendAgility(agilityPointsReq)) {

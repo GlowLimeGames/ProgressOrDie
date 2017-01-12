@@ -248,7 +248,7 @@ public class UnitModule : Module
 	}
 
 	EnemyNPC[] sortEnemiesByTurnPriority() {
-		
+		throw new System.NotImplementedException();
 	}
 
 	IEnumerator takeEnemiesTurnInOrder(EnemyNPC[] enemyOrder, float timerPerTurn, MonoAction callback = null)
@@ -270,9 +270,8 @@ public class UnitModule : Module
 
 	bool hasTargetToAttack(EnemyNPC enemy, out Unit validTarget)
 	{
-
+		throw new System.NotImplementedException();
 	}
-
-	void move
+		
 
 }

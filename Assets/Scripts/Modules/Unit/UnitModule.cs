@@ -4,6 +4,7 @@
  * Usage: [no notes]
  */
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -240,5 +241,37 @@ public class UnitModule : Module
 	void modSkill(Unit unit, int delta) {
 		unit.ModSkill(delta);
 	}
+
+	void handleEnemyTurn()
+	{
+
+	}
+
+	EnemyNPC[] sortEnemiesByTurnPriority() {
+		throw new System.NotImplementedException();
+	}
+
+	IEnumerator takeEnemiesTurnInOrder(EnemyNPC[] enemyOrder, float timerPerTurn, MonoAction callback = null)
+	{
+		foreach(EnemyNPC enemy in enemyOrder)
+		{
+			handleIndividualEnemyTurn(enemy);
+			yield return new WaitForSeconds(timerPerTurn);
+		}
+		if(callback != null) {
+			callback();
+		}
+	}
+
+	void handleIndividualEnemyTurn(EnemyNPC enemy)
+	{
+			
+	}
+
+	bool hasTargetToAttack(EnemyNPC enemy, out Unit validTarget)
+	{
+		throw new System.NotImplementedException();
+	}
+		
 
 }

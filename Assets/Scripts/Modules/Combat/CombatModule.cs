@@ -53,6 +53,11 @@ public class CombatModule : Module, ICombatModule
 		}
 	}
 
+	public bool HasTargetToAttack(Unit unit, out Unit validTarget)
+	{
+		throw new System.NotImplementedException();
+	}
+
 	bool ableToPerformMeleeAttack (IUnit attacker, IUnit target) {
 		return isTargetAdjacent(attacker, target, countDiagonal:false);
 	}

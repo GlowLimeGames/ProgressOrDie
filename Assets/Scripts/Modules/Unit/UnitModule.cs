@@ -20,6 +20,8 @@ public class UnitModule : Module
 	CombatModule combat;
 	StatModule stats;
 	TuningModule tuning;
+	TurnModule turns;
+	MovementModule movement;
 	List<Unit> units = new List<Unit>();
 	EnemyNPC[] highlightedEnemyTargets = new EnemyNPC[0];
 
@@ -51,6 +53,8 @@ public class UnitModule : Module
 		this.combat = combat;
 		this.stats = stats;
 		this.tuning = tuning;
+		this.turns = turns;
+		this.movement = movement;
 		movement.SubscribeToAgentMove(handleAgentMove);
 		turns.SubscribeToTurnSwitch(handleTurnSwitch);
 		createUnits(map.Map, units, enemyInfo);
@@ -59,7 +63,6 @@ public class UnitModule : Module
 		
 	public void HandleUnitDestroyed(Unit unit) {
 		// TODO: Implement real functionality
-
 	}
 
 	void handleAgentMove (Agent agent) {
@@ -92,6 +95,7 @@ public class UnitModule : Module
 			highlightEnemiesRange();
 		} else if (turn == AgentType.Enemy) {
 			unhighlightEnemies();
+			handleEnemyTurn();
 		}
 	}
 
@@ -242,13 +246,20 @@ public class UnitModule : Module
 		unit.ModSkill(delta);
 	}
 
-	void handleEnemyTurn()
+	void handleEndEnemyTurn()
 	{
-
+		turns.NextTurn();
 	}
 
-	EnemyNPC[] sortEnemiesByTurnPriority() {
-		throw new System.NotImplementedException();
+	void handleEnemyTurn()
+	{
+		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
+		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
+	}
+
+	EnemyNPC[] sortEnemiesByTurnPriority(List<Unit> units) {
+		Sort<EnemyNPC> sorter = new SelectionSort<EnemyNPC>();
+		return sorter.run(units.FindAll(enemy => enemy is EnemyNPC).ToArray() as EnemyNPC[]);
 	}
 
 	IEnumerator takeEnemiesTurnInOrder(EnemyNPC[] enemyOrder, float timerPerTurn, MonoAction callback = null)
@@ -265,13 +276,25 @@ public class UnitModule : Module
 
 	void handleIndividualEnemyTurn(EnemyNPC enemy)
 	{
-			
+		Unit target;
+		if(hasTargetToAttack(enemy, out target)) {
+			AttackType[] attacks = enemy.GetAvailableAttacks();
+			if(attacks[0] == AttackType.Magic) {
+				combat.MagicAttack(enemy, target as IUnit);
+			} else if (attacks[0] == AttackType.Melee) {
+				combat.MeleeAttack(enemy, target as IUnit);
+			}
+		}
+		handleEnemyMovement(enemy);
+	}
+
+	void handleEnemyMovement(EnemyNPC enemy) {
+		movement.DetermineEnemyMovement(enemy);
 	}
 
 	bool hasTargetToAttack(EnemyNPC enemy, out Unit validTarget)
 	{
-		throw new System.NotImplementedException();
+		return combat.HasTargetToAttack(enemy, out validTarget);
 	}
 		
-
 }

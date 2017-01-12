@@ -4,6 +4,8 @@
  * Usage: [no notes]
  */
 
+using UnityEngine;
+
 public class Map 
 {
 	MapModule module;
@@ -49,5 +51,13 @@ public class Map
 
 	public int TravelTo (Agent agent, MapLocation loc) {
 		return module.TravelTo(agent, loc);
+	}
+
+	public MapTile RandomTileInRadius(MapLocation center, int radius) {
+		int xMin = Mathf.Clamp(center.X - radius, 0, Width);
+		int xMax = Mathf.Clamp(center.X + radius, 0, Width);
+		int yMin = Mathf.Clamp(center.Y - radius, 0, Height);
+		int yMax = Mathf.Clamp(center.Y + radius, 0, Height);
+		return GetTile(Random.Range(xMin, xMax), Random.Range(yMin, yMax));
 	}
 }

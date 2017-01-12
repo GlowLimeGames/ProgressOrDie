@@ -84,7 +84,7 @@ public class ModuleController : SingletonController<ModuleController> {
 		unit.Init(map, sprites, units, enemyData, turn, movement, combat, stats, abilities, tuning);
 		cam.StartFollowing(unit.GetMainPlayer());
 		ui.Init(turn, unit);
-		movement.Init(turn, tuning);
+		movement.Init(turn, tuning, map);
 		combat.Init(unit, map, abilities, stats, gameEnd);
 
 		LegendData legendData = parser.ParseJSONFromResources<LegendData>("Legends");

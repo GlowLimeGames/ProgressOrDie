@@ -75,4 +75,9 @@ public class MapModule : Module, IMapModule
 		tile.PlaceUnit(agent);
 		return tile.TileType.Speed;
 	}
+
+	public MapTile RandomTileInRadius(MapLocation center, int radius) {
+		return Map.RandomTileInRadius(center, radius);
+	}
+
 }

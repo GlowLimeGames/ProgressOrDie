@@ -9,6 +9,8 @@ public class MovementModule : Module
 	AgentAction onAgentMove;
 	TurnModule turn;
 	TuningModule tuning;
+	MapModule map;
+
 	bool isSetup = false;
 	public float TimeToMove {
 		get {
@@ -22,9 +24,10 @@ public class MovementModule : Module
 		}
 	}
 
-	public void Init (TurnModule turn, TuningModule tuning) {
+	public void Init (TurnModule turn, TuningModule tuning, MapModule map) {
 		this.turn = turn;
 		this.tuning = tuning;
+		this.map = map;
 		this.isSetup = true;
 	}
 			
@@ -49,4 +52,11 @@ public class MovementModule : Module
 	public void Move (Agent agent) {
 		callOnAgentMove(agent);
 	}
+
+	public void DetermineEnemyMovement(EnemyNPC enemy) {
+		MapLocation currentLoc = enemy.GetLocation();
+		MapTile newTile = map.RandomTileInRadius(currentLoc, enemy.TerritoryRadius);
+		newTile.PlaceUnit(enemy.GetAgent());
+	}
+
 }

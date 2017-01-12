@@ -38,6 +38,7 @@ public class MapModule : Module, IMapModule
 		MapTile[,] tiles = new MapTile[width, height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
+				Debug.Log(tileKeys[x, y].ToLower());
 				tiles[x, y] = new MapTile(x, y, tileLookup[tileKeys[x, y].ToLower()]);
 			}
 		}

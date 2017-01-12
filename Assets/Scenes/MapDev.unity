@@ -560,6 +560,11 @@ Prefab:
       propertyPath: notifications
       value: 
       objectReference: {fileID: 1657170646}
+    - target: {fileID: 114614234690834654, guid: a2b72725072924ce5b9f6e84a67473e3,
+        type: 2}
+      propertyPath: levelName
+      value: Level1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2b72725072924ce5b9f6e84a67473e3, type: 2}
   m_IsPrefabParent: 0

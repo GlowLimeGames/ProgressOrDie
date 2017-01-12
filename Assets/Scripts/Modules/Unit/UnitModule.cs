@@ -18,9 +18,7 @@ public class UnitModule : Module
 	int level = 1;
 	CombatModule combat;
 	StatModule stats;
-
-	const string PLAYER_KEY = "P";
-
+	TuningModule tuning;
 	List<Unit> units = new List<Unit>();
 	EnemyNPC[] highlightedEnemyTargets = new EnemyNPC[0];
 
@@ -46,10 +44,12 @@ public class UnitModule : Module
 		MovementModule movement,
 		CombatModule combat, 
 		StatModule stats,
-		AbilitiesModule abilities
+		AbilitiesModule abilities,
+		TuningModule tuning
 	){
 		this.combat = combat;
 		this.stats = stats;
+		this.tuning = tuning;
 		movement.SubscribeToAgentMove(handleAgentMove);
 		turns.SubscribeToTurnSwitch(handleTurnSwitch);
 		createUnits(map.Map, units, enemyInfo);
@@ -190,7 +190,7 @@ public class UnitModule : Module
 	}
 
 	bool isPlayer(string unitKey) {
-		return unitKey.Equals(string.Concat(PLAYER_KEY, level));
+		return unitKey.Equals(string.Concat(tuning.PlayerKey, level));
 	}
 
 	Dictionary<string, EnemyDescriptor> getEnemyLookup (EnemyData enemyInfo) {

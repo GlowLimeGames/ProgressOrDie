@@ -15,5 +15,8 @@
      "HealthPercentGainFromPotion" : 1,
      "MeleeAttackMaxRange" : 1,
      "RangeAttackMaxRange" : 5,
-     "TimeToMove" : 1
+     "TimeToMove" : 1,
+     "TurnsBeforeBossMonsterHeals" : 5,
+     "BossMonsterHealingAmount" : 10,
+     "PlayerSymbolOnMap" : "PL"
 }

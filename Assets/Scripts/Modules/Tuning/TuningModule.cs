@@ -96,6 +96,24 @@ public class TuningModule : Module
 		}
 	}
 
+	public int TurnsBeforeBossMonsterHeals {
+		get {
+			return data.TurnsBeforeBossMonsterHeals;
+		}
+	}
+
+	public int BossMosnterHealingAmount {
+		get {
+			return data.BossMonsterHealingAmount;
+		}
+	}
+
+	public string PlayerKey {
+		get {
+			return data.PlayerSymbolOnMap;
+		}
+	}
+
 	TuningData data;
 
 	public void Init (TuningData data) {
@@ -121,5 +139,8 @@ public class TuningData : SerializableData
 	public float HealthPercentGainFromPotion;
 	public int MeleeAttackMaxRange;
 	public int RangeAttackMaxRange;
-	public int TimeToMove;
+	public float TimeToMove;
+	public int TurnsBeforeBossMonsterHeals;
+	public int BossMonsterHealingAmount;
+	public string PlayerSymbolOnMap;
 }

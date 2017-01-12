@@ -9,7 +9,6 @@ using UnityEngine;
 public class PlayerCharacterBehaviour : PlayerAgent 
 {	
 	MonoActionf onAgilityChange;
-
 	PlayerCharacter character;
 
 	public override AgentType GetAgentType()
@@ -28,7 +27,7 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	public void SetCharacter (PlayerCharacter character) {
 		this.character = character;
 		this.character.LinkToAgent(this);
-		ReplenishAgility(AgentType.Player);
+		ReplenishAtTurnStart(AgentType.Player);
 	}
 
 	public void SubscribeToAgilityChange (MonoActionf action) {
@@ -37,6 +36,28 @@ public class PlayerCharacterBehaviour : PlayerAgent
 
 	public void UnsubscribeFromAgilityChange (MonoActionf action) {
 		onAgilityChange -= action;
+	}
+
+	public override void Attack () {
+		base.Attack ();
+		EventModule.Event(PODEvent.PlayerAttacked);
+	}
+
+	public override bool MoveToPos (Vector3 pos)
+	{
+		// If animated
+		if(base.MoveToPos (pos)) {
+			QueryAnimator(AnimParam.Bool, IS_MOVING, true);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	protected override void stopMoving ()
+	{
+		base.stopMoving ();
+		QueryAnimator(AnimParam.Bool, IS_MOVING, false);
 	}
 
 	void Update () {
@@ -52,16 +73,37 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
-	public override bool ReplenishAgility(AgentType type)
+	public override bool MoveX (int dir)
 	{
-		if (base.ReplenishAgility(type)) {
+		if(dir > 0) {
+			QueryAnimator(AnimParam.Trigger, RIGHT);
+		} else if (dir < 0) {
+			QueryAnimator(AnimParam.Trigger, LEFT);
+		}
+		return base.MoveX (dir);
+	}
+
+	public override bool MoveY (int dir)
+	{
+		if(dir > 0) {
+			QueryAnimator(AnimParam.Trigger, BACK);
+		} else if (dir < 0) {
+			QueryAnimator(AnimParam.Trigger, FRONT);
+		}
+		return base.MoveY (dir);
+	}
+
+	public override bool ReplenishAtTurnStart(AgentType type)
+	{
+		if (base.ReplenishAtTurnStart(type)) {
 			callAgilityChange(remainingAgilityForTurn);
+			EventModule.Event(PODEvent.PlayerTurnStart);
 			return true;
 		} else {
 			return false;
 		}
 	}
-
+		
 	protected override bool trySpendAgility(int agilityPointsReq)
 	{
 		if (base.trySpendAgility(agilityPointsReq)) {

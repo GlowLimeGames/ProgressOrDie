@@ -8,6 +8,14 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class Agent : MobileObjectBehaviour {
+	protected const string FRONT = "Front";
+	protected const string BACK = "Back";
+	protected const string LEFT = "Left";
+	protected const string RIGHT = "Right";
+	protected const string IS_MOVING = "IsMoving";
+
+	public bool HasAttackedDuringTurn{get; protected set;}
+
 	protected bool canBeAttacked;
 	Color canAttackColor = Color.red;
 	SpriteRenderer spriteR;
@@ -36,7 +44,7 @@ public abstract class Agent : MobileObjectBehaviour {
 		this.stats = stats;
 		this.abilities = abilities;
 		turns.SubscribeToTurnSwitch(delegate(AgentType type)
-			{ReplenishAgility(type);});
+			{ReplenishAtTurnStart(type);});
 	}
 
 	public bool HasUnit {
@@ -45,9 +53,10 @@ public abstract class Agent : MobileObjectBehaviour {
 		}
 	}
 
-	public virtual bool ReplenishAgility (AgentType type) {
+	public virtual bool ReplenishAtTurnStart (AgentType type) {
 		if (GetAgentType() == type) {
 			remainingAgilityForTurn = GetUnit().GetSpeed();
+			HasAttackedDuringTurn = false;
 			return true;
 		} else {
 			return false;
@@ -72,6 +81,10 @@ public abstract class Agent : MobileObjectBehaviour {
 		spriteR = GetComponent<SpriteRenderer>();
 	}
 
+	public virtual void Attack () {
+		HasAttackedDuringTurn = true;
+	}
+
 	public void SetSprite(Sprite sprite) {
 		this.spriteR.sprite = sprite;
 	}
@@ -87,18 +100,28 @@ public abstract class Agent : MobileObjectBehaviour {
 
 	public void SetLocation(MapTileBehaviour tile) {
 		this.GetUnit().SetTile(tile.Tile);
-		SetPos(tile.WorldPos());
+		MoveToPos(tile.WorldPos());
 	}
 
-	public void SetPos(Vector3 pos) {
-		this.transform.position = pos;
+	// Returns true if animated
+	public virtual bool MoveToPos(Vector3 pos) {
+		if(movement && movement.IsSetup) {
+			moveTo(pos, movement.TimeToMove, stopMoving);
+			return remainingAgilityForTurn > 0;
+		} else {
+			this.transform.position = pos;
+			return false;
+		}
 	}
 		
-	public bool MoveX(int dir) { 
+	protected virtual void stopMoving(){
+		// NOTHING
+	}
+	public virtual bool MoveX(int dir) { 
 		return move(dir, 0);
 	}
 
-	public bool MoveY(int dir) {
+	public virtual bool MoveY(int dir) {
 		return move(0, dir);
 	}
 

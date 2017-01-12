@@ -38,7 +38,7 @@ public class MapModule : Module, IMapModule
 		MapTile[,] tiles = new MapTile[width, height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				tiles[x, y] = new MapTile(x, y, tileLookup[tileKeys[x, y]]);
+				tiles[x, y] = new MapTile(x, y, tileLookup[tileKeys[x, y].ToLower()]);
 			}
 		}
 		return tiles;
@@ -57,7 +57,7 @@ public class MapModule : Module, IMapModule
 	Dictionary<string, TileType> getTileLookup(TileType[] tileTypes) {
 		Dictionary<string, TileType> tileLookup = new Dictionary<string, TileType>();
 		foreach (TileType tile in tileTypes) {
-			tileLookup.Add(tile.Key, tile);
+			tileLookup.Add(tile.Key.ToLower(), tile);
 		}
 		return tileLookup;
 	}

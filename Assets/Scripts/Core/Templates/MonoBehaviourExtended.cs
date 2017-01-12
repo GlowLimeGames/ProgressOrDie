@@ -59,6 +59,13 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		}
 	}
 
+	protected void switchAnimatorLayer (int layerIndex) {
+		Animator anim = GetComponent<Animator>();
+		if(anim) {
+			anim.SetLayerWeight(layerIndex, weight:1.0f);
+		}
+	}
+
 	public bool QuerySpriteRenderer (Sprite sprite) {
 		SpriteRenderer renderer = GetComponent<SpriteRenderer>();
 		if (renderer == null) {

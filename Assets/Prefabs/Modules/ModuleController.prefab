@@ -51,6 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 588dcb7dfe2e2409781863eecf0a03e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelName: Example
   parser: {fileID: 0}
   sound: {fileID: 0}
   events: {fileID: 0}
@@ -68,3 +69,4 @@ MonoBehaviour:
   stats: {fileID: 0}
   tuning: {fileID: 0}
   legends: {fileID: 0}
+  notifications: {fileID: 0}

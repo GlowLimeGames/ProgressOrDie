@@ -22,7 +22,13 @@ public class StatModule : Module
 
 	public int MaxRange {
 		get {
-			return tuning.MaxRange;
+			return tuning.MaxMagicRange;
+		}
+	}
+
+	public int MaxMeleeRange {
+		get {
+			return tuning.MaxMeleeRange;
 		}
 	}
 
@@ -32,13 +38,13 @@ public class StatModule : Module
 		}
 	}
 
-	public int DamagePerMagicPoint {
+	public float DamagePerMagicPoint {
 		get {
 			return tuning.DamagePerMagicPoint;
 		}
 	}
 
-	public int DamagePerStrengthPoint {
+	public float DamagePerStrengthPoint {
 		get {
 			return tuning.DamagePerStrengthPoint;
 		}
@@ -53,6 +59,12 @@ public class StatModule : Module
 	public float CriticalHitRatePerSkillPoint {
 		get {
 			return tuning.CriticalHitRatePerSkillPoint;
+		}
+	}
+
+	public int StartingStatPoints {
+		get {
+			return tuning.StartingStatPoints;
 		}
 	}
 
@@ -73,16 +85,30 @@ public class StatModule : Module
 			return tuning.CriticalHitDamageMod;
 		}
 	}
+
+	public float SpeedToMovementRatio {
+		get {
+			return tuning.SpeedToMovementRatio;
+		}
+	}
+
+	public float HealthPerecentGainFromPotion {
+		get {
+			return tuning.HealthPerecentGainFromPotion;
+		}
+	}
+
 	public int GetMeleeDamage (IUnit unit) {
-		return unit.GetStrength() * DamagePerStrengthPoint;
+		return (int) (unit.GetStrength() * DamagePerStrengthPoint);
 	}
 
 	public int GetMagicDamage (IUnit unit) {
-		return unit.GetMagic() * DamagePerMagicPoint;
+		return (int) (unit.GetMagic() * DamagePerMagicPoint);
 	}
 
 	public bool CriticalHit (IUnit unit) {
 		float critChance = CriticalHitRatePerSkillPoint * unit.GetSkill();
 		return Random.Range(0.0f, 1.0f) < critChance;
 	}
+
 }

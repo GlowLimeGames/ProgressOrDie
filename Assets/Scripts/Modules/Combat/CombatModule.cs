@@ -30,11 +30,15 @@ public class CombatModule : Module, ICombatModule
 	}
 
 	public void HandleAttackByPlayer (IUnit unit) {
-		PlayerCharacter player = units.GetMainPlayer().GetCharacter();
-		if(ableToPerformMeleeAttack(player, unit)) {
-			player.MeleeAttack(unit);
-		} else {
-			player.MagicAttack(unit);
+		PlayerCharacterBehaviour playerAgent = units.GetMainPlayer();
+		PlayerCharacter player = playerAgent.GetCharacter();
+		if (!playerAgent.HasAttackedDuringTurn) {
+			playerAgent.Attack();
+			if(ableToPerformMeleeAttack(player, unit)) {
+				player.MeleeAttack(unit);
+			} else {
+				player.MagicAttack(unit);
+			}
 		}
 	}
 
@@ -84,6 +88,8 @@ public class CombatModule : Module, ICombatModule
 
 	public void MagicAttack (IUnit attacker, IUnit target) {
 		target.Damage(stats.GetMagicDamage(attacker));
+		EventModule.Event(PODEvent.Notification, 
+			string.Format("{0} dealt {1} damage to {2}", attacker, stats.GetMagicDamage(attacker), target));
 	}
 
 	public void FleeAttempt (IStatModule playerstats, IUnit unit) {

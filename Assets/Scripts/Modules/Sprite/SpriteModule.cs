@@ -50,10 +50,6 @@ public class SpriteModule : Module
 	Sprite loadSpriteFromResources(string fileName)
 	{
 		Sprite sprite = Resources.Load<Sprite>(spritePath(fileName));
-		if(sprite == null)
-		{
-			Debug.Log(fileName);
-		}
 		return sprite;
 	}
 

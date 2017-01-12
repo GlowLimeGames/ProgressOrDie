@@ -4,8 +4,15 @@
  */
 
 using UnityEngine;
+using System.IO;
 
 public class ModuleController : SingletonController<ModuleController> {
+	const string UNITS = "Units";
+	const string TILES = "Tiles";
+
+	[SerializeField]
+	string levelName = "Example";
+
 	[SerializeField]
 	ParserModule parser;
 
@@ -68,13 +75,13 @@ public class ModuleController : SingletonController<ModuleController> {
 		tuning.Init(tuningData);
 		stats.Init(tuning);
 
-		TileData tileData = parser.ParseJSONFromResources<TileData>("Tiles");
-		string[,] tiles = parser.ParseCSVFromResources("Example/Tiles");
+		TileData tileData = parser.ParseJSONFromResources<TileData>(TILES);
+		string[,] tiles = parser.ParseCSVFromResources(getTilesCSVPath(levelName));
 		map.Init(tiles, tileData.Tiles, sprites);
 
 		EnemyData enemyData = parser.ParseJSONFromResources<EnemyData>("Enemies");
-		string[,] units = parser.ParseCSVFromResources("Example/Units");
-		unit.Init(map, sprites, units, enemyData, turn, movement, combat, stats, abilities);
+		string[,] units = parser.ParseCSVFromResources(getUnitsCSVPath(levelName));
+		unit.Init(map, sprites, units, enemyData, turn, movement, combat, stats, abilities, tuning);
 		cam.StartFollowing(unit.GetMainPlayer());
 		ui.Init(turn, unit);
 		movement.Init(turn, tuning);
@@ -85,6 +92,16 @@ public class ModuleController : SingletonController<ModuleController> {
 
 		AbilityData abilityData = parser.ParseJSONFromResources<AbilityData>("Abilities");
 		abilities.Init(abilityData);
+	}
+
+	string getUnitsCSVPath(string levelName)
+	{
+		return Path.Combine(levelName, UNITS);
+	}
+
+	string getTilesCSVPath(string levelName)
+	{
+		return Path.Combine(levelName, TILES);
 	}
 		
 }

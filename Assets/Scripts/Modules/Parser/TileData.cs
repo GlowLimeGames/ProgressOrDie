@@ -20,6 +20,7 @@ public class TileType : SerializableData
 	public int Constitution;
 	public int Strength;
 	public int Magic;
-	public string PlaceholderLabel;
-	public string Passive;
+	public bool PlayerPassable;
+	public bool MonsterPassable;
+
 }

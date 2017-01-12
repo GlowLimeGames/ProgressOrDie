@@ -251,12 +251,52 @@
 			"Volume": 100
 		},
 		{
-			"Name":"WIP",
+			"Name":"Progress or Die Ambience",
 			"Groups":[],
 			"Events":["WIP"],
 			"StopEvents":["WIP"],
 			"Loop": false,
 			"Type": "Music",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Ushi Oni Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Yamata no Orochi Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Yuka Onna Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"WIP",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
 			"Channel": 0,
 			"Volume": 100
 		}

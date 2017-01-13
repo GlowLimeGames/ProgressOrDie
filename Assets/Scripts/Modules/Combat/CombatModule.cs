@@ -36,8 +36,10 @@ public class CombatModule : Module, ICombatModule
 			playerAgent.Attack();
 			if(ableToPerformMeleeAttack(player, unit)) {
 				player.MeleeAttack(unit);
+				EventModule.Event(PODEvent.PlayerMeleeAttack);
 			} else {
 				player.MagicAttack(unit);
+				EventModule.Event(PODEvent.PlayerMagicAttack);
 			}
 		}
 	}

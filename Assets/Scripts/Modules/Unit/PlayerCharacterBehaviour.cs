@@ -123,11 +123,13 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	protected override void SubscribeEvents ()
 	{
 		base.SubscribeEvents ();
+		EventModule.Subscribe(handlePODGameEvent);
 	}
 
 	protected override void UnusbscribeEvents ()
 	{
 		base.UnusbscribeEvents ();
+		EventModule.Unsubscribe(handlePODGameEvent);
 	}
 
 	protected bool playerAttackEvent(PODEvent gameEvent) {

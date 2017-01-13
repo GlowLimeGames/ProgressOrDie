@@ -253,8 +253,8 @@ public class UnitModule : Module
 
 	void handleEnemyTurn()
 	{
-		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
-		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
+//		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
+//		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
 	}
 
 	EnemyNPC[] sortEnemiesByTurnPriority(List<Unit> units) {

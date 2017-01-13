@@ -120,4 +120,35 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
+	protected override void SubscribeEvents ()
+	{
+		base.SubscribeEvents ();
+	}
+
+	protected override void UnusbscribeEvents ()
+	{
+		base.UnusbscribeEvents ();
+	}
+
+	protected bool playerAttackEvent(PODEvent gameEvent) {
+		return gameEvent == PODEvent.PlayerMeleeAttack || gameEvent == PODEvent.PlayerMagicAttack;
+	}
+
+	protected AttackType getAttackType(PODEvent combatEvent) {
+		switch(combatEvent) {
+			case PODEvent.PlayerMagicAttack:
+				return AttackType.Magic;
+			case PODEvent.PlayerMeleeAttack:
+				return AttackType.Melee;
+			default:
+				throw new UnityException("Attack type not found");
+		}
+	}
+
+	void handlePODGameEvent(PODEvent gameEvent) {
+		if(playerAttackEvent(gameEvent)) {
+			QueryAnimator(AnimParam.Trigger, getAttackKey(getAttackType(gameEvent)));
+		}
+	}
+
 }

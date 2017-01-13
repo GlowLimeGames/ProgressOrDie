@@ -13,10 +13,14 @@ public abstract class Agent : MobileObjectBehaviour {
 	protected const string LEFT = "Left";
 	protected const string RIGHT = "Right";
 	protected const string IS_MOVING = "IsMoving";
+	protected const string MAGIC = "Magic";
+	protected const string MELEE = "Melee";
+	protected const string ATTACK = "Attack";
 
 	public bool HasAttackedDuringTurn{get; protected set;}
 
 	protected bool canBeAttacked;
+
 	Color canAttackColor = Color.red;
 	SpriteRenderer spriteR;
 
@@ -46,7 +50,7 @@ public abstract class Agent : MobileObjectBehaviour {
 		turns.SubscribeToTurnSwitch(delegate(AgentType type)
 			{ReplenishAtTurnStart(type);});
 	}
-
+		
 	public bool HasUnit {
 		get {
 			return GetUnit() != null;
@@ -135,6 +139,17 @@ public abstract class Agent : MobileObjectBehaviour {
 		canBeAttacked = false;
 	}
 		
+	protected string getAttackKey(AttackType type) {
+		switch(type) {
+			case AttackType.Magic:
+				return string.Concat(MAGIC, ATTACK);
+			case AttackType.Melee:
+				return string.Concat(MELEE, ATTACK);
+			default:
+				return ATTACK;	
+		}
+	}
+
 	protected bool move (int deltaX, int deltaY) {
 		if (movement.CanMove(this)) {
 			prevLoc = currentLoc;

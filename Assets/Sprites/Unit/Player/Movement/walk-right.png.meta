@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: a834152f5ddfc374b8c359090d8e253b
-timeCreated: 1484243633
+guid: 8f1185dc6cb91f243ac28633b549d91f
+timeCreated: 1484243697
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: walk-left_0
-    21300002: walk-left_1
-    21300004: walk-left_2
-    21300006: walk-left_3
+    21300000: walk-right_0
+    21300002: walk-right_1
+    21300004: walk-right_2
+    21300006: walk-right_3
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -74,7 +74,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walk-left_0
+      name: walk-right_0
       rect:
         serializedVersion: 2
         x: 22
@@ -87,7 +87,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk-left_1
+      name: walk-right_1
       rect:
         serializedVersion: 2
         x: 96
@@ -100,7 +100,7 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk-left_2
+      name: walk-right_2
       rect:
         serializedVersion: 2
         x: 171
@@ -113,10 +113,10 @@ TextureImporter:
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk-left_3
+      name: walk-right_3
       rect:
         serializedVersion: 2
-        x: 241
+        x: 243
         y: 13
         width: 32
         height: 49

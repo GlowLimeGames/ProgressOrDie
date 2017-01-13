@@ -228,4 +228,6 @@ public enum PODEvent {
 	Notification,
 	PlayerAttacked,
 	PlayerTurnStart,
+	PlayerMagicAttack,
+	PlayerMeleeAttack
 }

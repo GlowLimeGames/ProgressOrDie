@@ -1,13 +1,15 @@
 fileFormatVersion: 2
-guid: a834152f5ddfc374b8c359090d8e253b
-timeCreated: 1484243633
+guid: ffb8cd71da963ed4ba9ddb79a9146b6c
+timeCreated: 1484324864
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: walk-left_0
-    21300002: walk-left_1
-    21300004: walk-left_2
-    21300006: walk-left_3
+    21300000: spritesheet (back)_0
+    21300002: spritesheet (back)_1
+    21300004: spritesheet (back)_2
+    21300006: spritesheet (back)_3
+    21300008: spritesheet (back)_4
+    21300010: spritesheet (back)_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -74,54 +76,80 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: walk-left_0
+      name: spritesheet (back)_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 12
-        width: 29
-        height: 50
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk-left_1
+      name: spritesheet (back)_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 12
-        width: 29
-        height: 50
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 74
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk-left_2
+      name: spritesheet (back)_2
       rect:
         serializedVersion: 2
-        x: 171
-        y: 12
-        width: 28
-        height: 50
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 148
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: walk-left_3
+      name: spritesheet (back)_3
       rect:
         serializedVersion: 2
-        x: 241
-        y: 13
-        width: 32
-        height: 49
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 222
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spritesheet (back)_4
+      rect:
+        serializedVersion: 2
+        x: 296
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: spritesheet (back)_5
+      rect:
+        serializedVersion: 2
+        x: 370
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

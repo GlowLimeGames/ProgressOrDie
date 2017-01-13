@@ -100,11 +100,12 @@ public class LegendData : SerializableData
 
 	void checkLegends() {
 		if(legendLookup == null) {
+			legendLookup = new Dictionary<string, Dictionary<int, PlayerLegend>>();
 			foreach (string gameEndKey in System.Enum.GetNames(typeof(GameEndType))) {
 				legendLookup.Add(gameEndKey, new Dictionary<int, PlayerLegend>());
 			}
 			foreach (PlayerLegend legend in Legends) {
-
+				legendLookup[legend.Type].Add(legend.LevelCount, legend);
 			}
 		}
 	}
@@ -121,4 +122,10 @@ public class PlayerLegend : SerializableData
 	public int ConstitutionMod;
 	public int SkillMod;
 	public int MagicMod;
+	public bool TakesEnemyName;
+
+	public string FormatLegendWithEnemyName(EnemyNPC enemy) {
+		return string.Format(Legend, enemy.Descriptor.Types[0]);
+	}
+
 }

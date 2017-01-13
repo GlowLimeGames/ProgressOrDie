@@ -7,7 +7,8 @@
       "StrengthMod" : 5,
       "ConstitutionMod" : 3,
       "SkillMod" : 0,
-      "MagicMod" : 0
+      "MagicMod" : 0,
+      "TakesEnemyName" : true
     },
     {
       "Type" : "Flee",
@@ -16,7 +17,8 @@
       "StrengthMod" : -5,
       "ConstitutionMod" : 3,
       "SkillMod" : 0,
-      "MagicMod" : 0
+      "MagicMod" : 0,
+      "TakesEnemyName" : true
     },
     {
       "Type" : "Win",
@@ -25,7 +27,8 @@
       "StrengthMod" : 0,
       "ConstitutionMod" : 0,
       "SkillMod" : 5,
-      "MagicMod" : 8
+      "MagicMod" : 8,
+      "TakesEnemyName" : false
     },
     {
       "Type" : "Flee",
@@ -34,7 +37,8 @@
       "StrengthMod" : 0,
       "ConstitutionMod" : 0,
       "SkillMod" : -5,
-      "MagicMod" : -8
+      "MagicMod" : -8,
+      "TakesEnemyName" : false
     },
     {
       "Type" : "Win",
@@ -43,7 +47,8 @@
       "StrengthMod" : 10,
       "ConstitutionMod" : 0,
       "SkillMod" : 0,
-      "MagicMod" : 10
+      "MagicMod" : 10,
+      "TakesEnemyName" : false
     },
     {
       "Type" : "Flee",
@@ -52,7 +57,8 @@
       "StrengthMod" : -10,
       "ConstitutionMod" : 0,
       "SkillMod" : 0,
-      "MagicMod" : -10
+      "MagicMod" : -10,
+      "TakesEnemyName" : false
     }
   ]
 }

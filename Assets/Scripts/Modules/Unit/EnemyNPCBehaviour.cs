@@ -29,6 +29,10 @@ public class EnemyNPCBehaviour : AIAgent
 		return enemy;
 	}
 
+	public void UpdateHealthDisplay(float fraction) {
+		healthBar.SetHealthDisplay(fraction);
+	}
+
 	public void SetEnemy (EnemyNPC enemy) {
 		this.enemy = enemy;
 		this.enemy.LinkToAgent(this);

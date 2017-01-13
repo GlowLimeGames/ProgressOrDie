@@ -7,6 +7,9 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable {
+	protected const int MAIN_MENU_INDEX = 0;
+	protected const string LEVEL = "Level";
+
 	IEnumerator moveCoroutine;
 
 	public delegate void MonoAction();

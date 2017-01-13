@@ -1,0 +1,58 @@
+{
+  "Legends" : [
+    {
+      "Type" : "Win",
+      "LevelCount" : 1,
+      "Legend" : "{0}'s Bane",
+      "StrengthMod" : 5,
+      "ConstitutionMod" : 3,
+      "SkillMod" : 0,
+      "MagicMod" : 0
+    },
+    {
+      "Type" : "Flee",
+      "LevelCount" : 1,
+      "Legend" : "{0}'s Welp",
+      "StrengthMod" : -5,
+      "ConstitutionMod" : 3,
+      "SkillMod" : 0,
+      "MagicMod" : 0
+    },
+    {
+      "Type" : "Win",
+      "LevelCount" : 2,
+      "Legend" : "Peasant's Dependant",
+      "StrengthMod" : 0,
+      "ConstitutionMod" : 0,
+      "SkillMod" : 5,
+      "MagicMod" : 8
+    },
+    {
+      "Type" : "Flee",
+      "LevelCount" : 2,
+      "Legend" : "Peasant's Failure",
+      "StrengthMod" : 0,
+      "ConstitutionMod" : 0,
+      "SkillMod" : -5,
+      "MagicMod" : -8
+    },
+    {
+      "Type" : "Win",
+      "LevelCount" : 3,
+      "Legend" : "Guardian of the Tower",
+      "StrengthMod" : 10,
+      "ConstitutionMod" : 0,
+      "SkillMod" : 0,
+      "MagicMod" : 10
+    },
+    {
+      "Type" : "Flee",
+      "LevelCount" : 3,
+      "Legend" : "Acolyte of the Tower",
+      "StrengthMod" : -10,
+      "ConstitutionMod" : 0,
+      "SkillMod" : 0,
+      "MagicMod" : -10
+    }
+  ]
+}

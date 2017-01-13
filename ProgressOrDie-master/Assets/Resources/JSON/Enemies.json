@@ -1,0 +1,623 @@
+{
+  "EnemiesLV1" : [
+    {
+      "Key" : "SN",
+      "Types" : [
+        "Small",
+        "Nimble"
+      ],
+      "Speed" : 8,
+      "Magic" : 0,
+      "Strength" : 40,
+      "Skill" : 5,
+      "Constitution" : 9,
+      "TurnPriority" : 1,
+      "StatsOnKill" : 5,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "SP",
+      "Types" : [
+        "Small",
+        "Powerful"
+      ],
+      "Speed" : 4,
+      "Magic" : 0,
+      "Strength" : 40,
+      "Skill" : 1,
+      "Constitution" : 27,
+      "TurnPriority" : 2,
+      "StatsOnKill" : 5,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "SS",
+      "Types" : [
+        "Small",
+        "Strong"
+      ],
+      "Speed" : 6,
+      "Magic" : 0,
+      "Strength" : 100,
+      "Skill" : 1,
+      "Constitution" : 14,
+      "TurnPriority" : 3,
+      "StatsOnKill" : 5,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "SA",
+      "Types" : [
+        "Small",
+        "Agile"
+      ],
+      "Speed" : 6,
+      "Magic" : 0,
+      "Strength" : 55,
+      "Skill" : 10,
+      "Constitution" : 3,
+      "TurnPriority" : 4,
+      "StatsOnKill" : 5,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "SE",
+      "Types" : [
+        "Small",
+        "Enlightened"
+      ],
+      "Speed" : 4,
+      "Magic" : 90,
+      "Strength" : 0,
+      "Skill" : 2,
+      "Constitution" : 6,
+      "TurnPriority" : 5,
+      "StatsOnKill" : 5,
+      "SphereOfInfluence" : 6,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 0,
+      "Level" : 1
+    },
+    {
+      "Key" : "LN",
+      "Types" : [
+        "Large",
+        "Nimble"
+      ],
+      "Speed" : 10,
+      "Magic" : 0,
+      "Strength" : 60,
+      "Skill" : 10,
+      "Constitution" : 10,
+      "TurnPriority" : 6,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 5,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "LP",
+      "Types" : [
+        "Large",
+        "Powerful"
+      ],
+      "Speed" : 6,
+      "Magic" : 0,
+      "Strength" : 60,
+      "Skill" : 2,
+      "Constitution" : 42,
+      "TurnPriority" : 7,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "LS",
+      "Types" : [
+        "Large",
+        "Strong"
+      ],
+      "Speed" : 8,
+      "Magic" : 0,
+      "Strength" : 200,
+      "Skill" : 2,
+      "Constitution" : 32,
+      "TurnPriority" : 8,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "LA",
+      "Types" : [
+        "Large",
+        "Agile"
+      ],
+      "Speed" : 8,
+      "Magic" : 0,
+      "Strength" : 105,
+      "Skill" : 20,
+      "Constitution" : 5,
+      "TurnPriority" : 9,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 1
+    },
+    {
+      "Key" : "LE",
+      "Types" : [
+        "Large",
+        "Enlightened"
+      ],
+      "Speed" : 6,
+      "Magic" : 120,
+      "Strength" : 0,
+      "Skill" : 3,
+      "Constitution" : 13,
+      "TurnPriority" : 10,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 7,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 0,
+      "Level" : 1
+    }
+  ],
+  "EnemiesLV2" : [
+    {
+      "Key" : "SN",
+      "Types" : [
+        "Small",
+        "Nimble"
+      ],
+      "Speed" : 12,
+      "Magic" : 0,
+      "Strength" : 80,
+      "Skill" : 10,
+      "Constitution" : 18,
+      "TurnPriority" : 1,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "SP",
+      "Types" : [
+        "Small",
+        "Powerful"
+      ],
+      "Speed" : 8,
+      "Magic" : 0,
+      "Strength" : 80,
+      "Skill" : 2,
+      "Constitution" : 54,
+      "TurnPriority" : 2,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "SS",
+      "Types" : [
+        "Small",
+        "Strong"
+      ],
+      "Speed" : 10,
+      "Magic" : 0,
+      "Strength" : 200,
+      "Skill" : 2,
+      "Constitution" : 28,
+      "TurnPriority" : 3,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "SA",
+      "Types" : [
+        "Small",
+        "Agile"
+      ],
+      "Speed" : 10,
+      "Magic" : 0,
+      "Strength" : 110,
+      "Skill" : 20,
+      "Constitution" : 6,
+      "TurnPriority" : 4,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "SE",
+      "Types" : [
+        "Small",
+        "Enlightened"
+      ],
+      "Speed" : 8,
+      "Magic" : 180,
+      "Strength" : 0,
+      "Skill" : 4,
+      "Constitution" : 12,
+      "TurnPriority" : 5,
+      "StatsOnKill" : 10,
+      "SphereOfInfluence" : 6,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 0,
+      "Level" : 2
+    },
+    {
+      "Key" : "LN",
+      "Types" : [
+        "Large",
+        "Nimble"
+      ],
+      "Speed" : 14,
+      "Magic" : 0,
+      "Strength" : 120,
+      "Skill" : 20,
+      "Constitution" : 20,
+      "TurnPriority" : 6,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 5,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "LP",
+      "Types" : [
+        "Large",
+        "Powerful"
+      ],
+      "Speed" : 10,
+      "Magic" : 0,
+      "Strength" : 120,
+      "Skill" : 4,
+      "Constitution" : 84,
+      "TurnPriority" : 7,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "LS",
+      "Types" : [
+        "Large",
+        "Strong"
+      ],
+      "Speed" : 12,
+      "Magic" : 0,
+      "Strength" : 400,
+      "Skill" : 4,
+      "Constitution" : 64,
+      "TurnPriority" : 8,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "LA",
+      "Types" : [
+        "Large",
+        "Agile"
+      ],
+      "Speed" : 12,
+      "Magic" : 0,
+      "Strength" : 210,
+      "Skill" : 40,
+      "Constitution" : 10,
+      "TurnPriority" : 9,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 2
+    },
+    {
+      "Key" : "LE",
+      "Types" : [
+        "Large",
+        "Enlightened"
+      ],
+      "Speed" : 10,
+      "Magic" : 240,
+      "Strength" : 0,
+      "Skill" : 6,
+      "Constitution" : 26,
+      "TurnPriority" : 10,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 7,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 0,
+      "Level" : 2
+    }
+  ],
+  "EnemiesLV3" : [
+    {
+      "Key" : "SN",
+      "Types" : [
+        "Small",
+        "Nimble"
+      ],
+      "Speed" : 16,
+      "Magic" : 0,
+      "Strength" : 160,
+      "Skill" : 20,
+      "Constitution" : 36,
+      "TurnPriority" : 1,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "SP",
+      "Types" : [
+        "Small",
+        "Powerful"
+      ],
+      "Speed" : 12,
+      "Magic" : 0,
+      "Strength" : 160,
+      "Skill" : 4,
+      "Constitution" : 108,
+      "TurnPriority" : 2,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "SS",
+      "Types" : [
+        "Small",
+        "Strong"
+      ],
+      "Speed" : 14,
+      "Magic" : 0,
+      "Strength" : 400,
+      "Skill" : 4,
+      "Constitution" : 56,
+      "TurnPriority" : 3,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "SA",
+      "Types" : [
+        "Small",
+        "Agile"
+      ],
+      "Speed" : 14,
+      "Magic" : 0,
+      "Strength" : 220,
+      "Skill" : 40,
+      "Constitution" : 12,
+      "TurnPriority" : 4,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 3,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "SE",
+      "Types" : [
+        "Small",
+        "Enlightened"
+      ],
+      "Speed" : 12,
+      "Magic" : 360,
+      "Strength" : 0,
+      "Skill" : 8,
+      "Constitution" : 24,
+      "TurnPriority" : 5,
+      "StatsOnKill" : 20,
+      "SphereOfInfluence" : 6,
+      "TerritoryRadius" : 9,
+      "ChanceOfMelee" : 0,
+      "Level" : 3
+    },
+    {
+      "Key" : "LN",
+      "Types" : [
+        "Large",
+        "Nimble"
+      ],
+      "Speed" : 18,
+      "Magic" : 0,
+      "Strength" : 240,
+      "Skill" : 40,
+      "Constitution" : 40,
+      "TurnPriority" : 6,
+      "StatsOnKill" : 40,
+      "SphereOfInfluence" : 5,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "LP",
+      "Types" : [
+        "Large",
+        "Powerful"
+      ],
+      "Speed" : 14,
+      "Magic" : 0,
+      "Strength" : 240,
+      "Skill" : 8,
+      "Constitution" : 168,
+      "TurnPriority" : 7,
+      "StatsOnKill" : 40,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "LS",
+      "Types" : [
+        "Large",
+        "Strong"
+      ],
+      "Speed" : 16,
+      "Magic" : 0,
+      "Strength" : 800,
+      "Skill" : 8,
+      "Constitution" : 128,
+      "TurnPriority" : 8,
+      "StatsOnKill" : 40,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "LA",
+      "Types" : [
+        "Large",
+        "Agile"
+      ],
+      "Speed" : 16,
+      "Magic" : 0,
+      "Strength" : 420,
+      "Skill" : 80,
+      "Constitution" : 20,
+      "TurnPriority" : 9,
+      "StatsOnKill" : 40,
+      "SphereOfInfluence" : 4,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 1,
+      "Level" : 3
+    },
+    {
+      "Key" : "LE",
+      "Types" : [
+        "Large",
+        "Enlightened"
+      ],
+      "Speed" : 14,
+      "Magic" : 480,
+      "Strength" : 0,
+      "Skill" : 12,
+      "Constitution" : 52,
+      "TurnPriority" : 10,
+      "StatsOnKill" : 40,
+      "SphereOfInfluence" : 7,
+      "TerritoryRadius" : 10,
+      "ChanceOfMelee" : 0,
+      "Level" : 3
+    }
+  ],
+  "BossMonsters" : [
+    {
+      "Key" : "B1",
+      "Types" : [
+        "BossLvl1",
+        "Ushi-Oni"
+      ],
+      "Speed" : 10,
+      "Magic" : 7,
+      "Strength" : 60,
+      "Skill" : 25,
+      "Constitution" : 75,
+      "TurnPriority" : 11,
+      "SphereOfInfluence" : 8,
+      "TerritoryRadius" : "EntireMap",
+      "ChanceOfMelee" : 0.8,
+      "BreakPoint" : ""
+    },
+    {
+      "Key" : "B2",
+      "Types" : [
+        "BossLvl2",
+        "Yuki-Onna"
+      ],
+      "Speed" : 10,
+      "Magic" : 400,
+      "Strength" : 200,
+      "Skill" : 50,
+      "Constitution" : 100,
+      "TurnPriority" : 11,
+      "SphereOfInfluence" : 12,
+      "TerritoryRadius" : "EntireMap",
+      "ChanceOfMelee" : 0.2,
+      "BreakPoint" : ""
+    },
+    {
+      "Key" : "B3",
+      "Types" : [
+        "BossLvl3",
+        "Yamata_no_Orochi"
+      ],
+      "Speed" : 10,
+      "Magic" : 650,
+      "Strength" : 500,
+      "Skill" : 50,
+      "Constitution" : 250,
+      "TurnPriority" : 11,
+      "SphereOfInfluence" : 10,
+      "TerritoryRadius" : "EntireMap",
+      "ChanceOfMelee" : 0.6,
+      "BreakPoint" : ""
+    }
+  ],
+  "Prefixes" : [
+    {
+      "Prefix" : "Nimble",
+      "Stat" : "Speed"
+    },
+    {
+      "Prefix" : "Strong",
+      "Stat" : "Strength"
+    },
+    {
+      "Prefix" : "Agile",
+      "Stat" : "Skill"
+    },
+    {
+      "Prefix" : "Enlightened",
+      "Stat" : "Magic"
+    },
+    {
+      "Prefix" : "Powerful",
+      "Stat" : "Constitution"
+    }
+  ]
+}

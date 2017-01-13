@@ -1,0 +1,257 @@
+{
+  "Tiles" : [
+    {
+      "TileName" : "ShortGrass",
+      "Key" : "SG",
+      "Speed" : 1,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "SGrass 2s VR",
+      "Passive" : "Vulnerable to Ranged"
+    },
+    {
+      "TileName" : "TallGrass",
+      "Key" : "TG",
+      "Speed" : 3,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "TGrass 3s SB",
+      "Passive" : "Strength Boost"
+    },
+    {
+      "TileName" : "Rocky",
+      "Key" : "R",
+      "Speed" : 4,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "Rocky 4s SR",
+      "Passive" : "Skill Reduction"
+    },
+    {
+      "TileName" : "Mud ",
+      "Key" : "Mu",
+      "Speed" : 3,
+      "Skill" : 8,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "Mud 3s/8Sk VM",
+      "Passive" : "Vulnerable to Melee"
+    },
+    {
+      "TileName" : "Marsh",
+      "Key" : "Ma",
+      "Speed" : 4,
+      "Skill" : 0,
+      "Constitution" : 8,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "Marsh 4s/8C RM",
+      "Passive" : "Resistant to Melee"
+    },
+    {
+      "TileName" : "Sand",
+      "Key" : "Sa",
+      "Speed" : 4,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "Sand 4s N/A",
+      "Passive" : "N/A"
+    },
+    {
+      "TileName" : "Shallow Water",
+      "Key" : "SW",
+      "Speed" : 5,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : "",
+      "PlaceholderLabel" : "sWater 5s RR",
+      "Passive" : "Resistant to Ranged"
+    },
+    {
+      "TileName" : "DeepWater,Calm",
+      "Key" : "DWC",
+      "Speed" : 5,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 8,
+      "Magic" : 0,
+      "PlaceholderLabel" : "dWater(C) 5s/8St OB",
+      "Passive" : "Obstructed"
+    },
+    {
+      "TileName" : "DeepWater,Harsh",
+      "Key" : "DWH",
+      "Speed" : -1,
+      "Skill" : "",
+      "Constitution" : "",
+      "Strength" : "",
+      "Magic" : "",
+      "PlaceholderLabel" : "dWater(H) IM N/A",
+      "Passive" : "N/A"
+    },
+    {
+      "TileName" : "SlopeRock,Scramble",
+      "Key" : "SlRS",
+      "Speed" : 3,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 6,
+      "Magic" : 0,
+      "PlaceholderLabel" : "SlRock 3s/6ST OB RB",
+      "Passive" : "Obstructed/ Ranged Boost"
+    },
+    {
+      "TileName" : "SteepRock,Scramble",
+      "Key" : "StRS",
+      "Speed" : 5,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "StRock 5s/8ST OB SR",
+      "Passive" : "Obstructed/ Skill Reduction"
+    },
+    {
+      "TileName" : "SheerCliff",
+      "Key" : "SC",
+      "Speed" : -1,
+      "Skill" : "",
+      "Constitution" : "",
+      "Strength" : "",
+      "Magic" : "",
+      "PlaceholderLabel" : "ShCliff IM N/A",
+      "Passive" : "N/A"
+    },
+    {
+      "TileName" : "ForestPath",
+      "Key" : "FP",
+      "Speed" : 3,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "Forestp 3s RR",
+      "Passive" : "Resistant to Ranged"
+    },
+    {
+      "TileName" : "Thicket",
+      "Key" : "T",
+      "Speed" : 4,
+      "Skill" : 0,
+      "Constitution" : 10,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "Thicket 4s/10CON VR",
+      "Passive" : "Vulnerable to Ranged"
+    },
+    {
+      "TileName" : "DeepForest",
+      "Key" : "DF",
+      "Speed" : 4,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 10,
+      "PlaceholderLabel" : "Forestd 4s/ 10SK OB",
+      "Passive" : "Obstructed"
+    },
+    {
+      "TileName" : "EnchantedForest",
+      "Key" : "EF",
+      "Speed" : 4,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 10,
+      "PlaceholderLabel" : "EnForest 4s/10MA MB",
+      "Passive" : "Magic Boost"
+    },
+    {
+      "TileName" : "EnchantedPond",
+      "Key" : "EP",
+      "Speed" : 3,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 8,
+      "PlaceholderLabel" : "EnPond 3s/8MA MR",
+      "Passive" : "Magic Resistance"
+    },
+    {
+      "TileName" : "EnchantedMeadow",
+      "Key" : "EM",
+      "Speed" : 2,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 6,
+      "PlaceholderLabel" : "EnMeadow 2s/6MA MB",
+      "Passive" : "Magic Boost"
+    },
+    {
+      "TileName" : "Ruined Village",
+      "Key" : "RV",
+      "Speed" : 3,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 10,
+      "PlaceholderLabel" : "Ruin 3s/10MA SB",
+      "Passive" : "Strength Boost"
+    },
+    {
+      "TileName" : "MineShaft",
+      "Key" : "MS",
+      "Speed" : 3,
+      "Skill" : 6,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "Mineshaft 3s/6SK OB",
+      "Passive" : "Obstructed"
+    },
+    {
+      "TileName" : "Unholy Ground",
+      "Key" : "UG",
+      "Speed" : 2,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "UGround 2s PI",
+      "Passive" : "Player Impassable"
+    },
+    {
+      "TileName" : "Concecrated Ground",
+      "Key" : "CG",
+      "Speed" : 2,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "CGround 2s MI",
+      "Passive" : "Monster Impassable"
+    },
+    {
+      "TileName" : "Pit",
+      "Key" : "P",
+      "Speed" : 0,
+      "Skill" : 0,
+      "Constitution" : 0,
+      "Strength" : 0,
+      "Magic" : 0,
+      "PlaceholderLabel" : "",
+      "Passive" : "Impassable"
+    }
+  ]
+}

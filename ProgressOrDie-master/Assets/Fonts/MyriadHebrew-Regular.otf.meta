@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: bf0de90d2cfab4b95be6708a749c340d
+timeCreated: 1483952089
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Myriad Hebrew
+  fontNames:
+  - Myriad Hebrew
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

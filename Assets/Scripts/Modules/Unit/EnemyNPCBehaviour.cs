@@ -6,7 +6,15 @@
 
 public class EnemyNPCBehaviour : AIAgent 
 {	
+	HealthBarBehaviour healthBar;
+
 	EnemyNPC enemy;
+
+	protected override void SetReferences ()
+	{
+		base.SetReferences ();
+		healthBar = GetComponentInChildren<HealthBarBehaviour>();
+	}
 
 	public override AgentType GetAgentType()
 	{

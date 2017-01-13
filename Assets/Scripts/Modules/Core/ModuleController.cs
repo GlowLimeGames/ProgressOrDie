@@ -70,6 +70,9 @@ public class ModuleController : SingletonController<ModuleController> {
 	[SerializeField]
 	NotificationModule notifications;
 
+	[SerializeField]
+	PrefabModule prefabs;
+
 	protected override void SetReferences ()
 	{
 		base.SetReferences ();
@@ -86,7 +89,7 @@ public class ModuleController : SingletonController<ModuleController> {
 
 		EnemyData enemyData = parser.ParseJSONFromResources<EnemyData>("Enemies");
 		string[,] units = parser.ParseCSVFromResources(getUnitsCSVPath(levelName));
-		unit.Init(map, sprites, units, enemyData, turn, movement, combat, stats, abilities, tuning);
+		unit.Init(map, units, enemyData, turn, movement, combat, stats, abilities, tuning, prefabs);
 		cam.StartFollowing(unit.GetMainPlayer());
 		ui.Init(turn, unit);
 		movement.Init(turn, tuning, map);

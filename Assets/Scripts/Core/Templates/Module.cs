@@ -11,6 +11,8 @@ public abstract class Module : MonoBehaviourExtended {
 	protected const string JSON_DIR = "JSON";
 	protected const string CSV_DIR = "CSV";
 	protected const string AUDIO_DIR = "Audio";
+	protected const string PREFABS_DIR = "Prefabs";
+	protected const string ENEMIES_DIR = "Enemies";
 
 	[SerializeField]
 	protected string id;

@@ -21,6 +21,8 @@ public class UnitModule : Module
 	StatModule stats;
 	TuningModule tuning;
 	TurnModule turns;
+	PrefabModule prefabs;
+
 	MovementModule movement;
 	List<Unit> units = new List<Unit>();
 	EnemyNPC[] highlightedEnemyTargets = new EnemyNPC[0];
@@ -40,7 +42,6 @@ public class UnitModule : Module
 	}
 
 	public void Init(MapModule map, 
-		SpriteModule sprites, 
 		string[,] units,
 		EnemyData enemyInfo,
 		TurnModule turns,
@@ -48,17 +49,19 @@ public class UnitModule : Module
 		CombatModule combat, 
 		StatModule stats,
 		AbilitiesModule abilities,
-		TuningModule tuning
+		TuningModule tuning,
+		PrefabModule prefabs
 	){
 		this.combat = combat;
 		this.stats = stats;
 		this.tuning = tuning;
 		this.turns = turns;
 		this.movement = movement;
+		this.prefabs = prefabs;
 		movement.SubscribeToAgentMove(handleAgentMove);
 		turns.SubscribeToTurnSwitch(handleTurnSwitch);
 		createUnits(map.Map, units, enemyInfo);
-		placeUnits(map, sprites, this.units.ToArray(), turns, movement, combat, stats, abilities);
+		placeUnits(map, this.units.ToArray(), turns, movement, combat, stats, abilities, prefabs);
 	}
 		
 	public void HandleUnitDestroyed(Unit unit) {
@@ -150,13 +153,13 @@ public class UnitModule : Module
 	}
 
 	void placeUnits(MapModule map, 
-		SpriteModule sprites, 
 		Unit[] units, 
 		TurnModule turns,
 		MovementModule movement, 
 		CombatModule combat,
 		StatModule stats,
-		AbilitiesModule abilities
+		AbilitiesModule abilities,
+		PrefabModule prefabs
 	) {
 		
 		for (int i = 0; i < units.Length; i++) {
@@ -166,7 +169,7 @@ public class UnitModule : Module
 				agent = getPlayer(unit as PlayerCharacter);
 				mainPlayer = agent as PlayerCharacterBehaviour;
 			} else if (unit is EnemyNPC) {
-				agent = getEnemy(unit as EnemyNPC, sprites);
+				agent = getEnemy(unit as EnemyNPC, prefabs);
 			} else {
 				// Skip this unit: it's not supported
 				continue;
@@ -174,13 +177,11 @@ public class UnitModule : Module
 			agent.Init(turns, movement, combat, stats, abilities);
 			map.PlaceUnit(agent);
 		}
-
 	}
 		
-	EnemyNPCBehaviour getEnemy (EnemyNPC data, SpriteModule sprites) {
-		EnemyNPCBehaviour enemy = Instantiate(enemyPrefab, transform);	
+	EnemyNPCBehaviour getEnemy (EnemyNPC data, PrefabModule prefabs) {
+		EnemyNPCBehaviour enemy = prefabs.GetEnemy(data.Descriptor.Key);
 		enemy.SetEnemy(data);
-		enemy.SetSprite(sprites.GetEnemy(data.Descriptor));
 		return enemy;
 	}
 

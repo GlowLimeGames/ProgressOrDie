@@ -9,6 +9,12 @@ using UnityEngine.UI;
 
 public class EnemyNPC : Unit, IEnemyNPC, IComparable
 {
+	EnemyNPCBehaviour enemy {
+		get {
+			return agent as EnemyNPCBehaviour;
+		}
+	}
+
 	public int TerritoryRadius {
 		get {
 			return Descriptor.TerritoryRadius;
@@ -86,4 +92,11 @@ public class EnemyNPC : Unit, IEnemyNPC, IComparable
 		}
 	}
 
+	public override void Damage (int damage)
+	{
+		base.Damage (damage);
+		if(HasAgentLink) {
+			enemy.UpdateHealthDisplay((float) RemainingHealth / (float) getMaxHealth);
+		}
+	}
 }

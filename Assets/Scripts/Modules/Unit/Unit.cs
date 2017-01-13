@@ -31,7 +31,7 @@ public abstract class Unit
 		this.agent = null;
 	}
 
-	int getMaxHealth {
+	protected int getMaxHealth {
 		get {
 			return (int) (parentModule.BulkToHPRatio * (float) GetConstitution()); 
 		}
@@ -113,7 +113,7 @@ public abstract class Unit
 		throw new System.NotImplementedException();
 	}
 
-	public void Damage (int damage) {
+	public virtual void Damage (int damage) {
 		this.RemainingHealth -= damage;
 		if (IsDead) {
 			Kill();
@@ -156,7 +156,7 @@ public abstract class Unit
 		parentModule.MagicAttack(this as IUnit, unit);
 	}
 
-	public void Kill () {
+	public virtual void Kill () {
 		parentModule.HandleUnitDestroyed(this);		
 		if (HasAgentLink) {
 			UnityEngine.Object.Destroy(agent.gameObject);

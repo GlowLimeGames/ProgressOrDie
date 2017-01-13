@@ -182,6 +182,7 @@ public class UnitModule : Module
 	EnemyNPCBehaviour getEnemy (EnemyNPC data, PrefabModule prefabs) {
 		EnemyNPCBehaviour enemy = prefabs.GetEnemy(data.Descriptor.Key);
 		enemy.SetEnemy(data);
+		enemy.transform.SetParent(transform);
 		return enemy;
 	}
 

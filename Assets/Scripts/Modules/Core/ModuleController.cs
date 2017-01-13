@@ -14,6 +14,9 @@ public class ModuleController : SingletonController<ModuleController> {
 	string levelName = "Example";
 
 	[SerializeField]
+	bool levelOverride = false;
+
+	[SerializeField]
 	ParserModule parser;
 
 	[SerializeField]
@@ -70,7 +73,9 @@ public class ModuleController : SingletonController<ModuleController> {
 	protected override void SetReferences ()
 	{
 		base.SetReferences ();
-
+		if(!levelOverride) {
+			levelName = PlayerPrefs.GetString(LEVEL);
+		}
 		TuningData tuningData = parser.ParseJSONFromResources<TuningData>("Tuning");
 		tuning.Init(tuningData);
 		stats.Init(tuning);

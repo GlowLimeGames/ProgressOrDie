@@ -5,6 +5,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIModule : Module, IUIModule
@@ -24,6 +25,8 @@ public class UIModule : Module, IUIModule
 	UIFillBar constitutionBar;
 	[SerializeField]
 	UIFillBar speedBar;
+	[SerializeField]
+	UIButton menuButton;
 
 	[Space(25)]
 	[SerializeField]
@@ -42,6 +45,7 @@ public class UIModule : Module, IUIModule
 		turnText.SetText(turn.CurrentTurnStr());
 		turn.SubscribeToTurnSwitchStr(handleTurnChange);
 		endTurnButton.SubscribeToClick(turn.NextTurn);
+		menuButton.SubscribeToClick(quitToMenu);
 		this.playerAgent = units.GetMainPlayer();
 		this.playerAgent.SubscribeToAgilityChange(handleAgilityChange);
 		this.playerUnit = playerAgent.GetUnit() as PlayerCharacter;
@@ -80,4 +84,9 @@ public class UIModule : Module, IUIModule
 				break;
 		}
 	}
+
+	void quitToMenu() {
+		SceneManager.LoadScene(MAIN_MENU_INDEX);
+	}
+
 }

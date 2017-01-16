@@ -22,7 +22,6 @@ public class UnitModule : Module
 	StatModule stats;
 	TuningModule tuning;
 	TurnModule turns;
-	PrefabModule prefabs;
 
 	MovementModule movement;
 	List<Unit> units = new List<Unit>();
@@ -58,7 +57,6 @@ public class UnitModule : Module
 		this.tuning = tuning;
 		this.turns = turns;
 		this.movement = movement;
-		this.prefabs = prefabs;
 		movement.SubscribeToAgentMove(handleAgentMove);
 		turns.SubscribeToTurnSwitch(handleTurnSwitch);
 		createUnits(map.Map, units, enemyInfo);
@@ -251,11 +249,13 @@ public class UnitModule : Module
 
 	void handleEndEnemyTurn()
 	{
+		EventModule.Event(PODEvent.EnemyTurnEnd);
 		turns.NextTurn();
 	}
 
 	void handleEnemyTurn()
 	{
+		EventModule.Event(PODEvent.EnemyTurnStart);
 		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
 		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
 	}

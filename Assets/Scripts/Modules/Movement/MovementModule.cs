@@ -54,8 +54,7 @@ public class MovementModule : Module
 	}
 
 	public void DetermineEnemyMovement(EnemyNPC enemy) {
-		MapLocation currentLoc = enemy.GetLocation();
-		MapTile newTile = map.RandomTileInRadius(currentLoc, enemy.TerritoryRadius);
+		MapTile newTile = map.RandomTileInRadius(enemy.StartingLocation, enemy.TerritoryRadius);
 		newTile.PlaceUnit(enemy.GetAgent());
 	}
 

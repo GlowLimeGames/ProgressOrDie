@@ -25,6 +25,11 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		skill = 9;
 	}
 		
+	public override AttackType GetPrimaryAttack()
+	{
+		return AttackType.Magic;
+	}
+
 	public override int GetSpeed () {
 		return speed;
 	}

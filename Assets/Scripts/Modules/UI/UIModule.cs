@@ -82,6 +82,12 @@ public class UIModule : Module, IUIModule
 				meleeIcon.color = Color.white;
 				magicIcon.color = Color.white;
 				break;
+			case PODEvent.EnemyTurnStart:
+				endTurnButton.ToggleInteractable(false);
+				break;
+			case PODEvent.EnemyTurnEnd:
+				endTurnButton.ToggleInteractable(true);
+				break;
 		}
 	}
 

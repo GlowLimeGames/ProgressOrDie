@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: a834152f5ddfc374b8c359090d8e253b
-timeCreated: 1484243633
+timeCreated: 1484590480
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -70,6 +70,30 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -77,12 +101,12 @@ TextureImporter:
       name: walk-left_0
       rect:
         serializedVersion: 2
-        x: 22
-        y: 12
-        width: 29
-        height: 50
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 0
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -90,12 +114,12 @@ TextureImporter:
       name: walk-left_1
       rect:
         serializedVersion: 2
-        x: 96
-        y: 12
-        width: 29
-        height: 50
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 74
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -103,12 +127,12 @@ TextureImporter:
       name: walk-left_2
       rect:
         serializedVersion: 2
-        x: 171
-        y: 12
-        width: 28
-        height: 50
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 148
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
@@ -116,12 +140,12 @@ TextureImporter:
       name: walk-left_3
       rect:
         serializedVersion: 2
-        x: 241
-        y: 13
-        width: 32
-        height: 49
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
+        x: 222
+        y: 0
+        width: 74
+        height: 74
+      alignment: 0
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

@@ -263,7 +263,6 @@ public class UnitModule : Module
 	EnemyNPC[] sortEnemiesByTurnPriority(List<Unit> units) {
 		Sort<EnemyNPC> sorter = new SelectionSort<EnemyNPC>();
 		EnemyNPC[] enemies = getAllEnemies();
-		Debug.Log(enemies.Length);
 		return sorter.run(enemies);
 	}
 

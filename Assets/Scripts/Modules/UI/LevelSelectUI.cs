@@ -17,6 +17,11 @@ public class LevelSelectUI : UIElement
 		SceneManager.LoadScene(gameLevelIndex);
 	}
 
+	public void LoadCredits()
+	{
+		SceneManager.LoadScene(CREDITS_INDEX);
+	}
+
 	public void QuitGame(){
 		Application.Quit();
 	}

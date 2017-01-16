@@ -4,7 +4,7 @@
  * Usage: [no notes]
  */
 
-public abstract class Unit
+public abstract class Unit : IUnit
 {
 	protected UnitModule parentModule;
 
@@ -16,7 +16,7 @@ public abstract class Unit
 
 	protected Agent agent;
 	public int RemainingHealth {get; private set;}
-
+	public abstract AttackType GetPrimaryAttack();
 	public bool IsDead {
 		get {
 			return RemainingHealth <= 0;

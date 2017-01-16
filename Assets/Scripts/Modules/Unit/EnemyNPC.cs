@@ -29,6 +29,17 @@ public class EnemyNPC : Unit, IEnemyNPC, IComparable
 		}
 	}
 
+	public override AttackType GetPrimaryAttack() {
+		if(GetStrength() >= GetMagic())
+		{
+			return AttackType.Melee;
+		}
+		else
+		{
+			return AttackType.Magic;
+		}
+	}
+
 	public EnemyNPC(UnitModule parent, EnemyDescriptor descriptor, MapLocation location, Map map) :
 	base (parent, location, map) {
 		this.Descriptor = descriptor.GetInstance();

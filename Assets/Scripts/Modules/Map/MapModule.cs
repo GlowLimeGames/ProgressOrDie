@@ -38,7 +38,12 @@ public class MapModule : Module, IMapModule
 		MapTile[,] tiles = new MapTile[width, height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				tiles[x, y] = new MapTile(x, y, tileLookup[tileKeys[x, y].ToLower()]);
+				try {
+					tiles[x, y] = new MapTile(x, y, tileLookup[tileKeys[x, y].ToLower()]);
+				} catch {
+					Debug.LogErrorFormat("{0} at ({1}, {2}) is an illegal key", tileKeys[x, y].ToLower(), x, y);
+					tiles[x, y] = MapTile.Default;
+				}
 			}
 		}
 		return tiles;

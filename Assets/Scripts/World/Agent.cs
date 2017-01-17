@@ -131,7 +131,23 @@ public abstract class Agent : MobileObjectBehaviour {
 			return false;
 		}
 	}
-		
+
+	protected bool isNorthKeyDown() {
+		return Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+	}
+
+	protected bool isSouthKeyDown() {
+		return Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+	}
+
+	protected bool isWestKeyDown() {
+		return Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
+	}
+
+	protected bool isEastKeyDown() {
+		return Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+	}
+
 	protected virtual void stopMoving(){
 		// NOTHING
 	}

@@ -25,6 +25,7 @@ public abstract class Agent : MobileObjectBehaviour {
 	SpriteRenderer spriteR;
 
 	protected int remainingAgilityForTurn;
+	protected int remainingHealth;
 
 	protected TurnModule turns;
 	protected MovementModule movement;
@@ -50,11 +51,24 @@ public abstract class Agent : MobileObjectBehaviour {
 		turns.SubscribeToTurnSwitch(delegate(AgentType type)
 			{ReplenishAtTurnStart(type);});
 	}
-		
+
+	public int Health () {
+		return remainingHealth;
+	}
+
+	public virtual void UpdateRemainingHealth(int healthRemaing) {
+		this.remainingHealth = healthRemaing;
+	}
+
 	public bool HasUnit {
 		get {
 			return GetUnit() != null;
 		}
+	}
+
+	public virtual void SetUnit(Unit unit) {
+		this.remainingHealth = unit.RemainingHealth;	
+		unit.LinkToAgent(this);
 	}
 
 	public virtual bool ReplenishAtTurnStart (AgentType type) {

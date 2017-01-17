@@ -115,11 +115,21 @@ public abstract class Unit : IUnit
 
 	public virtual void Damage (int damage) {
 		this.RemainingHealth -= damage;
+		tryUpdateAgentHealth(RemainingHealth);
 		if (IsDead) {
 			Kill();
 		}
 	}
 
+	bool tryUpdateAgentHealth(int health) {
+		if (HasAgentLink) {
+			this.agent.UpdateRemainingHealth(health);
+			return true;
+		} else {
+			return false;
+		}
+	}
+		
 	public bool CanMoveTo (IMapTile tile) {
 		throw new System.NotImplementedException();
 	}

@@ -16,6 +16,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	public delegate void MonoAction();
 	public delegate void MonoActionStr(string eventName);
 	public delegate void MonoActionf(float value);
+	public delegate void MonoActionInt(int value);
 	public delegate void AgentTypeAction(AgentType type);
 	public delegate void AgentAction(Agent agent);
 

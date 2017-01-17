@@ -14,6 +14,14 @@ public class CombatModule : Module, ICombatModule
 	StatModule stats;
 	GameEndModule gameEnd;
 
+	PlayerCharacter player
+	{
+		get 
+		{
+			return units.Player();
+		}
+	}
+
 	public void Init (
 		UnitModule units, 
 		MapModule map, 
@@ -57,7 +65,23 @@ public class CombatModule : Module, ICombatModule
 
 	public bool HasTargetToAttack(Unit unit, out Unit validTarget)
 	{
-		throw new System.NotImplementedException();
+		validTarget = null;
+		if(unit is EnemyNPC)
+		{
+			if(IsTargetInRange(unit, player, unit.GetPrimaryAttack()))
+			{
+				validTarget = player;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
+		}
 	}
 
 	bool ableToPerformMeleeAttack (IUnit attacker, IUnit target) {

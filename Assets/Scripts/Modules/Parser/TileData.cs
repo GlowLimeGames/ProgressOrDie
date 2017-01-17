@@ -13,6 +13,17 @@ public class TileData : SerializableData
 [System.Serializable]
 public class TileType : SerializableData
 {
+	public static TileType Default 
+	{
+		get 
+		{
+			TileType tile = new TileType();
+			tile.TileName = "Pit";
+			tile.Key = "P";
+			return tile;
+		}
+	}
+
 	public string TileName;
 	public string Key;
 	public int Speed;

@@ -6,6 +6,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UnitModule : Module 
@@ -21,7 +22,6 @@ public class UnitModule : Module
 	StatModule stats;
 	TuningModule tuning;
 	TurnModule turns;
-	PrefabModule prefabs;
 
 	MovementModule movement;
 	List<Unit> units = new List<Unit>();
@@ -33,7 +33,7 @@ public class UnitModule : Module
 		}
 	}
 		
-	PlayerCharacter player() {
+	public PlayerCharacter Player() {
 		return GetMainPlayer().GetCharacter();
 	}
 
@@ -57,7 +57,6 @@ public class UnitModule : Module
 		this.tuning = tuning;
 		this.turns = turns;
 		this.movement = movement;
-		this.prefabs = prefabs;
 		movement.SubscribeToAgentMove(handleAgentMove);
 		turns.SubscribeToTurnSwitch(handleTurnSwitch);
 		createUnits(map.Map, units, enemyInfo);
@@ -209,23 +208,23 @@ public class UnitModule : Module
 	}
 
 	public void ChangePlayerStrength(int delta) {
-		player().ModStrength(delta);	
+		Player().ModStrength(delta);	
 	}
 
 	public void ChangePlayerSpeed(int delta) {
-		player().ModSpeed(delta);	
+		Player().ModSpeed(delta);	
 	}
 
 	public void ChangePlayerConstitution(int delta) {
-		player().ModConstitution(delta);	
+		Player().ModConstitution(delta);	
 	}
 
 	public void ChangePlayerMagic(int delta) {
-		player().ModMagic(delta);
+		Player().ModMagic(delta);
 	}
 
 	public void ChangePlayerSkill(int delta) {
-		player().ModSkill(delta);
+		Player().ModSkill(delta);
 	}
 		
 	void modStrength(Unit unit, int delta) {
@@ -250,18 +249,26 @@ public class UnitModule : Module
 
 	void handleEndEnemyTurn()
 	{
+		EventModule.Event(PODEvent.EnemyTurnEnd);
 		turns.NextTurn();
 	}
 
 	void handleEnemyTurn()
 	{
-//		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
-//		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
+		EventModule.Event(PODEvent.EnemyTurnStart);
+		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
+		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
 	}
 
 	EnemyNPC[] sortEnemiesByTurnPriority(List<Unit> units) {
 		Sort<EnemyNPC> sorter = new SelectionSort<EnemyNPC>();
-		return sorter.run(units.FindAll(enemy => enemy is EnemyNPC).ToArray() as EnemyNPC[]);
+		EnemyNPC[] enemies = getAllEnemies();
+		return sorter.run(enemies);
+	}
+
+	EnemyNPC[] getAllEnemies()
+	{
+		return units.OfType<EnemyNPC>().ToArray();
 	}
 
 	IEnumerator takeEnemiesTurnInOrder(EnemyNPC[] enemyOrder, float timerPerTurn, MonoAction callback = null)

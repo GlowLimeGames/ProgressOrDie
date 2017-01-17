@@ -25,7 +25,7 @@
     {
       "TileName" : "Rocky",
       "Key" : "R",
-      "Speed" : 3,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 1,
       "Constitution" : 0,
@@ -34,9 +34,9 @@
       "MonsterPassable" : true
     },
     {
-      "TileName" : "Mud ",
+      "TileName" : "Mud",
       "Key" : "Mu",
-      "Speed" : 3,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 3,
       "Constitution" : 0,
@@ -58,7 +58,7 @@
     {
       "TileName" : "Sand",
       "Key" : "SA",
-      "Speed" : 3,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -69,7 +69,7 @@
     {
       "TileName" : "ShallowWater",
       "Key" : "SW",
-      "Speed" : 3,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -80,7 +80,7 @@
     {
       "TileName" : "DeepWaterCalm",
       "Key" : "DWC",
-      "Speed" : 5,
+      "Speed" : 3,
       "Magic" : 0,
       "Strength" : 3,
       "Constitution" : 0,
@@ -102,7 +102,7 @@
     {
       "TileName" : "SteepRockScramble-N",
       "Key" : "STRS-N",
-      "Speed" : 5,
+      "Speed" : 3,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -113,7 +113,7 @@
     {
       "TileName" : "SteepRockScramble-S",
       "Key" : "STRS-S",
-      "Speed" : 5,
+      "Speed" : 3,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -124,7 +124,7 @@
     {
       "TileName" : "SteepRockScramble-E",
       "Key" : "STRS-E",
-      "Speed" : 5,
+      "Speed" : 3,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -133,9 +133,9 @@
       "MonsterPassable" : true
     },
     {
-      "TileName" : "SteepRock,Scramble-W",
+      "TileName" : "SteepRockScramble-W",
       "Key" : "STRS-W",
-      "Speed" : 5,
+      "Speed" : 3,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -190,7 +190,7 @@
     {
       "TileName" : "ForestPath-Cross",
       "Key" : "FP-C",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -201,7 +201,7 @@
     {
       "TileName" : "ForestPath-T-NWE",
       "Key" : "FP-T-NWE",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -212,7 +212,7 @@
     {
       "TileName" : "ForestPath-T-SWE",
       "Key" : "FP-T-SWE",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -223,7 +223,7 @@
     {
       "TileName" : "ForestPath-Elbow-SE",
       "Key" : "FP-E-SE",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -234,7 +234,7 @@
     {
       "TileName" : "ForestPath-Elbow-SW",
       "Key" : "FP-E-SW",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -245,7 +245,7 @@
     {
       "TileName" : "ForestPath-Elbow-NW",
       "Key" : "FP-E-NW",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -256,7 +256,7 @@
     {
       "TileName" : "ForestPath-Elbow-NE",
       "Key" : "FP-E-NE",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -267,7 +267,7 @@
     {
       "TileName" : "ForestPath-Straight-NS",
       "Key" : "FP-S-NS",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -278,7 +278,7 @@
     {
       "TileName" : "ForestPath-Straight-EW",
       "Key" : "FP-S-EW",
-      "Speed" : 2,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -289,7 +289,7 @@
     {
       "TileName" : "Thicket1",
       "Key" : "T1",
-      "Speed" : 4,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 10,
       "Constitution" : 0,
@@ -300,7 +300,7 @@
     {
       "TileName" : "Thicket2",
       "Key" : "T2",
-      "Speed" : 4,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 10,
       "Constitution" : 0,
@@ -311,7 +311,7 @@
     {
       "TileName" : "Thicket3",
       "Key" : "T3",
-      "Speed" : 4,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 10,
       "Constitution" : 0,
@@ -322,7 +322,7 @@
     {
       "TileName" : "DeepForest",
       "Key" : "DF",
-      "Speed" : 4,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 10,
       "Constitution" : 0,
@@ -333,40 +333,40 @@
     {
       "TileName" : "EnchantedForest",
       "Key" : "EF",
-      "Speed" : 4,
-      "Magic" : 0,
+      "Speed" : 1,
+      "Magic" : 15,
       "Strength" : 0,
       "Constitution" : 0,
-      "Skill" : 15,
+      "Skill" : 0,
       "PlayerPassable" : true,
       "MonsterPassable" : true
     },
     {
       "TileName" : "EnchantedPond",
       "Key" : "EP",
-      "Speed" : 3,
-      "Magic" : 0,
+      "Speed" : 1,
+      "Magic" : 10,
       "Strength" : 0,
       "Constitution" : 0,
-      "Skill" : 10,
+      "Skill" : 0,
       "PlayerPassable" : true,
       "MonsterPassable" : true
     },
     {
       "TileName" : "EnchantedMeadow",
       "Key" : "EM",
-      "Speed" : 2,
-      "Magic" : 0,
+      "Speed" : 1,
+      "Magic" : 5,
       "Strength" : 0,
       "Constitution" : 0,
-      "Skill" : 10,
+      "Skill" : 0,
       "PlayerPassable" : true,
       "MonsterPassable" : true
     },
     {
       "TileName" : "RuinedVillage1",
       "Key" : "RV1",
-      "Speed" : 3,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -377,7 +377,7 @@
     {
       "TileName" : "RuinedVillage2",
       "Key" : "RV2",
-      "Speed" : 3,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 3,
       "Constitution" : 0,
@@ -388,7 +388,7 @@
     {
       "TileName" : "RuinedVillage3",
       "Key" : "RV3",
-      "Speed" : 3,
+      "Speed" : 1,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,

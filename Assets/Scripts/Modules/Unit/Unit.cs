@@ -109,8 +109,8 @@ public abstract class Unit : IUnit
 		return this.occupiedTile.GetLocation();
 	}
 
-	public AttackType[] GetAvailableAttacks() {
-		throw new System.NotImplementedException();
+	public virtual AttackType[] GetAvailableAttacks() {
+		return new AttackType[]{GetPrimaryAttack()};
 	}
 
 	public virtual void Damage (int damage) {

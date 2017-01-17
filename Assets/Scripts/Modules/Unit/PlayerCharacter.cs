@@ -20,7 +20,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	void setStatsToDefault () {
 		speed = 9;
 		magic = 9;
-		constitution = 9;
+		constitution = 25;
 		strength = 9;
 		skill = 9;
 	}

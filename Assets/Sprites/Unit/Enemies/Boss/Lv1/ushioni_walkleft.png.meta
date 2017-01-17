@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: 81a1b0d38a2482245bf70b1e0113358b
-timeCreated: 1484322249
+guid: dba5718336ef946b4842d72e9680260e
+timeCreated: 1484687122
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: spritesheet (right) (1)_0
-    21300002: spritesheet (right) (1)_1
-    21300004: spritesheet (right) (1)_2
-    21300006: spritesheet (right) (1)_3
-    21300008: spritesheet (right) (1)_4
-    21300010: spritesheet (right) (1)_5
+    21300000: ushioni_walkleft_0
+    21300002: ushioni_walkleft_1
+    21300004: ushioni_walkleft_2
+    21300006: ushioni_walkleft_3
+    21300008: ushioni_walkleft_4
+    21300010: ushioni_walkleft_5
   serializedVersion: 4
   mipmaps:
     mipMapMode: 0
@@ -72,84 +72,108 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: spritesheet (right) (1)_0
+      name: ushioni_walkleft_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 74
-        height: 74
+        width: 417.83334
+        height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet (right) (1)_1
+      name: ushioni_walkleft_1
       rect:
         serializedVersion: 2
-        x: 74
+        x: 417
         y: 0
-        width: 74
-        height: 74
+        width: 417.83334
+        height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet (right) (1)_2
+      name: ushioni_walkleft_2
       rect:
         serializedVersion: 2
-        x: 148
+        x: 834
         y: 0
-        width: 74
-        height: 74
+        width: 417.83334
+        height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet (right) (1)_3
+      name: ushioni_walkleft_3
       rect:
         serializedVersion: 2
-        x: 222
+        x: 1251
         y: 0
-        width: 74
-        height: 74
+        width: 417.83334
+        height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet (right) (1)_4
+      name: ushioni_walkleft_4
       rect:
         serializedVersion: 2
-        x: 296
+        x: 1668
         y: 0
-        width: 74
-        height: 74
+        width: 417.83334
+        height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: spritesheet (right) (1)_5
+      name: ushioni_walkleft_5
       rect:
         serializedVersion: 2
-        x: 370
+        x: 2085
         y: 0
-        width: 74
-        height: 74
+        width: 417.83334
+        height: 512
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       tessellationDetail: 0

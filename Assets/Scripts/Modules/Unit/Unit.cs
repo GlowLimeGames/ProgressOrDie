@@ -23,6 +23,10 @@ public abstract class Unit : IUnit
 		}
 	}
 
+	public void LeaveCurrentTile() {
+		Map.VacateTile(this.GetLocation());
+	}
+
 	public void LinkToAgent (Agent agent) {
 		this.agent = agent;
 	}

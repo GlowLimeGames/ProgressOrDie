@@ -29,6 +29,13 @@ public class Map
 
 	MapTile[,] tiles;
 
+	public void VacateTile(MapLocation loc){
+		if(CoordinateIsInBounds(loc)){ 
+			MapTile tile = GetTile(loc);
+			tile.RemoveUnit();
+		}
+	}
+		
 	public bool CoordinateIsInBounds (MapLocation loc) {
 		return CoordinateIsInBounds(loc.X, loc.Y);
 	}

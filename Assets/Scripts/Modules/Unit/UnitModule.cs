@@ -108,6 +108,14 @@ public class UnitModule : Module
 		}
 	}
 
+	public bool PlayerHasUnspentSkillPoints() {
+		return Player().HasUnspentSkillPoints();
+	}
+
+	public int GetAvailablePlayerSkillPoints() {
+		return Player().GetUnspentSkillPoints();
+	}
+
 	public void MeleeAttack (IUnit attacker, IUnit target) {
 		combat.MeleeAttack(attacker, target);
 	}

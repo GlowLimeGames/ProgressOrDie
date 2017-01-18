@@ -11,6 +11,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	int constitution;
 	int strength;
 	int skill;
+	int unspentSkillPoints = 0;
 
 	public PlayerCharacter(UnitModule parent, MapLocation location, Map map) : 
 	base (parent, location, map) {
@@ -18,13 +19,46 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	}
 
 	void setStatsToDefault () {
-		speed = 9;
-		magic = 9;
-		constitution = 25;
-		strength = 9;
-		skill = 9;
+		speed = 0;
+		magic = 0;
+		constitution = 0;
+		strength = 0;
+		skill = 0;
 	}
 		
+	public void PrintInfo(){
+		printStats();
+	}
+
+	public bool HasUnspentSkillPoints() {
+		return unspentSkillPoints > 0;
+	}
+
+	public int GetUnspentSkillPoints() {
+		return unspentSkillPoints;
+	}
+
+	public bool TrySpendSkillPoints(int amount) {
+		if(amount <= unspentSkillPoints) {
+			unspentSkillPoints -= amount;
+			return true;
+		} else {
+			return false;	
+		}
+	}
+
+	public void EarnSkillPoints(int delta) {
+		unspentSkillPoints += delta;
+	}
+
+	void printStats(){
+		UnityEngine.Debug.Log("Speed: " + speed);
+		UnityEngine.Debug.Log("Magic: " + magic);
+		UnityEngine.Debug.Log("Constitution: " + constitution);
+		UnityEngine.Debug.Log("Strength: " + strength);
+		UnityEngine.Debug.Log("Skill: " + skill);
+	}
+
 	public override void Kill ()
 	{
 		base.Kill ();
@@ -58,26 +92,31 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		
 	public override int ModSpeed(int delta) {
 		speed += delta;
+		printStats();
 		return base.ModSpeed(delta);
 	}
 
 	public override int ModMagic (int delta) {
 		magic += delta;
+		printStats();
 		return base.ModMagic(delta);
 	}
 
 	public override int ModConstitution(int delta) {
 		constitution += delta;
+		printStats();
 		return base.ModConstitution(delta);
 	}
 
 	public override int ModStrength (int delta) {
 		strength += delta;
+		printStats();
 		return base.ModStrength(delta);
 	}
 
 	public override int ModSkill (int delta) {
 		skill += delta;
+		printStats();
 		return base.ModSkill(delta);
 	}
 }

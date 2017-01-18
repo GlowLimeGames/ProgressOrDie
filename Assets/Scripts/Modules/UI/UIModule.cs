@@ -53,7 +53,7 @@ public class UIModule : Module, IUIModule
 			this.playerAgent = units.GetMainPlayer ();
 			this.playerAgent.SubscribeToAgilityChange (handleAgilityChange);
 			this.playerUnit = playerAgent.GetUnit () as PlayerCharacter;
-			updateHealthDisplay(playerAgent.Health());		
+			updateHealthDisplay(playerAgent.Health());
 			playerAgent.SubscribeToHPChange(updateHealthDisplay);
 		}
 		if(StatsPanel) StatsPanel.initTuning (Tuning, units);

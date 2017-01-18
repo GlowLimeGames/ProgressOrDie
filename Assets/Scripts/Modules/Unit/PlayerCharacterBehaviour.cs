@@ -71,14 +71,14 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.W)) {
+		if (isNorthKeyDown()) {
 			MoveY(1);
-		} else if (Input.GetKeyDown(KeyCode.S)) {
+		} else if (isSouthKeyDown()) {
 			MoveY(-1);
 		}
-		if (Input.GetKeyDown(KeyCode.A)) {
+		if (isWestKeyDown()) {
 			MoveX(-1);
-		} else if (Input.GetKeyDown(KeyCode.D)) {
+		} else if (isEastKeyDown()) {
 			MoveX(1);
 		}
 	}

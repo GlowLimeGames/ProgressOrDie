@@ -40,6 +40,16 @@ public class StatsUIPanel : UIElement
 	SpeedText = GameObject.Find("TextSpeed").GetComponent<Text>();
 	}
 
+	public void SwapPlayMode()
+	{
+		if (IfCreation == 1) {
+			IfCreation = 0;
+		}
+		else {
+			IfCreation = 1;
+		}
+	}
+
 	public void ConstitutionPlusClick()
 	{
 		if (IfCreation == 1) {

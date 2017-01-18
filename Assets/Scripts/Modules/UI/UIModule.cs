@@ -10,6 +10,7 @@ using UnityEngine.UI;
 
 public class UIModule : Module, IUIModule
 {	
+	public StatsUIPanel StatsPanel;
 	[SerializeField]
 	UIElement turnText;
 	[SerializeField]
@@ -43,16 +44,19 @@ public class UIModule : Module, IUIModule
 	PlayerCharacterBehaviour playerAgent;
 	PlayerCharacter playerUnit;
 
-	public void Init(TurnModule turn, UnitModule units) {
+	public void Init(TurnModule turn, UnitModule units, TuningModule Tuning, bool createWorld = true) {
 		turnText.SetText(turn.CurrentTurnStr());
 		turn.SubscribeToTurnSwitchStr(handleTurnChange);
 		endTurnButton.SubscribeToClick(turn.NextTurn);
 		menuButton.SubscribeToClick(quitToMenu);
-		this.playerAgent = units.GetMainPlayer();
-		this.playerAgent.SubscribeToAgilityChange(handleAgilityChange);
-		this.playerUnit = playerAgent.GetUnit() as PlayerCharacter;
-		updateHealthDisplay(playerAgent.Health());
-		playerAgent.SubscribeToHPChange(updateHealthDisplay);
+		if (createWorld) {
+			this.playerAgent = units.GetMainPlayer ();
+			this.playerAgent.SubscribeToAgilityChange (handleAgilityChange);
+			this.playerUnit = playerAgent.GetUnit () as PlayerCharacter;
+			updateHealthDisplay(playerAgent.Health());		
+			playerAgent.SubscribeToHPChange(updateHealthDisplay);
+		}
+		if(StatsPanel) StatsPanel.initTuning (Tuning, units);
 	}
 
 	void updateHealthDisplay(int healthRemaining) { 

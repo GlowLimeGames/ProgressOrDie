@@ -114,6 +114,12 @@ public class TuningModule : Module
 		}
 	}
 
+	public int MaxSpeedInCharacterCreation {
+		get {
+			return data.MaxSpeedInCharacterCreation;
+		}
+	}
+
 	TuningData data;
 
 	public void Init (TuningData data) {

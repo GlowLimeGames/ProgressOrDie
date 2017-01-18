@@ -1360,6 +1360,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5bd84637ede4560a2da921a2e27d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
   fill: {fileID: 114378241281843556}
   barValue: {fileID: 0}
@@ -1423,6 +1424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5bd84637ede4560a2da921a2e27d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
   fill: {fileID: 114542860428201090}
   barValue: {fileID: 114548934634328858}
@@ -1851,6 +1853,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
 --- !u!114 &114168906207172502
 MonoBehaviour:
@@ -1960,6 +1963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5bd84637ede4560a2da921a2e27d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
   fill: {fileID: 114470612001137836}
   barValue: {fileID: 114066083927977406}
@@ -2077,6 +2081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
 --- !u!114 &114260855995269736
 MonoBehaviour:
@@ -2239,6 +2244,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
 --- !u!114 &114310329305047908
 MonoBehaviour:
@@ -2320,6 +2326,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5bd84637ede4560a2da921a2e27d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
   fill: {fileID: 114538884231848314}
   barValue: {fileID: 114574503325249536}
@@ -3622,7 +3629,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300002, guid: 0df3a9637a61e9d4ba9d970c897cf515, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2bf947f387c334322a36d78915f638ca, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -3784,6 +3791,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: UI
+  StatsPanel: {fileID: 0}
   turnText: {fileID: 114876113417347828}
   endTurnButton: {fileID: 114923107174910834}
   strengthBar: {fileID: 114034465622881466}
@@ -3876,6 +3884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5bd84637ede4560a2da921a2e27d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
   fill: {fileID: 114505196986710062}
   barValue: {fileID: 114693748911476126}
@@ -4066,6 +4075,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
 --- !u!114 &114879995506744150
 MonoBehaviour:
@@ -4187,6 +4197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b54f762609fe48cba586ac4228edb7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
 --- !u!114 &114930442038666984
 MonoBehaviour:
@@ -4308,6 +4319,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f5bd84637ede4560a2da921a2e27d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameLevelIndex: 2
   alternateSprites: []
   fill: {fileID: 114617021330823606}
   barValue: {fileID: 114745222111542848}
@@ -5243,10 +5255,10 @@ RectTransform:
   m_Father: {fileID: 224633117791785332}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1401, y: 0}
+  m_SizeDelta: {x: 300, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224346416743046024
 RectTransform:

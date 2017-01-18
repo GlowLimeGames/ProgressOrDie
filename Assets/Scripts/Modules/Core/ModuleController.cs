@@ -11,6 +11,9 @@ public class ModuleController : SingletonController<ModuleController> {
 	const string TILES = "Tiles";
 
 	[SerializeField]
+	bool createWorld = true;
+
+	[SerializeField]
 	string levelName = "Example";
 
 	[SerializeField]
@@ -85,16 +88,19 @@ public class ModuleController : SingletonController<ModuleController> {
 
 		TileData tileData = parser.ParseJSONFromResources<TileData>(TILES);
 		string[,] tiles = parser.ParseCSVFromResources(getTilesCSVPath(levelName));
-		map.Init(tiles, tileData.Tiles, sprites);
+		if (createWorld) {
+			map.Init (tiles, tileData.Tiles, sprites);
+		}
 
 		EnemyData enemyData = parser.ParseJSONFromResources<EnemyData>("Enemies");
 		string[,] units = parser.ParseCSVFromResources(getUnitsCSVPath(levelName));
-		unit.Init(map, units, enemyData, turn, movement, combat, stats, abilities, tuning, prefabs);
-		cam.StartFollowing(unit.GetMainPlayer());
-		ui.Init(turn, unit);
-		movement.Init(turn, tuning, map);
-		combat.Init(unit, map, abilities, stats, gameEnd);
-
+		unit.Init (map, units, enemyData, turn, movement, combat, stats, abilities, tuning, prefabs, createWorld);
+		if (createWorld) {
+			cam.StartFollowing (unit.GetMainPlayer ());
+			movement.Init (turn, tuning, map);
+			combat.Init (unit, map, abilities, stats, gameEnd);
+		}
+		ui.Init (turn, unit, tuning, createWorld);
 		LegendData legendData = parser.ParseJSONFromResources<LegendData>("Legends");
 		legends.Init(stats, unit, legendData);
 

@@ -9,6 +9,8 @@ using System.Collections;
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable {
 	protected const int MAIN_MENU_INDEX = 1;
 	protected const int CREDITS_INDEX = 3;
+	protected const int GAME_OVER_INDEX = 4;
+
 	protected const string LEVEL = "Level";
 
 	IEnumerator moveCoroutine;

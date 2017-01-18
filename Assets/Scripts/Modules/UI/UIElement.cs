@@ -1,8 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class UIElement : MonoBehaviourExtended {
+	[SerializeField]
+	int gameLevelIndex = 2;
+
 	Image image;
 	Text text;
 
@@ -62,5 +66,23 @@ public class UIElement : MonoBehaviourExtended {
 		if (hasText) {
 			this.text.text = text;
 		}
+	}
+
+	public void LoadLevel(string levelName) {
+		PlayerPrefs.SetString(LEVEL, levelName);
+		SceneManager.LoadScene(gameLevelIndex);
+	}
+
+	public void LoadCredits()
+	{
+		SceneManager.LoadScene(CREDITS_INDEX);
+	}
+
+	public void QuitGame(){
+		Application.Quit();
+	}
+
+	public void LoadMenu() {
+		SceneManager.LoadScene(MAIN_MENU_INDEX);
 	}
 }

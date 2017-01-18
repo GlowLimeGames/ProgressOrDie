@@ -25,6 +25,12 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		skill = 9;
 	}
 		
+	public override void Kill ()
+	{
+		base.Kill ();
+		parentModule.HandlePlayerKilled();
+	}
+
 	public override AttackType GetPrimaryAttack()
 	{
 		return AttackType.Magic;
@@ -49,8 +55,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	public override int GetSkill () {
 		return skill;
 	}
-
-
+		
 	public override int ModSpeed(int delta) {
 		speed += delta;
 		return base.ModSpeed(delta);

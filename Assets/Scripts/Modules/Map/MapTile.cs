@@ -25,6 +25,18 @@ public class MapTile : WorldData, IMapTile
 		}
 	}
 
+	public bool EnemyPassable {
+		get {
+			return type.MonsterPassable;
+		}
+	}
+
+	public bool PlayerPassable {
+		get {
+			return type.PlayerPassable;
+		}
+	}
+
 	[System.NonSerialized]
 	MapTileBehaviour goLink;
 

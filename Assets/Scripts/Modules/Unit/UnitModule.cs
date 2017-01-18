@@ -71,7 +71,7 @@ public class UnitModule : Module
 	}
 		
 	public void HandleUnitDestroyed(Unit unit) {
-		// TODO: Implement real functionality
+		units.Remove(unit);
 	}
 
 	void handleAgentMove (Agent agent) {
@@ -185,7 +185,7 @@ public class UnitModule : Module
 				// Skip this unit: it's not supported
 				continue;
 			}
-			agent.Init(turns, movement, combat, stats, abilities);
+			agent.Init(map, turns, movement, combat, stats, abilities);
 			map.PlaceUnit(agent);
 		}
 	}

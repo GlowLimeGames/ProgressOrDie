@@ -27,6 +27,7 @@ public abstract class Agent : MobileObjectBehaviour {
 	protected int remainingAgilityForTurn;
 	protected int remainingHealth;
 
+	protected MapModule mapModule;
 	protected TurnModule turns;
 	protected MovementModule movement;
 	protected CombatModule combat;
@@ -37,12 +38,14 @@ public abstract class Agent : MobileObjectBehaviour {
 	public abstract AgentType GetAgentType();
 
 	public void Init (
+		MapModule map,
 		TurnModule turns,
 		MovementModule movement,
 		CombatModule combat,
 		StatModule stats,
 		AbilitiesModule abilities
 	){
+		this.mapModule = map;
 		this.turns = turns;
 		this.movement = movement;
 		this.combat = combat;
@@ -184,7 +187,7 @@ public abstract class Agent : MobileObjectBehaviour {
 		if (movement.CanMove(this)) {
 			prevLoc = currentLoc;
 			MapLocation newLoc = currentLoc.Translate(deltaX, deltaY);
-			if (map.CoordinateIsInBounds(newLoc)) {
+			if (mapModule.CanTravelTo(this, newLoc)) {
 				int agilityCost = map.TravelTo(this, newLoc);
 				if (trySpendAgility(agilityCost)) {
 					movement.Move(this);

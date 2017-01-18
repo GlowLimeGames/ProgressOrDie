@@ -89,7 +89,7 @@ public class ModuleController : SingletonController<ModuleController> {
 		TileData tileData = parser.ParseJSONFromResources<TileData>(TILES);
 		string[,] tiles = parser.ParseCSVFromResources(getTilesCSVPath(levelName));
 		if (createWorld) {
-			map.Init (tiles, tileData.Tiles, sprites);
+			map.Init (tiles, tileData.Tiles, sprites, movement);
 		}
 
 		EnemyData enemyData = parser.ParseJSONFromResources<EnemyData>("Enemies");

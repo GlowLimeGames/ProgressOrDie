@@ -115,17 +115,27 @@ public class CombatModule : Module, ICombatModule
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
 		target.Damage(stats.GetMeleeDamage(attacker));
-		handleAttack(attacker, target);
+		handleAttack(attacker, target, AttackType.Melee);
 	}
 
 	public void MagicAttack (IUnit attacker, IUnit target) {
 		target.Damage(stats.GetMagicDamage(attacker));
-		handleAttack(attacker, target);
+		handleAttack(attacker, target, AttackType.Magic);
 	}
 
-	void handleAttack(IUnit attacker, IUnit target) {
+	void handleAttack(IUnit attacker, IUnit target, AttackType attackType) {
+		int damage = 0;
+		switch(attackType)
+		{
+			case AttackType.Magic:
+				damage = stats.GetMagicDamage(attacker);
+				break;
+			case AttackType.Melee:
+				damage = stats.GetMeleeDamage(attacker);
+				break;
+		}
 		EventModule.Event(PODEvent.Notification, 
-			string.Format("{0} dealt {1} damage to {2}", attacker, stats.GetMagicDamage(attacker), target));
+			string.Format("{0} dealt {1} damage to {2}", attacker, damage, target));
 	}
 
 	public void FleeAttempt (IStatModule playerstats, IUnit unit) {

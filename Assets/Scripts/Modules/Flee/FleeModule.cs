@@ -16,6 +16,11 @@
 
 	int valueForFlee = 0;
 
+	public void IUnit(PlayerCharacter player, LegendModule legend) {
+		this.player = player;
+		this.legend = legend;
+	}
+
 	int CurrentConstitution() {
 		return player.GetConstitution();
 	}

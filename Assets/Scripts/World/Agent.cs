@@ -25,6 +25,7 @@ public abstract class Agent : MobileObjectBehaviour {
 	SpriteRenderer spriteR;
 
 	protected int remainingAgilityForTurn;
+	protected int remainingHealth;
 
 	protected TurnModule turns;
 	protected MovementModule movement;
@@ -50,11 +51,24 @@ public abstract class Agent : MobileObjectBehaviour {
 		turns.SubscribeToTurnSwitch(delegate(AgentType type)
 			{ReplenishAtTurnStart(type);});
 	}
-		
+
+	public int Health () {
+		return remainingHealth;
+	}
+
+	public virtual void UpdateRemainingHealth(int healthRemaing) {
+		this.remainingHealth = healthRemaing;
+	}
+
 	public bool HasUnit {
 		get {
 			return GetUnit() != null;
 		}
+	}
+
+	public virtual void SetUnit(Unit unit) {
+		this.remainingHealth = unit.RemainingHealth;	
+		unit.LinkToAgent(this);
 	}
 
 	public virtual bool ReplenishAtTurnStart (AgentType type) {
@@ -117,7 +131,23 @@ public abstract class Agent : MobileObjectBehaviour {
 			return false;
 		}
 	}
-		
+
+	protected bool isNorthKeyDown() {
+		return Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+	}
+
+	protected bool isSouthKeyDown() {
+		return Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+	}
+
+	protected bool isWestKeyDown() {
+		return Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
+	}
+
+	protected bool isEastKeyDown() {
+		return Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+	}
+
 	protected virtual void stopMoving(){
 		// NOTHING
 	}

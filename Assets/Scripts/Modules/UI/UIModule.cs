@@ -27,6 +27,8 @@ public class UIModule : Module, IUIModule
 	UIFillBar speedBar;
 	[SerializeField]
 	UIButton menuButton;
+	[SerializeField]
+	UIElement healthDisplay;
 
 	[Space(25)]
 	[SerializeField]
@@ -49,6 +51,12 @@ public class UIModule : Module, IUIModule
 		this.playerAgent = units.GetMainPlayer();
 		this.playerAgent.SubscribeToAgilityChange(handleAgilityChange);
 		this.playerUnit = playerAgent.GetUnit() as PlayerCharacter;
+		updateHealthDisplay(playerAgent.Health());
+		playerAgent.SubscribeToHPChange(updateHealthDisplay);
+	}
+
+	void updateHealthDisplay(int healthRemaining) { 
+		healthDisplay.SetText(healthRemaining.ToString());
 	}
 
 	void handleAgilityChange(float newAgility) {
@@ -71,7 +79,7 @@ public class UIModule : Module, IUIModule
 		base.UnusbscribeEvents ();
 		EventModule.Unsubscribe(handlePODEvent);
 	}
-
+		
 	void handlePODEvent(PODEvent gameEvent) {
 		switch(gameEvent) {
 			case PODEvent.PlayerAttacked:

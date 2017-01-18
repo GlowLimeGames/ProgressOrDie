@@ -20,11 +20,17 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	void setStatsToDefault () {
 		speed = 9;
 		magic = 9;
-		constitution = 9;
+		constitution = 25;
 		strength = 9;
 		skill = 9;
 	}
 		
+	public override void Kill ()
+	{
+		base.Kill ();
+		parentModule.HandlePlayerKilled();
+	}
+
 	public override AttackType GetPrimaryAttack()
 	{
 		return AttackType.Magic;
@@ -49,8 +55,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	public override int GetSkill () {
 		return skill;
 	}
-
-
+		
 	public override int ModSpeed(int delta) {
 		speed += delta;
 		return base.ModSpeed(delta);

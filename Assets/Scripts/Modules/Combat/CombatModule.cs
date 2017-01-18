@@ -115,10 +115,15 @@ public class CombatModule : Module, ICombatModule
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
 		target.Damage(stats.GetMeleeDamage(attacker));
+		handleAttack(attacker, target);
 	}
 
 	public void MagicAttack (IUnit attacker, IUnit target) {
 		target.Damage(stats.GetMagicDamage(attacker));
+		handleAttack(attacker, target);
+	}
+
+	void handleAttack(IUnit attacker, IUnit target) {
 		EventModule.Event(PODEvent.Notification, 
 			string.Format("{0} dealt {1} damage to {2}", attacker, stats.GetMagicDamage(attacker), target));
 	}

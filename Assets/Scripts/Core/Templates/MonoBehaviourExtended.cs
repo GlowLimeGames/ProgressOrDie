@@ -9,6 +9,8 @@ using System.Collections;
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable {
 	protected const int MAIN_MENU_INDEX = 1;
 	protected const int CREDITS_INDEX = 3;
+	protected const int GAME_OVER_INDEX = 4;
+
 	protected const string LEVEL = "Level";
 
 	IEnumerator moveCoroutine;
@@ -16,6 +18,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	public delegate void MonoAction();
 	public delegate void MonoActionStr(string eventName);
 	public delegate void MonoActionf(float value);
+	public delegate void MonoActionInt(int value);
 	public delegate void AgentTypeAction(AgentType type);
 	public delegate void AgentAction(Agent agent);
 

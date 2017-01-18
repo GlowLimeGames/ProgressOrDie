@@ -1086,6 +1086,7 @@ GameObject:
   - component: {fileID: 222343671325105834}
   - component: {fileID: 114920047726452150}
   - component: {fileID: 114432969978618438}
+  - component: {fileID: 114168056115458538}
   m_Layer: 5
   m_Name: HealthIcon
   m_TagString: Untagged
@@ -1839,6 +1840,18 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: 
+--- !u!114 &114168056115458538
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1770783697257018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c55ae2fb54a4aa29b78b1632008ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  alternateSprites: []
 --- !u!114 &114168906207172502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3779,6 +3792,7 @@ MonoBehaviour:
   constitutionBar: {fileID: 114195549862180102}
   speedBar: {fileID: 114786970548100056}
   menuButton: {fileID: 114310239364886268}
+  healthDisplay: {fileID: 114168056115458538}
   critBar: {fileID: 114005762722433524}
   meleeIcon: {fileID: 114680008293586030}
   magicIcon: {fileID: 114797004415137632}

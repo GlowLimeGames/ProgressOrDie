@@ -9,6 +9,8 @@ using UnityEngine;
 public class PlayerCharacterBehaviour : PlayerAgent 
 {	
 	MonoActionf onAgilityChange;
+	MonoActionInt onHPChange;
+
 	PlayerCharacter character;
 
 	public override AgentType GetAgentType()
@@ -26,8 +28,16 @@ public class PlayerCharacterBehaviour : PlayerAgent
 
 	public void SetCharacter (PlayerCharacter character) {
 		this.character = character;
-		this.character.LinkToAgent(this);
+		this.SetUnit(character);
 		ReplenishAtTurnStart(AgentType.Player);
+	}
+
+	public void SubscribeToHPChange (MonoActionInt action) {
+		onHPChange += action;
+	}
+
+	public void UnsubscribeFromHPChange (MonoActionInt action) {
+		onHPChange -= action;
 	}
 
 	public void SubscribeToAgilityChange (MonoActionf action) {
@@ -61,15 +71,26 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.W)) {
+		if (isNorthKeyDown()) {
 			MoveY(1);
-		} else if (Input.GetKeyDown(KeyCode.S)) {
+		} else if (isSouthKeyDown()) {
 			MoveY(-1);
 		}
-		if (Input.GetKeyDown(KeyCode.A)) {
+		if (isWestKeyDown()) {
 			MoveX(-1);
-		} else if (Input.GetKeyDown(KeyCode.D)) {
+		} else if (isEastKeyDown()) {
 			MoveX(1);
+		}
+	}
+
+	public override void UpdateRemainingHealth (int healthRemaing) {
+		base.UpdateRemainingHealth (healthRemaing);
+		callOnHPChange(healthRemaing);
+	}
+
+	void callOnHPChange(int healthRemaining) {
+		if(onHPChange != null) {
+			onHPChange(healthRemaining);
 		}
 	}
 

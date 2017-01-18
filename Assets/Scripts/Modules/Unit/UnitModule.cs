@@ -113,6 +113,11 @@ public class UnitModule : Module
 		return this.mainPlayer;
 	}
 
+	public void HandlePlayerKilled()
+	{
+		loadGameOver();
+	}
+
 	public EnemyNPC[] GetEnemiesInRange (PlayerCharacter player) {
 		List<EnemyNPC> inRange = new List<EnemyNPC>();
 		foreach (Unit unit in units) {
@@ -257,7 +262,13 @@ public class UnitModule : Module
 	{
 		EventModule.Event(PODEvent.EnemyTurnStart);
 		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
-		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
+		float turnTimerPerEnemy = getEnemyTurnTimePerEnemy(enemiesSorted);
+		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, turnTimerPerEnemy, handleEndEnemyTurn));
+	}
+
+	float getEnemyTurnTimePerEnemy(EnemyNPC[] enemies)
+	{
+		return tuning.TimeToMove / (float) enemies.Length;
 	}
 
 	EnemyNPC[] sortEnemiesByTurnPriority(List<Unit> units) {

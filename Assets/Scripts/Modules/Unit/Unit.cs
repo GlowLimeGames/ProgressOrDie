@@ -109,31 +109,25 @@ public abstract class Unit : IUnit
 		return this.occupiedTile.GetLocation();
 	}
 
-	public AttackType[] GetAvailableAttacks() {
-		throw new System.NotImplementedException();
+	public virtual AttackType[] GetAvailableAttacks() {
+		return new AttackType[]{GetPrimaryAttack()};
 	}
 
 	public virtual void Damage (int damage) {
 		this.RemainingHealth -= damage;
+		tryUpdateAgentHealth(RemainingHealth);
 		if (IsDead) {
 			Kill();
 		}
 	}
 
-	public bool CanMoveTo (IMapTile tile) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanAttack (IUnit unit, AttackType attack) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanMeleeAttack (IUnit unit) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanMagicAttack (IUnit unit) {
-		throw new System.NotImplementedException();
+	bool tryUpdateAgentHealth(int health) {
+		if (HasAgentLink) {
+			this.agent.UpdateRemainingHealth(health);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void MoveTo (IMapTile tile) {

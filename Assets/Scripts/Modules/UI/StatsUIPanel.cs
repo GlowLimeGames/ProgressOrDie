@@ -3,65 +3,163 @@
  * Description: [to be added]
  * Usage: [no notes]
  */
+using UnityEngine;
+using UnityEngine.UI;
+
 
 public class StatsUIPanel : UIElement
 	
 {
-	int AvailablePoint = 50;
-	int Body = 0;
-	int Mind = 0;
-	int Muscle = 0;
-	int Spirit = 0;
-	int Sp = 0;
+	UnitModule units;
+	TuningModule Tuning;
+	public void initTuning (TuningModule Tuning, UnitModule units){
+		this.Tuning = Tuning;
+		this.units = units;
+		ChangeStat = units;
+	}
 
-	public void BodyPlusClick()
+	int Constitution = 0;
+	int Skill = 0;
+	int Strength = 0;
+	int Spirit = 0;
+	int Speed = 0;
+	int IfCreation = 1;
+	Text ConstitutionText = null;
+	Text SkillText = null;
+	Text StrengthText = null;
+	Text SpiritText = null;
+	Text SpeedText = null;
+	public UnitModule ChangeStat;
+
+	void Start ()
 	{
-		Body = Body + 1;
-		print (Body);
+	ConstitutionText = GameObject.Find("TextConstitution").GetComponent<Text>();
+	SkillText = GameObject.Find("TextSkill").GetComponent<Text>();
+	StrengthText = GameObject.Find("TextStrength").GetComponent<Text>();
+	SpiritText = GameObject.Find("TextSpirit").GetComponent<Text>();
+	SpeedText = GameObject.Find("TextSpeed").GetComponent<Text>();
 	}
-	public void BodyMinusClick()
+
+	public void ConstitutionPlusClick()
 	{
-		Body = Body - 1;
-		print (Body);
+		if (IfCreation == 1) {
+			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
+				return;
+			}
+		}
+		Constitution = Constitution + 1;
+		ConstitutionText.text = Constitution.ToString();
+		ChangeStat.ChangePlayerConstitution (+1);
+		print (Constitution);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
-	public void MindPlusClick()
+	public void ConstitutionMinusClick()
 	{
-		Mind = Mind + 1;
-		print (Mind);
+		if (Constitution == 0) {
+			return;}
+		Constitution = Constitution - 1;
+		ConstitutionText.text = Constitution.ToString();
+		ChangeStat.ChangePlayerConstitution (-1);
+		print (Constitution);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
-	public void MindMinusClick()
+	public void SkillPlusClick()
 	{
-		Mind = Mind - 1;
-		print (Mind);
+		if (Skill == Tuning.MaxSkill){
+			return;}
+		if (IfCreation == 1) {
+			if (Constitution + Skill + Strength + Spirit + Speed > Tuning.StartingStatPoints) {
+				return;
+			}
+		}
+		Skill = Skill + 1;
+		SkillText.text = Skill.ToString();
+		ChangeStat.ChangePlayerSkill (Skill);
+		print (Skill);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
-	public void MusclePlusClick()
+	public void SkillMinusClick()
 	{
-		Muscle = Muscle + 1;
-		print (Muscle);
+		if (Skill == 0) {
+			return;}
+		Skill = Skill - 1;
+		SkillText.text = Skill.ToString();
+		ChangeStat.ChangePlayerSkill (Skill);
+		print (Skill);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
-	public void MuscleMinusClick()
+	public void StrengthPlusClick()
 	{
-		Muscle = Muscle - 1;
-		print (Muscle);
+		if (IfCreation == 1) {
+			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
+				return;
+			}
+		}
+		Strength = Strength + 1;
+		StrengthText.text = Strength.ToString();
+		ChangeStat.ChangePlayerStrength (Strength);
+		print (Strength);
+		print (Constitution + Skill + Strength + Spirit + Speed);
+	}
+	public void StrengthMinusClick()
+	{
+		if (Strength == 0) {
+			return;}
+		Strength = Strength - 1;
+		StrengthText.text = Strength.ToString();
+		ChangeStat.ChangePlayerStrength (Strength);
+		print (Strength);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
 	public void SpiritPlusClick()
 	{
+		if (IfCreation == 1) {
+			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
+				return;
+			}
+		}
 		Spirit = Spirit + 1;
-		print ("Spirit+1");
+		SpiritText.text = Spirit.ToString();
+		ChangeStat.ChangePlayerMagic (Spirit);
+		print (Spirit);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
 	public void SpiritMinusClick()
 	{
+		if (Spirit == 0) {
+			return;}
 		Spirit = Spirit - 1;
-		print ("Spirit-1");
+		SpiritText.text = Spirit.ToString();
+		ChangeStat.ChangePlayerMagic (Spirit);
+		print (Spirit);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
-	public void SpPlusClick()
+	public void SpeedPlusClick()
 	{
-		Sp = Sp + 1;
-		print ("Sp+1");
+		if (IfCreation == 1) {
+			if (Speed == Tuning.MaxSpeedInCharacterCreation) {
+				return;
+			}
+			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
+				return;
+			}
+		}
+		if (Speed == Tuning.MaxSpeed) {
+			return;}
+		Speed = Speed + 1;
+		SpeedText.text = Speed.ToString();
+		ChangeStat.ChangePlayerSpeed (Speed);
+		print (Speed);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
-	public void SpMinusClick()
+	public void SpeedMinusClick()
 	{
-		Sp = Sp - 1;
-		print ("Sp-1");
+		if (Speed == 0) {
+			return;}
+		Speed = Speed - 1;
+		SpeedText.text = Speed.ToString();
+		ChangeStat.ChangePlayerSpeed (Speed);
+		print (Speed);
+		print (Constitution + Skill + Strength + Spirit + Speed);
 	}
 }

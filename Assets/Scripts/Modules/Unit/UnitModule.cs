@@ -50,17 +50,24 @@ public class UnitModule : Module
 		StatModule stats,
 		AbilitiesModule abilities,
 		TuningModule tuning,
-		PrefabModule prefabs
+		PrefabModule prefabs,
+		bool createWorld
 	){
 		this.combat = combat;
 		this.stats = stats;
 		this.tuning = tuning;
 		this.turns = turns;
 		this.movement = movement;
-		movement.SubscribeToAgentMove(handleAgentMove);
-		turns.SubscribeToTurnSwitch(handleTurnSwitch);
-		createUnits(map.Map, units, enemyInfo);
-		placeUnits(map, this.units.ToArray(), turns, movement, combat, stats, abilities, prefabs);
+		if (createWorld) {
+			movement.SubscribeToAgentMove (handleAgentMove);
+			turns.SubscribeToTurnSwitch (handleTurnSwitch);
+			createUnits(map.Map, units, enemyInfo);
+			placeUnits (map, this.units.ToArray (), turns, movement, combat, stats, abilities, prefabs);
+		} else {
+			GameObject go = new GameObject ();
+			mainPlayer = go.AddComponent<PlayerCharacterBehaviour> ();
+			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), map.Map));
+		}
 	}
 		
 	public void HandleUnitDestroyed(Unit unit) {

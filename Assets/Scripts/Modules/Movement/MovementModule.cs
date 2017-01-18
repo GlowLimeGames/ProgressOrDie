@@ -73,12 +73,19 @@ public class MovementModule : Module
 
 	public bool CanMoveToTile(Unit unit, MapTile tile)
 	{
-		if(unit is PlayerCharacter) {
-			return tile.PlayerPassable;
-		} else if (unit is EnemyNPC) {
-			return tile.EnemyPassable;
-		} else {
-			return true;
+		if(tile.IsOccupiedByUnit())
+		{
+			return false;
+		}
+		else 
+		{
+			if(unit is PlayerCharacter) {
+				return tile.PlayerPassable;
+			} else if (unit is EnemyNPC) {
+				return tile.EnemyPassable;
+			} else {
+				return true;
+			}
 		}
 	}
 

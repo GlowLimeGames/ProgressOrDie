@@ -67,6 +67,7 @@ public class MovementModule : Module
 			foundSuitableTile = CanMoveToTile(enemy, potentialDestination);
 		}
 		if(foundSuitableTile) {
+			enemy.LeaveCurrentTile();
 			potentialDestination.PlaceUnit(enemy.GetAgent());
 		}
 	}

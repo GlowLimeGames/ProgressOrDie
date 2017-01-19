@@ -23,12 +23,18 @@ public class EnemyNPC : Unit, IEnemyNPC, IComparable
 
 	public EnemyDescriptor Descriptor{get; private set;}
 
+	public int StatPointsOnKill {
+		get {
+			return Descriptor.StatPointsOnKill;
+		}
+	}
+
 	int turnPriority {
 		get {
 			return Descriptor.TurnPriority;
 		}
 	}
-
+		
 	public override AttackType GetPrimaryAttack() {
 		if(GetStrength() >= GetMagic())
 		{

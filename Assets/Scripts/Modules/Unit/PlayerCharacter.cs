@@ -11,11 +11,12 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	int constitution;
 	int strength;
 	int skill;
-	int unspentSkillPoints = 0;
+	int unspentStatPoints = 0;
 	bool debuggingEnabled = false;
-	public PlayerCharacter(UnitModule parent, MapLocation location, Map map) : 
+	public PlayerCharacter(UnitModule parent, MapLocation location, Map map, int startingStatPoints) : 
 	base (parent, location, map) {
 		setStatsToDefault();
+		this.unspentStatPoints = startingStatPoints;
 	}
 
 	PlayerCharacterBehaviour player {
@@ -36,17 +37,20 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		printStats();
 	}
 		
-	public bool HasUnspentSkillPoints() {
-		return unspentSkillPoints > 0;
+	public bool HasUnspentStatPoints() {
+		return unspentStatPoints > 0;
 	}
 
-	public int GetUnspentSkillPoints() {
-		return unspentSkillPoints;
+	public int GetUnspentStatPoints() {
+		return unspentStatPoints;
 	}
 
-	public bool TrySpendSkillPoints(int amount) {
-		if(amount <= unspentSkillPoints) {
-			unspentSkillPoints -= amount;
+	public bool TrySpendStatPoints(int amount) {
+		if(amount <= unspentStatPoints) {
+			unspentStatPoints -= amount;
+			if(HasAgentLink) {
+				player.UpdateStatPoints(unspentStatPoints);
+			}
 			return true;
 		} else {
 			return false;	
@@ -54,9 +58,9 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	}
 
 	public void EarnStatPoints(int delta) {
-		unspentSkillPoints += delta;
+		unspentStatPoints += delta;
 		if(HasAgentLink) {
-			player.EarnStatPoints(unspentSkillPoints);		
+			player.UpdateStatPoints(unspentStatPoints);		
 		}
 	}
 

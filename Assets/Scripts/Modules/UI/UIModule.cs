@@ -50,15 +50,24 @@ public class UIModule : Module, IUIModule
 		turnText.SetText(turn.CurrentTurnStr());
 		turn.SubscribeToTurnSwitchStr(handleTurnChange);
 		endTurnButton.SubscribeToClick(turn.NextTurn);
-		menuButton.SubscribeToClick(quitToMenu);
+		menuButton.SubscribeToClick(OpenMenuPopUp);
 		if (createWorld) {
 			this.playerAgent = units.GetMainPlayer ();
 			this.playerAgent.SubscribeToAgilityChange (handleAgilityChange);
 			this.playerUnit = playerAgent.GetUnit () as PlayerCharacter;
 			updateHealthDisplay(playerAgent.Health());
 			playerAgent.SubscribeToHPChange(updateHealthDisplay);
+			playerAgent.SubscribeToEarnStatPoints(updateStatPonts);
+			updateStatPonts(playerUnit.GetUnspentStatPoints());
 		}
-		if(StatsPanel) StatsPanel.initTuning (this, Tuning, units);
+		if(StatsPanel) {
+			StatsPanel.Init (this, Tuning, units);
+			OpenMenuPopUp();
+		}
+	}
+
+	public void OpenMenuPopUp () {
+		StatsPanel.Show();
 	}
 
 	public void RefreshStats() {

@@ -71,12 +71,17 @@ public class UnitModule : Module
 		} else {
 			GameObject go = new GameObject ();
 			mainPlayer = go.AddComponent<PlayerCharacterBehaviour> ();
-			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), map.Map));
+			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), map.Map, tuning.StartingStatPoints));
 		}
 	}
 		
 	public void HandleUnitDestroyed(Unit unit) {
 		units.Remove(unit);
+		if(unit is EnemyNPC) 
+		{
+			EnemyNPC enemy = unit as EnemyNPC;
+			Player().EarnStatPoints(enemy.StatPointsOnKill);
+		}
 	}
 
 	void handleAgentMove (Agent agent) {
@@ -112,13 +117,13 @@ public class UnitModule : Module
 			handleEnemyTurn();
 		}
 	}
-
+		
 	public bool PlayerHasUnspentSkillPoints() {
-		return Player().HasUnspentSkillPoints();
+		return Player().HasUnspentStatPoints();
 	}
 
 	public int GetAvailablePlayerSkillPoints() {
-		return Player().GetUnspentSkillPoints();
+		return Player().GetUnspentStatPoints();
 	}
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
@@ -160,7 +165,7 @@ public class UnitModule : Module
 					Unit unit = null;
 					MapLocation startLocation = new MapLocation(x, y);
 					if(isPlayer(tileUnit)) {
-						unit = new PlayerCharacter(this, startLocation, map);
+						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints);
 					} else {
 						EnemyDescriptor descr;
 						if(lookup.TryGetValue(tileUnit, out descr)) {
@@ -230,6 +235,14 @@ public class UnitModule : Module
 			lookup.Add(string.Concat(descriptor.Key, descriptor.Level), descriptor);
 		}
 		return lookup;
+	}
+
+	public void ChangePlayerUnspentStatPoints(int delta) {
+		if(delta > 0) {
+			Player().EarnStatPoints(delta);
+		} else if (delta < 0) {
+			Player().TrySpendStatPoints(Mathf.Abs(delta));
+		}
 	}
 
 	public void ChangePlayerStrength(int delta) {

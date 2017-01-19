@@ -46,6 +46,10 @@ public class UnitModule : Module
 		Player().EarnStatPoints(statPointsCollected);
 	}
 
+	public void UsePotionOnPlayer() {
+		Player().Heal(tuning.HealthPerecentGainFromPotion);
+	}
+
 	public void Init(MapModule map, 
 		string[,] units,
 		EnemyData enemyInfo,
@@ -75,6 +79,14 @@ public class UnitModule : Module
 		}
 	}
 		
+	public string GetPlayerCritChanceAsPercentStr(PlayerCharacter player){
+		return stats.GetPlayerCritChanceAsPercentStr(player);
+	}
+
+	public float GetPlayerCritChanceAsPercentf(PlayerCharacter player){
+		return stats.GetPlayerCritChanceAsPercentf(player);
+	}
+
 	public void HandleUnitDestroyed(Unit unit) {
 		units.Remove(unit);
 		if(unit is EnemyNPC) 

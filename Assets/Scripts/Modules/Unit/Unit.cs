@@ -72,6 +72,10 @@ public abstract class Unit : IUnit
 	public virtual int ModSkill (int delta) {
 		return GetSkill();
 	}
+		
+	public virtual void Heal (float percent) {
+		RemainingHealth = (int) ((float) getMaxHealth * percent);
+	}
 
 	public int X {
 		get {

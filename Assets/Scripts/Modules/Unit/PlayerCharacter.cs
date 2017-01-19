@@ -25,6 +25,14 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		}
 	}
 
+	public override void Heal (float percent)
+	{
+		base.Heal (percent);
+		if(HasAgentLink){
+			agent.UpdateRemainingHealth(RemainingHealth);
+		}
+	}
+
 	void setStatsToDefault () {
 		speed = 0;
 		magic = 0;
@@ -72,6 +80,16 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 			UnityEngine.Debug.Log("Strength: " + strength);
 			UnityEngine.Debug.Log("Skill: " + skill);
 		}
+	}
+
+	public string GetCritChanceAsPercentStr()
+	{
+		return parentModule.GetPlayerCritChanceAsPercentStr(this);
+	}
+
+	public float GetPlayerCritChanceAsPercentf()
+	{
+		return parentModule.GetPlayerCritChanceAsPercentf(this);
 	}
 
 	public override void Kill ()

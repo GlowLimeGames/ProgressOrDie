@@ -92,6 +92,14 @@ public class StatModule : Module
 		}
 	}
 
+	public string GetPlayerCritChanceAsPercentStr(PlayerCharacter player) {
+		return string.Format("{0}%", getChanceOfCrit(player) * 100);
+	}
+
+	public float GetPlayerCritChanceAsPercentf(PlayerCharacter player) {
+		return getChanceOfCrit(player);
+	}
+
 	public int GetMeleeDamage (IUnit unit) {
 		int damage = (int) (unit.GetStrength() * DamagePerStrengthPoint);
 		return applyDamageMods(unit, damage);
@@ -114,6 +122,10 @@ public class StatModule : Module
 		return totalDamage;
 	}
 
+	float getChanceOfCrit(IUnit unit) {
+		return CriticalHitRatePerSkillPoint * unit.GetSkill() + tuning.BaseCriticalHitRate;
+	}
+
 	float getCritDamageModifier(IUnit unit) {
 		return (float) unit.GetSkill() * tuning.DamageAddedToCriticalHitMultiplierPerSkillPoint + tuning.BaseCriticalHitDamageMultiplier;
 	}
@@ -125,7 +137,7 @@ public class StatModule : Module
 
 
 	public bool CriticalHit (IUnit unit) {
-		float critChance = CriticalHitRatePerSkillPoint * unit.GetSkill() + tuning.BaseCriticalHitRate;
+		float critChance = getChanceOfCrit(unit);
 		return Random.Range(0.0f, 1.0f) < critChance;
 	}
 

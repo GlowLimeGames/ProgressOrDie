@@ -79,6 +79,14 @@ public class UnitModule : Module
 		}
 	}
 		
+	public string GetPlayerCritChanceAsPercentStr(PlayerCharacter player){
+		return stats.GetPlayerCritChanceAsPercentStr(player);
+	}
+
+	public float GetPlayerCritChanceAsPercentf(PlayerCharacter player){
+		return stats.GetPlayerCritChanceAsPercentf(player);
+	}
+
 	public void HandleUnitDestroyed(Unit unit) {
 		units.Remove(unit);
 		if(unit is EnemyNPC) 

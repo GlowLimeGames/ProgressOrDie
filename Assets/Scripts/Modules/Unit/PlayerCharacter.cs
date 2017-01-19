@@ -82,6 +82,16 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		}
 	}
 
+	public string GetCritChanceAsPercentStr()
+	{
+		return parentModule.GetPlayerCritChanceAsPercentStr(this);
+	}
+
+	public float GetPlayerCritChanceAsPercentf()
+	{
+		return parentModule.GetPlayerCritChanceAsPercentf(this);
+	}
+
 	public override void Kill ()
 	{
 		base.Kill ();

@@ -12,8 +12,10 @@ public class StatsUIPanel : UIElement
 	const int CHARACTER_CREATION = 1;
 	const int PLAYER_PROGRESSION = 0;
 
+	UIModule parentModule;
 	TuningModule Tuning;
-	public void initTuning (TuningModule Tuning, UnitModule units){
+	public void initTuning (UIModule ui, TuningModule Tuning, UnitModule units){
+		this.parentModule = ui;
 		this.Tuning = Tuning;
 		unitModule = units;
 	}
@@ -30,8 +32,16 @@ public class StatsUIPanel : UIElement
 	Text SpeedText = null;
 	[SerializeField]
 	Text pointsRemainingText;
+	[SerializeField]
+	UIButton battleButton;
 
-	public UnitModule unitModule;
+	UnitModule unitModule;
+
+	protected override void SetReferences ()
+	{
+		base.SetReferences ();
+		battleButton.SubscribeToClick(Hide);
+	}
 
 	protected override void FetchReferences ()
 	{
@@ -43,7 +53,14 @@ public class StatsUIPanel : UIElement
 		SpeedText = GameObject.Find("TextSpeed").GetComponent<Text>();
 		updateStats();
 	}
-		
+
+	public override void Hide ()
+	{
+		base.Hide ();
+
+		EventModule.Event(PODEvent.StatPanelClosed);
+	}
+
 	public void SwapPlayMode()
 	{
 		if (StatsPanelMode == 1) {
@@ -56,7 +73,14 @@ public class StatsUIPanel : UIElement
 	void updateStats()
 	{
 		updateRemainingText();
+		toggleBattleButton();
+		parentModule.RefreshStats();
 	}
+
+	void toggleBattleButton(){
+		battleButton.ToggleInteractable(!HasUnllocatedStatPoints());
+	}
+
 	void updateRemainingText()
 	{
 		pointsRemainingText.text = GetUnallocatedStatPoints().ToString();
@@ -108,7 +132,7 @@ public class StatsUIPanel : UIElement
 		}
 		Skill = Skill + 1;
 		SkillText.text = Skill.ToString();
-		unitModule.ChangePlayerSkill (Skill);
+		unitModule.ChangePlayerSkill (1);
 		updateStats();
 	}
 	public void SkillMinusClick()
@@ -117,7 +141,7 @@ public class StatsUIPanel : UIElement
 			return;}
 		Skill = Skill - 1;
 		SkillText.text = Skill.ToString();
-		unitModule.ChangePlayerSkill (Skill);
+		unitModule.ChangePlayerSkill (-1);
 		updateStats();
 	}
 	public void StrengthPlusClick()
@@ -129,7 +153,7 @@ public class StatsUIPanel : UIElement
 		}
 		Strength = Strength + 1;
 		StrengthText.text = Strength.ToString();
-		unitModule.ChangePlayerStrength (Strength);
+		unitModule.ChangePlayerStrength (+1);
 		updateStats();
 	}
 	public void StrengthMinusClick()
@@ -138,7 +162,7 @@ public class StatsUIPanel : UIElement
 			return;}
 		Strength = Strength - 1;
 		StrengthText.text = Strength.ToString();
-		unitModule.ChangePlayerStrength (Strength);
+		unitModule.ChangePlayerStrength (-1);
 		updateStats();
 	}
 	public void SpiritPlusClick()
@@ -150,7 +174,7 @@ public class StatsUIPanel : UIElement
 		}
 		Spirit = Spirit + 1;
 		SpiritText.text = Spirit.ToString();
-		unitModule.ChangePlayerMagic (Spirit);
+		unitModule.ChangePlayerMagic (1);
 		updateStats();
 	}
 	public void SpiritMinusClick()
@@ -159,7 +183,7 @@ public class StatsUIPanel : UIElement
 			return;}
 		Spirit = Spirit - 1;
 		SpiritText.text = Spirit.ToString();
-		unitModule.ChangePlayerMagic (Spirit);
+		unitModule.ChangePlayerMagic (-1);
 		updateStats();
 	}
 	public void SpeedPlusClick()
@@ -176,7 +200,7 @@ public class StatsUIPanel : UIElement
 			return;}
 		Speed = Speed + 1;
 		SpeedText.text = Speed.ToString();
-		unitModule.ChangePlayerSpeed (Speed);
+		unitModule.ChangePlayerSpeed (1);
 		updateStats();
 	}
 	public void SpeedMinusClick()
@@ -185,7 +209,7 @@ public class StatsUIPanel : UIElement
 			return;}
 		Speed = Speed - 1;
 		SpeedText.text = Speed.ToString();
-		unitModule.ChangePlayerSpeed (Speed);
+		unitModule.ChangePlayerSpeed (-1);
 		updateStats();
 	}
 }

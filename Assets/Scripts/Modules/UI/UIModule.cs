@@ -56,7 +56,15 @@ public class UIModule : Module, IUIModule
 			updateHealthDisplay(playerAgent.Health());
 			playerAgent.SubscribeToHPChange(updateHealthDisplay);
 		}
-		if(StatsPanel) StatsPanel.initTuning (Tuning, units);
+		if(StatsPanel) StatsPanel.initTuning (this, Tuning, units);
+	}
+
+	public void RefreshStats() {
+		skillBar.SetText(playerUnit.GetSkill(), 1);
+		strengthBar.SetText(playerUnit.GetStrength(), 1);
+		magicBar.SetText(playerUnit.GetMagic(), 1);
+		constitutionBar.SetText(playerUnit.GetConstitution(), 1);
+		speedBar.SetText(playerUnit.GetSpeed(), 1);
 	}
 
 	void updateHealthDisplay(int healthRemaining) { 

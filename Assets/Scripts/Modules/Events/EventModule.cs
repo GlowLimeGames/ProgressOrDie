@@ -231,5 +231,7 @@ public enum PODEvent {
 	EnemyTurnStart,
 	EnemyTurnEnd,
 	PlayerMagicAttack,
-	PlayerMeleeAttack
+	PlayerMeleeAttack,
+	StatPanelClosed,
+
 }

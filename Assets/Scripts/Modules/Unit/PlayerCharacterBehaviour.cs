@@ -171,6 +171,9 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	void handlePODGameEvent(PODEvent gameEvent) {
 		if(playerAttackEvent(gameEvent)) {
 			QueryAnimator(AnimParam.Trigger, getAttackKey(getAttackType(gameEvent)));
+		} else if (gameEvent == PODEvent.StatPanelClosed) {
+			ReplenishAtTurnStart(AgentType.Player);
+
 		}
 	}
 

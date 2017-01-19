@@ -12,7 +12,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	int strength;
 	int skill;
 	int unspentSkillPoints = 0;
-
+	bool debuggingEnabled = false;
 	public PlayerCharacter(UnitModule parent, MapLocation location, Map map) : 
 	base (parent, location, map) {
 		setStatsToDefault();
@@ -52,11 +52,13 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	}
 
 	void printStats(){
-		UnityEngine.Debug.Log("Speed: " + speed);
-		UnityEngine.Debug.Log("Magic: " + magic);
-		UnityEngine.Debug.Log("Constitution: " + constitution);
-		UnityEngine.Debug.Log("Strength: " + strength);
-		UnityEngine.Debug.Log("Skill: " + skill);
+		if(debuggingEnabled) {
+			UnityEngine.Debug.Log("Speed: " + speed);
+			UnityEngine.Debug.Log("Magic: " + magic);
+			UnityEngine.Debug.Log("Constitution: " + constitution);
+			UnityEngine.Debug.Log("Strength: " + strength);
+			UnityEngine.Debug.Log("Skill: " + skill);
+		}
 	}
 
 	public override void Kill ()

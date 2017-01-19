@@ -9,9 +9,15 @@ public class UIElement : MonoBehaviourExtended {
 
 	Image image;
 	Text text;
+	Text[] childTexts;
 
 	[SerializeField]
 	Sprite[] alternateSprites;
+	public bool hasChildText {
+		get {
+			return childTexts != null;
+		}
+	}
 	public bool hasImage {
 		get {
 			return image != null;
@@ -32,6 +38,7 @@ public class UIElement : MonoBehaviourExtended {
 		base.SetReferences();
 		image = GetComponentInChildren<Image>();
 		text = GetComponentInChildren<Text>();
+		childTexts = GetComponentsInChildren<Text>();
 	}
 
 	protected override void CleanupReferences()
@@ -44,11 +51,11 @@ public class UIElement : MonoBehaviourExtended {
 		// NOTHING
 	}
 
-	public void Show () {
+	public virtual void Show () {
 		gameObject.SetActive(true);
 	}
 
-	public void Hide () {
+	public virtual void Hide () {
 		gameObject.SetActive(false);
 	}
 
@@ -58,11 +65,26 @@ public class UIElement : MonoBehaviourExtended {
 		}
 	}
 
+	public void SetText(int value, int childIndex) {
+		SetText(value.ToString(), childIndex);
+	}
+
+	public void SetText(string text, int childIndex) {
+		CheckReferences();
+		if(hasChildText && IntUtil.InRange(childIndex, childTexts.Length)) {
+			childTexts[childIndex].text = text;
+		}
+	}
+
 	public void SetText (string text) {
 		CheckReferences();
 		if (hasText) {
 			this.text.text = text;
 		}
+	}
+
+	public void SetText(int value) {
+		SetText(value.ToString());
 	}
 
 	public void LoadLevel(string levelName) {

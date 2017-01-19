@@ -41,6 +41,10 @@ public abstract class Unit : IUnit
 		}
 	}
 
+	int getHealthPointsForConstitution(int constPoints) {
+		return (int) (parentModule.BulkToHPRatio * (float) constPoints);
+	}
+
 	public abstract int GetSpeed();
 	public abstract int GetMagic ();
 	public abstract int GetConstitution();
@@ -56,6 +60,8 @@ public abstract class Unit : IUnit
 	}
 
 	public virtual int ModConstitution(int delta) {
+		RemainingHealth += getHealthPointsForConstitution(delta);
+		tryUpdateAgentHealth(RemainingHealth);
 		return GetConstitution();
 	}
 

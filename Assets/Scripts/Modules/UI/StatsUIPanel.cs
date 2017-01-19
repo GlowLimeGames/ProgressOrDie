@@ -11,14 +11,10 @@ public class StatsUIPanel : UIElement
 {
 	const int CHARACTER_CREATION = 1;
 	const int PLAYER_PROGRESSION = 0;
-
+	[SerializeField]
+	bool disableBattleButtonUntilPointsFull = false;
 	UIModule parentModule;
 	TuningModule Tuning;
-	public void initTuning (UIModule ui, TuningModule Tuning, UnitModule units){
-		this.parentModule = ui;
-		this.Tuning = Tuning;
-		unitModule = units;
-	}
 	int Constitution = 0;
 	int Skill = 0;
 	int Strength = 0;
@@ -34,15 +30,27 @@ public class StatsUIPanel : UIElement
 	Text pointsRemainingText;
 	[SerializeField]
 	UIButton battleButton;
-
 	UnitModule unitModule;
+
+	public void Init (UIModule ui, TuningModule Tuning, UnitModule units){
+		this.parentModule = ui;
+		this.Tuning = Tuning;
+		unitModule = units;
+	}
 
 	protected override void SetReferences ()
 	{
 		base.SetReferences ();
 		battleButton.SubscribeToClick(Hide);
+		battleButton.SubscribeToClick(switchToPlayMod);
 	}
-
+	protected void switchToPlayMod()
+	{
+		if(StatsPanelMode == CHARACTER_CREATION)
+		{
+			SwapPlayMode();
+		}
+	}
 	protected override void FetchReferences ()
 	{
 		base.FetchReferences ();
@@ -57,7 +65,6 @@ public class StatsUIPanel : UIElement
 	public override void Hide ()
 	{
 		base.Hide ();
-
 		EventModule.Event(PODEvent.StatPanelClosed);
 	}
 
@@ -70,10 +77,17 @@ public class StatsUIPanel : UIElement
 			StatsPanelMode = 1;
 		}
 	}
+	public override void Show ()
+	{
+		base.Show ();
+		updateRemainingText();
+	}
 	void updateStats()
 	{
 		updateRemainingText();
-		toggleBattleButton();
+		if(disableBattleButtonUntilPointsFull) {
+			toggleBattleButton();
+		}
 		parentModule.RefreshStats();
 	}
 
@@ -90,11 +104,7 @@ public class StatsUIPanel : UIElement
 	}
 	int GetUnallocatedStatPoints()
 	{
-		if(StatsPanelMode == CHARACTER_CREATION) {
-			return Tuning.StartingStatPoints - SumAllocatedStatPoints();
-		} else {
-			return unitModule.GetAvailablePlayerSkillPoints();
-		}
+		return unitModule.GetAvailablePlayerSkillPoints();
 	}
 	int SumAllocatedStatPoints()
 	{
@@ -102,14 +112,13 @@ public class StatsUIPanel : UIElement
 	}
 	public void ConstitutionPlusClick()
 	{
-		if (StatsPanelMode == 1) {
-			if (!HasUnllocatedStatPoints()) {
-				return;
-			}
+		if (!HasUnllocatedStatPoints()) {
+			return;
 		}
 		Constitution = Constitution + 1;
 		ConstitutionText.text = Constitution.ToString();
 		unitModule.ChangePlayerConstitution (+1);
+		unitModule.ChangePlayerUnspentStatPoints(-1);
 		updateStats();
 	}
 	public void ConstitutionMinusClick()
@@ -119,20 +128,18 @@ public class StatsUIPanel : UIElement
 		Constitution = Constitution - 1;
 		ConstitutionText.text = Constitution.ToString();
 		unitModule.ChangePlayerConstitution (-1);
+		unitModule.ChangePlayerUnspentStatPoints(1);
 		updateStats();
 	}
 	public void SkillPlusClick()
 	{
-		if (Skill == Tuning.MaxSkill){
-			return;}
-		if (StatsPanelMode == 1) {
-			if (Constitution + Skill + Strength + Spirit + Speed > Tuning.StartingStatPoints) {
-				return;
-			}
+		if (Skill == Tuning.MaxSkill || !HasUnllocatedStatPoints()) {
+			return;
 		}
 		Skill = Skill + 1;
 		SkillText.text = Skill.ToString();
 		unitModule.ChangePlayerSkill (1);
+		unitModule.ChangePlayerUnspentStatPoints(-1);
 		updateStats();
 	}
 	public void SkillMinusClick()
@@ -142,18 +149,18 @@ public class StatsUIPanel : UIElement
 		Skill = Skill - 1;
 		SkillText.text = Skill.ToString();
 		unitModule.ChangePlayerSkill (-1);
+		unitModule.ChangePlayerUnspentStatPoints(1);
 		updateStats();
 	}
 	public void StrengthPlusClick()
 	{
-		if (StatsPanelMode == 1) {
-			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
-				return;
-			}
+		if (!HasUnllocatedStatPoints()) {
+			return;
 		}
 		Strength = Strength + 1;
 		StrengthText.text = Strength.ToString();
 		unitModule.ChangePlayerStrength (+1);
+		unitModule.ChangePlayerUnspentStatPoints(-1);
 		updateStats();
 	}
 	public void StrengthMinusClick()
@@ -163,18 +170,18 @@ public class StatsUIPanel : UIElement
 		Strength = Strength - 1;
 		StrengthText.text = Strength.ToString();
 		unitModule.ChangePlayerStrength (-1);
+		unitModule.ChangePlayerUnspentStatPoints(1);
 		updateStats();
 	}
 	public void SpiritPlusClick()
 	{
-		if (StatsPanelMode == 1) {
-			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
-				return;
-			}
+		if (!HasUnllocatedStatPoints()) {
+			return;
 		}
 		Spirit = Spirit + 1;
 		SpiritText.text = Spirit.ToString();
 		unitModule.ChangePlayerMagic (1);
+		unitModule.ChangePlayerUnspentStatPoints(-1);
 		updateStats();
 	}
 	public void SpiritMinusClick()
@@ -184,23 +191,24 @@ public class StatsUIPanel : UIElement
 		Spirit = Spirit - 1;
 		SpiritText.text = Spirit.ToString();
 		unitModule.ChangePlayerMagic (-1);
+		unitModule.ChangePlayerUnspentStatPoints(1);
 		updateStats();
 	}
 	public void SpeedPlusClick()
 	{
-		if (StatsPanelMode == 1) {
-			if (Speed == Tuning.MaxSpeedInCharacterCreation) {
-				return;
-			}
-			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
-				return;
-			}
+		if (!HasUnllocatedStatPoints()) {
+			return;
 		}
-		if (Speed == Tuning.MaxSpeed) {
-			return;}
+		if (StatsPanelMode == CHARACTER_CREATION && Speed >= Tuning.MaxSpeedInCharacterCreation) {
+			return;
+		}
+		else if (Speed >= Tuning.MaxSpeed) {
+			return;
+		}
 		Speed = Speed + 1;
 		SpeedText.text = Speed.ToString();
 		unitModule.ChangePlayerSpeed (1);
+		unitModule.ChangePlayerUnspentStatPoints(-1);
 		updateStats();
 	}
 	public void SpeedMinusClick()
@@ -210,6 +218,7 @@ public class StatsUIPanel : UIElement
 		Speed = Speed - 1;
 		SpeedText.text = Speed.ToString();
 		unitModule.ChangePlayerSpeed (-1);
+		unitModule.ChangePlayerUnspentStatPoints(1);
 		updateStats();
 	}
 }

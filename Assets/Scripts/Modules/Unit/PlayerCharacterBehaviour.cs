@@ -10,6 +10,7 @@ public class PlayerCharacterBehaviour : PlayerAgent
 {	
 	MonoActionf onAgilityChange;
 	MonoActionInt onHPChange;
+	MonoActionInt onUnallocatedStatPointsChange;
 
 	PlayerCharacter character;
 
@@ -30,6 +31,14 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		this.character = character;
 		this.SetUnit(character);
 		ReplenishAtTurnStart(AgentType.Player);
+	}
+
+	public void SubscribeToEarnStatPoints (MonoActionInt action){
+		onUnallocatedStatPointsChange += action;
+	}
+
+	public void UnsubscribeFromEarnStatPoints (MonoActionInt action) {
+		onUnallocatedStatPointsChange -= action;
 	}
 
 	public void SubscribeToHPChange (MonoActionInt action) {
@@ -82,7 +91,7 @@ public class PlayerCharacterBehaviour : PlayerAgent
 			MoveX(1);
 		}
 	}
-
+	
 	public override void UpdateRemainingHealth (int healthRemaing) {
 		base.UpdateRemainingHealth (healthRemaing);
 		callOnHPChange(healthRemaing);
@@ -92,6 +101,10 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		if(onHPChange != null) {
 			onHPChange(healthRemaining);
 		}
+	}
+
+	public void UpdateStatPoints(int statPoints) {
+		callUpdateStatPoints(statPoints);
 	}
 
 	public override bool MoveX (int dir)
@@ -138,6 +151,12 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	void callAgilityChange (float agility) {
 		if (onAgilityChange != null) {
 			onAgilityChange(agility);
+		}
+	}
+
+	void callUpdateStatPoints(int statPoints) {
+		if(onUnallocatedStatPointsChange != null) {
+			onUnallocatedStatPointsChange(statPoints);
 		}
 	}
 

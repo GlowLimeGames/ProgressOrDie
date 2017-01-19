@@ -73,10 +73,22 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
+	protected override bool move (int deltaX, int deltaY)
+	{
+		if(base.move (deltaX, deltaY)) {
+			EventModule.Event("Movement")
+			;EventModule.Event("PlayerWalking");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	protected override void stopMoving ()
 	{
 		base.stopMoving ();
 		QueryAnimator(AnimParam.Bool, IS_MOVING, false);
+		EventModule.Event("StopPlayerWalking");
 	}
 
 	void Update () {

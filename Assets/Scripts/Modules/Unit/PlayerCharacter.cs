@@ -78,6 +78,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	{
 		base.Kill ();
 		parentModule.HandlePlayerKilled();
+		EventModule.Event("PlayerDeath");
 	}
 
 	public override AttackType GetPrimaryAttack()

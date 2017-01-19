@@ -81,6 +81,7 @@ public class UnitModule : Module
 		{
 			EnemyNPC enemy = unit as EnemyNPC;
 			Player().EarnStatPoints(enemy.StatPointsOnKill);
+			EventModule.Event("EnemyDeath");
 		}
 	}
 
@@ -317,6 +318,7 @@ public class UnitModule : Module
 
 	IEnumerator takeEnemiesTurnInOrder(EnemyNPC[] enemyOrder, float timerPerTurn, MonoAction callback = null)
 	{
+		EventModule.Event("EnemyFootsteps");
 		foreach(EnemyNPC enemy in enemyOrder)
 		{
 			handleIndividualEnemyTurn(enemy);
@@ -325,6 +327,7 @@ public class UnitModule : Module
 		if(callback != null) {
 			callback();
 		}
+		EventModule.Event("StopEnemyFootsteps");
 	}
 
 	void handleIndividualEnemyTurn(EnemyNPC enemy)

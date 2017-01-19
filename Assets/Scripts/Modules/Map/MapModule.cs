@@ -20,6 +20,13 @@ public class MapModule : Module, IMapModule
 		this.sprites = sprites;
 		this.movement = movement;
 		createMap(this.Map);
+		EventModule.Event("Ambience");
+	}
+
+	protected override void CleanupReferences ()
+	{
+		base.CleanupReferences ();
+		EventModule.Event("StopAmbience");
 	}
 
 	void createMap(Map map) {

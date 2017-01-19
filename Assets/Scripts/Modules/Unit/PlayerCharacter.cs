@@ -25,6 +25,14 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		}
 	}
 
+	public override void Heal (float percent)
+	{
+		base.Heal (percent);
+		if(HasAgentLink){
+			agent.UpdateRemainingHealth(RemainingHealth);
+		}
+	}
+
 	void setStatsToDefault () {
 		speed = 0;
 		magic = 0;

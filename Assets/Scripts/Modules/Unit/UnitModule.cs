@@ -46,6 +46,10 @@ public class UnitModule : Module
 		Player().EarnStatPoints(statPointsCollected);
 	}
 
+	public void UsePotionOnPlayer() {
+		Player().Heal(tuning.HealthPerecentGainFromPotion);
+	}
+
 	public void Init(MapModule map, 
 		string[,] units,
 		EnemyData enemyInfo,

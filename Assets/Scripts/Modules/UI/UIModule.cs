@@ -17,6 +17,7 @@ public class UIModule : Module, IUIModule
 	UIElement turnText;
 	[SerializeField]
 	UIButton endTurnButton;
+
 	[Space(25)]
 	[SerializeField]
 	UIFillBar strengthBar;
@@ -29,15 +30,15 @@ public class UIModule : Module, IUIModule
 	[SerializeField]
 	UIFillBar speedBar;
 	[SerializeField]
+	UIFillBar critBar;
+
+	[Space(25)]
+	[SerializeField]
 	UIButton menuButton;
 	[SerializeField]
 	UIElement healthDisplay;
 	[SerializeField]
 	UIElement unspentStatPoints;
-
-	[Space(25)]
-	[SerializeField]
-	UIFillBar critBar;
 
 	[Space(25)]
 	[SerializeField]
@@ -47,8 +48,10 @@ public class UIModule : Module, IUIModule
 
 	PlayerCharacterBehaviour playerAgent;
 	PlayerCharacter playerUnit;
+	UnitModule units;
 
 	public void Init(string levelName, TurnModule turn, UnitModule units, TuningModule Tuning, bool createWorld = true) {
+		this.units = units;
 		levelText.SetText(levelName);
 		turnText.SetText(turn.CurrentTurnStr());
 		turn.SubscribeToTurnSwitchStr(handleTurnChange);
@@ -67,6 +70,10 @@ public class UIModule : Module, IUIModule
 			StatsPanel.Init (this, Tuning, units);
 			OpenMenuPopUp();
 		}
+	}
+
+	public void UsePotion() {
+		units.UsePotionOnPlayer();
 	}
 
 	public void OpenMenuPopUp () {

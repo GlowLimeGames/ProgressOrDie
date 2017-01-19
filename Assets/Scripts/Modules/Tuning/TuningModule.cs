@@ -114,6 +114,12 @@ public class TuningModule : Module
 		}
 	}
 
+	public int MaxSpeedInCharacterCreation {
+		get {
+			return data.MaxSpeedInCharacterCreation;
+		}
+	}
+
 	TuningData data;
 
 	public void Init (TuningData data) {
@@ -127,10 +133,14 @@ public class TuningData : SerializableData
 {
 	public float ConstitutionToHPRatio;
 	public int MaxSpeed;
+	public int MaxSpeedInCharacterCreation;
 	public float DamagePerMagicPoint;
 	public float DamagePerStrengthPoint;
 	public int MaxSkill;
 	public float CriticalHitRatePerSkillPoint;
+	public float BaseCriticalHiteRate;
+	public float BaseCriticalHitDamageMultiplier;
+	public float DamageAddedToCriticalHItMultiplierPerSkillPoint;
 	public int StartingStatPoints;
 	public int StartingHealthPotions;
 	public int VisionRange;
@@ -143,4 +153,5 @@ public class TuningData : SerializableData
 	public int TurnsBeforeBossMonsterHeals;
 	public int BossMonsterHealingAmount;
 	public string PlayerSymbolOnMap;
+	public int NumberOfPotions;
 }

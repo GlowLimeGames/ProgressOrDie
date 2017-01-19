@@ -4,7 +4,9 @@
  * Usage: [no notes]
  */
 
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class UnitModule : Module 
@@ -19,6 +21,9 @@ public class UnitModule : Module
 	CombatModule combat;
 	StatModule stats;
 	TuningModule tuning;
+	TurnModule turns;
+
+	MovementModule movement;
 	List<Unit> units = new List<Unit>();
 	EnemyNPC[] highlightedEnemyTargets = new EnemyNPC[0];
 
@@ -28,7 +33,7 @@ public class UnitModule : Module
 		}
 	}
 		
-	PlayerCharacter player() {
+	public PlayerCharacter Player() {
 		return GetMainPlayer().GetCharacter();
 	}
 
@@ -36,8 +41,12 @@ public class UnitModule : Module
 		this.level = level;
 	}
 
+	public void EarnStatPoints(int statPointsCollected)
+	{
+		Player().EarnStatPoints(statPointsCollected);
+	}
+
 	public void Init(MapModule map, 
-		SpriteModule sprites, 
 		string[,] units,
 		EnemyData enemyInfo,
 		TurnModule turns,
@@ -45,20 +54,34 @@ public class UnitModule : Module
 		CombatModule combat, 
 		StatModule stats,
 		AbilitiesModule abilities,
-		TuningModule tuning
+		TuningModule tuning,
+		PrefabModule prefabs,
+		bool createWorld
 	){
 		this.combat = combat;
 		this.stats = stats;
 		this.tuning = tuning;
-		movement.SubscribeToAgentMove(handleAgentMove);
-		turns.SubscribeToTurnSwitch(handleTurnSwitch);
-		createUnits(map.Map, units, enemyInfo);
-		placeUnits(map, sprites, this.units.ToArray(), turns, movement, combat, stats, abilities);
+		this.turns = turns;
+		this.movement = movement;
+		if (createWorld) {
+			movement.SubscribeToAgentMove (handleAgentMove);
+			turns.SubscribeToTurnSwitch (handleTurnSwitch);
+			createUnits(map.Map, units, enemyInfo);
+			placeUnits (map, this.units.ToArray (), turns, movement, combat, stats, abilities, prefabs);
+		} else {
+			GameObject go = new GameObject ();
+			mainPlayer = go.AddComponent<PlayerCharacterBehaviour> ();
+			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), map.Map, tuning.StartingStatPoints));
+		}
 	}
 		
 	public void HandleUnitDestroyed(Unit unit) {
-		// TODO: Implement real functionality
-
+		units.Remove(unit);
+		if(unit is EnemyNPC) 
+		{
+			EnemyNPC enemy = unit as EnemyNPC;
+			Player().EarnStatPoints(enemy.StatPointsOnKill);
+		}
 	}
 
 	void handleAgentMove (Agent agent) {
@@ -91,7 +114,16 @@ public class UnitModule : Module
 			highlightEnemiesRange();
 		} else if (turn == AgentType.Enemy) {
 			unhighlightEnemies();
+			handleEnemyTurn();
 		}
+	}
+		
+	public bool PlayerHasUnspentSkillPoints() {
+		return Player().HasUnspentStatPoints();
+	}
+
+	public int GetAvailablePlayerSkillPoints() {
+		return Player().GetUnspentStatPoints();
 	}
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
@@ -104,6 +136,11 @@ public class UnitModule : Module
 
 	public PlayerCharacterBehaviour GetMainPlayer () {
 		return this.mainPlayer;
+	}
+
+	public void HandlePlayerKilled()
+	{
+		loadGameOver();
 	}
 
 	public EnemyNPC[] GetEnemiesInRange (PlayerCharacter player) {
@@ -128,7 +165,7 @@ public class UnitModule : Module
 					Unit unit = null;
 					MapLocation startLocation = new MapLocation(x, y);
 					if(isPlayer(tileUnit)) {
-						unit = new PlayerCharacter(this, startLocation, map);
+						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints);
 					} else {
 						EnemyDescriptor descr;
 						if(lookup.TryGetValue(tileUnit, out descr)) {
@@ -145,13 +182,13 @@ public class UnitModule : Module
 	}
 
 	void placeUnits(MapModule map, 
-		SpriteModule sprites, 
 		Unit[] units, 
 		TurnModule turns,
 		MovementModule movement, 
 		CombatModule combat,
 		StatModule stats,
-		AbilitiesModule abilities
+		AbilitiesModule abilities,
+		PrefabModule prefabs
 	) {
 		
 		for (int i = 0; i < units.Length; i++) {
@@ -161,21 +198,20 @@ public class UnitModule : Module
 				agent = getPlayer(unit as PlayerCharacter);
 				mainPlayer = agent as PlayerCharacterBehaviour;
 			} else if (unit is EnemyNPC) {
-				agent = getEnemy(unit as EnemyNPC, sprites);
+				agent = getEnemy(unit as EnemyNPC, prefabs);
 			} else {
 				// Skip this unit: it's not supported
 				continue;
 			}
-			agent.Init(turns, movement, combat, stats, abilities);
+			agent.Init(map, turns, movement, combat, stats, abilities);
 			map.PlaceUnit(agent);
 		}
-
 	}
 		
-	EnemyNPCBehaviour getEnemy (EnemyNPC data, SpriteModule sprites) {
-		EnemyNPCBehaviour enemy = Instantiate(enemyPrefab, transform);	
+	EnemyNPCBehaviour getEnemy (EnemyNPC data, PrefabModule prefabs) {
+		EnemyNPCBehaviour enemy = prefabs.GetEnemy(data.Descriptor.Key);
 		enemy.SetEnemy(data);
-		enemy.SetSprite(sprites.GetEnemy(data.Descriptor));
+		enemy.transform.SetParent(transform);
 		return enemy;
 	}
 
@@ -201,24 +237,32 @@ public class UnitModule : Module
 		return lookup;
 	}
 
+	public void ChangePlayerUnspentStatPoints(int delta) {
+		if(delta > 0) {
+			Player().EarnStatPoints(delta);
+		} else if (delta < 0) {
+			Player().TrySpendStatPoints(Mathf.Abs(delta));
+		}
+	}
+
 	public void ChangePlayerStrength(int delta) {
-		player().ModStrength(delta);	
+		Player().ModStrength(delta);	
 	}
 
 	public void ChangePlayerSpeed(int delta) {
-		player().ModSpeed(delta);	
+		Player().ModSpeed(delta);	
 	}
 
 	public void ChangePlayerConstitution(int delta) {
-		player().ModConstitution(delta);	
+		Player().ModConstitution(delta);	
 	}
 
 	public void ChangePlayerMagic(int delta) {
-		player().ModMagic(delta);
+		Player().ModMagic(delta);
 	}
 
 	public void ChangePlayerSkill(int delta) {
-		player().ModSkill(delta);
+		Player().ModSkill(delta);
 	}
 		
 	void modStrength(Unit unit, int delta) {
@@ -241,4 +285,69 @@ public class UnitModule : Module
 		unit.ModSkill(delta);
 	}
 
+	void handleEndEnemyTurn()
+	{
+		EventModule.Event(PODEvent.EnemyTurnEnd);
+		turns.NextTurn();
+	}
+
+	void handleEnemyTurn()
+	{
+		EventModule.Event(PODEvent.EnemyTurnStart);
+		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
+		float turnTimerPerEnemy = getEnemyTurnTimePerEnemy(enemiesSorted);
+		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, turnTimerPerEnemy, handleEndEnemyTurn));
+	}
+
+	float getEnemyTurnTimePerEnemy(EnemyNPC[] enemies)
+	{
+		return tuning.TimeToMove / (float) enemies.Length;
+	}
+
+	EnemyNPC[] sortEnemiesByTurnPriority(List<Unit> units) {
+		Sort<EnemyNPC> sorter = new SelectionSort<EnemyNPC>();
+		EnemyNPC[] enemies = getAllEnemies();
+		return sorter.run(enemies);
+	}
+
+	EnemyNPC[] getAllEnemies()
+	{
+		return units.OfType<EnemyNPC>().ToArray();
+	}
+
+	IEnumerator takeEnemiesTurnInOrder(EnemyNPC[] enemyOrder, float timerPerTurn, MonoAction callback = null)
+	{
+		foreach(EnemyNPC enemy in enemyOrder)
+		{
+			handleIndividualEnemyTurn(enemy);
+			yield return new WaitForSeconds(timerPerTurn);
+		}
+		if(callback != null) {
+			callback();
+		}
+	}
+
+	void handleIndividualEnemyTurn(EnemyNPC enemy)
+	{
+		Unit target;
+		if(hasTargetToAttack(enemy, out target)) {
+			AttackType[] attacks = enemy.GetAvailableAttacks();
+			if(attacks[0] == AttackType.Magic) {
+				combat.MagicAttack(enemy, target as IUnit);
+			} else if (attacks[0] == AttackType.Melee) {
+				combat.MeleeAttack(enemy, target as IUnit);
+			}
+		}
+		handleEnemyMovement(enemy);
+	}
+
+	void handleEnemyMovement(EnemyNPC enemy) {
+		movement.DetermineEnemyMovement(enemy);
+	}
+
+	bool hasTargetToAttack(EnemyNPC enemy, out Unit validTarget)
+	{
+		return combat.HasTargetToAttack(enemy, out validTarget);
+	}
+		
 }

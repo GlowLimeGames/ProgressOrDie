@@ -6,7 +6,15 @@
 
 public class EnemyNPCBehaviour : AIAgent 
 {	
+	HealthBarBehaviour healthBar;
+
 	EnemyNPC enemy;
+
+	protected override void SetReferences ()
+	{
+		base.SetReferences ();
+		healthBar = GetComponentInChildren<HealthBarBehaviour>();
+	}
 
 	public override AgentType GetAgentType()
 	{
@@ -21,9 +29,13 @@ public class EnemyNPCBehaviour : AIAgent
 		return enemy;
 	}
 
+	public void UpdateHealthDisplay(float fraction) {
+		healthBar.SetHealthDisplay(fraction);
+	}
+
 	public void SetEnemy (EnemyNPC enemy) {
 		this.enemy = enemy;
-		this.enemy.LinkToAgent(this);
+		this.SetUnit(enemy);
 		ReplenishAtTurnStart(AgentType.Enemy);
 	}
 }

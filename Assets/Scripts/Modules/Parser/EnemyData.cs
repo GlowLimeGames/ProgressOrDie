@@ -33,7 +33,7 @@ public class EnemyDescriptor : SerializableData
 	public int Constitution;
 	public int Magic;
 	public int TurnPriority;
-	public int StatsOnKill;
+	public int StatPointsOnKill;
 	public int SphereOfInfluence;
 	public int TerritoryRadius;
 	public float ChanceOfMelee;

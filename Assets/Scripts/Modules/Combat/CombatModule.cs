@@ -14,6 +14,14 @@ public class CombatModule : Module, ICombatModule
 	StatModule stats;
 	GameEndModule gameEnd;
 
+	PlayerCharacter player
+	{
+		get 
+		{
+			return units.Player();
+		}
+	}
+
 	public void Init (
 		UnitModule units, 
 		MapModule map, 
@@ -36,8 +44,10 @@ public class CombatModule : Module, ICombatModule
 			playerAgent.Attack();
 			if(ableToPerformMeleeAttack(player, unit)) {
 				player.MeleeAttack(unit);
+				EventModule.Event(PODEvent.PlayerMeleeAttack);
 			} else {
 				player.MagicAttack(unit);
+				EventModule.Event(PODEvent.PlayerMagicAttack);
 			}
 		}
 	}
@@ -50,6 +60,27 @@ public class CombatModule : Module, ICombatModule
 				return ableToPerformRangedAttack(attacker, target);
 			default:
 				return false;
+		}
+	}
+
+	public bool HasTargetToAttack(Unit unit, out Unit validTarget)
+	{
+		validTarget = null;
+		if(unit is EnemyNPC)
+		{
+			if(IsTargetInRange(unit, player, unit.GetPrimaryAttack()))
+			{
+				validTarget = player;
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+		else
+		{
+			return false;
 		}
 	}
 
@@ -84,12 +115,27 @@ public class CombatModule : Module, ICombatModule
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
 		target.Damage(stats.GetMeleeDamage(attacker));
+		handleAttack(attacker, target, AttackType.Melee);
 	}
 
 	public void MagicAttack (IUnit attacker, IUnit target) {
 		target.Damage(stats.GetMagicDamage(attacker));
+		handleAttack(attacker, target, AttackType.Magic);
+	}
+
+	void handleAttack(IUnit attacker, IUnit target, AttackType attackType) {
+		int damage = 0;
+		switch(attackType)
+		{
+			case AttackType.Magic:
+				damage = stats.GetMagicDamage(attacker);
+				break;
+			case AttackType.Melee:
+				damage = stats.GetMeleeDamage(attacker);
+				break;
+		}
 		EventModule.Event(PODEvent.Notification, 
-			string.Format("{0} dealt {1} damage to {2}", attacker, stats.GetMagicDamage(attacker), target));
+			string.Format("{0} dealt {1} damage to {2}", attacker, damage, target));
 	}
 
 	public void FleeAttempt (IStatModule playerstats, IUnit unit) {

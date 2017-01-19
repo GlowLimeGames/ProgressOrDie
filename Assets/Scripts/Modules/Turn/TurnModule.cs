@@ -8,7 +8,8 @@ public class TurnModule : Module, ITurnModule
 {	
 	const string TURN = "Turn";
 	int turnCount = 1;
-
+	// Display this instead of turn count (so the UI doesn't count enemy turns)
+	int roundCount = 1;
 	AgentType currentTurn;
 	AgentTypeAction onTurnChange;
 	MonoActionStr onTurnChangeStr;
@@ -18,7 +19,7 @@ public class TurnModule : Module, ITurnModule
 	}
 
 	public string CurrentTurnStr () {
-		return string.Format("{0} {1}:\n{2}", TURN, turnCount, currentTurn.ToString());
+		return string.Format("{0} {1}:\n{2}", TURN, roundCount, currentTurn);
 	}
 
 	public void SubscribeToTurnSwitch (AgentTypeAction action) {
@@ -50,6 +51,10 @@ public class TurnModule : Module, ITurnModule
 	}
 
 	public void NextTurn () {
+		if(shouldIncreaseTurnCounter(this.currentTurn))
+		{
+			roundCount++;
+		}
 		turnCount++;
 		int currentTurn = (int) this.currentTurn;
 		currentTurn += 1;
@@ -57,6 +62,11 @@ public class TurnModule : Module, ITurnModule
 		this.currentTurn = (AgentType) currentTurn;
 		callOnTurnChange(this.currentTurn);
 		callOnTurnChangeStr(CurrentTurnStr());
+	}
+
+	bool shouldIncreaseTurnCounter(AgentType previousTurn)
+	{
+		return previousTurn == AgentType.Enemy;
 	}
 
 }

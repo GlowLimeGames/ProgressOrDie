@@ -4,15 +4,62 @@
  * Usage: [no notes]
  */
 
+using System;
 using UnityEngine.UI;
 
-public class EnemyNPC : Unit, IEnemyNPC
+public class EnemyNPC : Unit, IEnemyNPC, IComparable
 {
+	EnemyNPCBehaviour enemy {
+		get {
+			return agent as EnemyNPCBehaviour;
+		}
+	}
+
+	public int TerritoryRadius {
+		get {
+			return Descriptor.TerritoryRadius;
+		}
+	}
+
 	public EnemyDescriptor Descriptor{get; private set;}
+
+	public int StatPointsOnKill {
+		get {
+			return Descriptor.StatPointsOnKill;
+		}
+	}
+
+	int turnPriority {
+		get {
+			return Descriptor.TurnPriority;
+		}
+	}
+		
+	public override AttackType GetPrimaryAttack() {
+		if(GetStrength() >= GetMagic())
+		{
+			return AttackType.Melee;
+		}
+		else
+		{
+			return AttackType.Magic;
+		}
+	}
+
+	public override void Kill ()
+	{
+		base.Kill ();
+		parentModule.HandleUnitDestroyed(this);
+
+	}
 
 	public EnemyNPC(UnitModule parent, EnemyDescriptor descriptor, MapLocation location, Map map) :
 	base (parent, location, map) {
 		this.Descriptor = descriptor.GetInstance();
+	}
+
+	public EnemyNPCBehaviour GetAgent () {
+		return agent as EnemyNPCBehaviour;
 	}
 
 	public override int GetSpeed () {
@@ -60,4 +107,20 @@ public class EnemyNPC : Unit, IEnemyNPC
 		return base.ModSkill(delta);
 	}
 
+	public int CompareTo(Object otherObj) {
+		if (otherObj is EnemyNPC) {
+			EnemyNPC other = otherObj as EnemyNPC;
+			return this.turnPriority - other.turnPriority;
+		} else {
+			return 0;
+		}
+	}
+
+	public override void Damage (int damage)
+	{
+		base.Damage (damage);
+		if(HasAgentLink) {
+			enemy.UpdateHealthDisplay((float) RemainingHealth / (float) getMaxHealth);
+		}
+	}
 }

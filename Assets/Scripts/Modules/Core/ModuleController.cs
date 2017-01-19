@@ -11,7 +11,13 @@ public class ModuleController : SingletonController<ModuleController> {
 	const string TILES = "Tiles";
 
 	[SerializeField]
+	bool createWorld = true;
+
+	[SerializeField]
 	string levelName = "Example";
+
+	[SerializeField]
+	bool levelOverride = false;
 
 	[SerializeField]
 	ParserModule parser;
@@ -67,26 +73,34 @@ public class ModuleController : SingletonController<ModuleController> {
 	[SerializeField]
 	NotificationModule notifications;
 
+	[SerializeField]
+	PrefabModule prefabs;
+
 	protected override void SetReferences ()
 	{
 		base.SetReferences ();
-
+		if(!levelOverride) {
+			levelName = PlayerPrefs.GetString(LEVEL);
+		}
 		TuningData tuningData = parser.ParseJSONFromResources<TuningData>("Tuning");
 		tuning.Init(tuningData);
 		stats.Init(tuning);
 
 		TileData tileData = parser.ParseJSONFromResources<TileData>(TILES);
 		string[,] tiles = parser.ParseCSVFromResources(getTilesCSVPath(levelName));
-		map.Init(tiles, tileData.Tiles, sprites);
+		if (createWorld) {
+			map.Init (tiles, tileData.Tiles, sprites, movement);
+		}
 
 		EnemyData enemyData = parser.ParseJSONFromResources<EnemyData>("Enemies");
 		string[,] units = parser.ParseCSVFromResources(getUnitsCSVPath(levelName));
-		unit.Init(map, sprites, units, enemyData, turn, movement, combat, stats, abilities, tuning);
-		cam.StartFollowing(unit.GetMainPlayer());
-		ui.Init(turn, unit);
-		movement.Init(turn, tuning);
-		combat.Init(unit, map, abilities, stats, gameEnd);
-
+		unit.Init (map, units, enemyData, turn, movement, combat, stats, abilities, tuning, prefabs, createWorld);
+		if (createWorld) {
+			cam.StartFollowing (unit.GetMainPlayer ());
+			movement.Init (turn, tuning, map);
+			combat.Init (unit, map, abilities, stats, gameEnd);
+		}
+		ui.Init (turn, unit, tuning, createWorld);
 		LegendData legendData = parser.ParseJSONFromResources<LegendData>("Legends");
 		legends.Init(stats, unit, legendData);
 

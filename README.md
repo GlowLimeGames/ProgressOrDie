@@ -6,6 +6,7 @@ Turn based RPG, created by Matt Regan
 - Riva Lam
 - Ian Macpherson
 - Xijie Guo
+- Hunter Golden
 
 ## Spec
 - Unity: **5.5.0f3**

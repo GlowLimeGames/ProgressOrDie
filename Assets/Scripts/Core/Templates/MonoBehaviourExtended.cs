@@ -7,11 +7,22 @@ using UnityEngine;
 using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable {
+	protected const int MAIN_MENU_INDEX = 1;
+	protected const int CREDITS_INDEX = 3;
+	protected const int GAME_OVER_INDEX = 4;
+
+	protected bool referencesSet = false;
+	protected bool referencesFetched = false;
+
+
+	protected const string LEVEL = "Level";
+
 	IEnumerator moveCoroutine;
 
 	public delegate void MonoAction();
 	public delegate void MonoActionStr(string eventName);
 	public delegate void MonoActionf(float value);
+	public delegate void MonoActionInt(int value);
 	public delegate void AgentTypeAction(AgentType type);
 	public delegate void AgentAction(Agent agent);
 
@@ -30,6 +41,18 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		StopAllCoroutines();
 	}
 
+	protected virtual void CheckReferences()
+	{
+		if(!this.referencesSet)
+		{
+			this.SetReferences();
+		}
+		if(!this.referencesFetched)
+		{
+			this.FetchReferences();
+		}
+	}
+		
 	// Value should only be null if you're setting a trigger
 	public bool QueryAnimator (AnimParam param, string key, object value = null) {
 		Animator animator = GetComponent<Animator>();
@@ -84,9 +107,13 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		EventModule.Unsubscribe(HandleNamedEvent);
 	}
 
-	protected abstract void SetReferences ();
+	protected virtual void SetReferences () {
+		this.referencesSet = true;
+	}
 
-	protected abstract void FetchReferences ();
+	protected virtual void FetchReferences () {
+		this.referencesFetched = true;
+	}
 
 	protected abstract void CleanupReferences ();
 

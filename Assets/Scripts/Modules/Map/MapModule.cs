@@ -13,10 +13,12 @@ public class MapModule : Module, IMapModule
 	GameObject mapTilePrefab;
 	public Map Map{get; private set;}
 	SpriteModule sprites;
+	MovementModule movement;
 
-	public void Init(string[,] tiles, TileType[] tileTypes, SpriteModule sprites) {
+	public void Init(string[,] tiles, TileType[] tileTypes, SpriteModule sprites, MovementModule movement) {
 		this.Map = new Map(parseTilesToMap(tiles, tileTypes), this);
 		this.sprites = sprites;
+		this.movement = movement;
 		createMap(this.Map);
 	}
 
@@ -38,7 +40,12 @@ public class MapModule : Module, IMapModule
 		MapTile[,] tiles = new MapTile[width, height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				tiles[x, y] = new MapTile(x, y, tileLookup[tileKeys[x, y].ToLower()]);
+				try {
+					tiles[x, y] = new MapTile(x, y, tileLookup[tileKeys[x, y].ToLower()]);
+				} catch {
+					Debug.LogErrorFormat("{0} at ({1}, {2}) is an illegal key", tileKeys[x, y].ToLower(), x, y);
+					tiles[x, y] = MapTile.Default;
+				}
 			}
 		}
 		return tiles;
@@ -66,8 +73,21 @@ public class MapModule : Module, IMapModule
 		return Map.CoordinateIsInBounds(x, y);
 	}
 
+	public bool CoordinateIsInBounds(MapLocation loc) {
+		return Map.CoordinateIsInBounds(loc);
+	}
+
 	public MapTile GetTile (int x, int y) {
 		return Map.GetTile(x, y);
+	}
+
+	public bool CanTravelTo(Agent agent, MapLocation loc) {
+		if(CoordinateIsInBounds(loc)) {
+			MapTile tile = getTileFromLoc(loc);
+			return movement.CanMoveToTile(agent.GetUnit(), tile);
+		} else {
+			return false;
+		}
 	}
 
 	public int TravelTo (Agent agent, MapLocation loc) {
@@ -75,4 +95,9 @@ public class MapModule : Module, IMapModule
 		tile.PlaceUnit(agent);
 		return tile.TileType.Speed;
 	}
+
+	public MapTile RandomTileInRadius(MapLocation center, int radius) {
+		return Map.RandomTileInRadius(center, radius);
+	}
+
 }

@@ -4,7 +4,7 @@
  * Usage: [no notes]
  */
 
-public abstract class Unit
+public abstract class Unit : IUnit
 {
 	protected UnitModule parentModule;
 
@@ -16,11 +16,15 @@ public abstract class Unit
 
 	protected Agent agent;
 	public int RemainingHealth {get; private set;}
-
+	public abstract AttackType GetPrimaryAttack();
 	public bool IsDead {
 		get {
 			return RemainingHealth <= 0;
 		}
+	}
+
+	public void LeaveCurrentTile() {
+		Map.VacateTile(this.GetLocation());
 	}
 
 	public void LinkToAgent (Agent agent) {
@@ -31,10 +35,14 @@ public abstract class Unit
 		this.agent = null;
 	}
 
-	int getMaxHealth {
+	protected int getMaxHealth {
 		get {
 			return (int) (parentModule.BulkToHPRatio * (float) GetConstitution()); 
 		}
+	}
+
+	int getHealthPointsForConstitution(int constPoints) {
+		return (int) (parentModule.BulkToHPRatio * (float) constPoints);
 	}
 
 	public abstract int GetSpeed();
@@ -52,6 +60,8 @@ public abstract class Unit
 	}
 
 	public virtual int ModConstitution(int delta) {
+		RemainingHealth += getHealthPointsForConstitution(delta);
+		tryUpdateAgentHealth(RemainingHealth);
 		return GetConstitution();
 	}
 
@@ -109,31 +119,25 @@ public abstract class Unit
 		return this.occupiedTile.GetLocation();
 	}
 
-	public AttackType[] GetAvailableAttacks() {
-		throw new System.NotImplementedException();
+	public virtual AttackType[] GetAvailableAttacks() {
+		return new AttackType[]{GetPrimaryAttack()};
 	}
 
-	public void Damage (int damage) {
+	public virtual void Damage (int damage) {
 		this.RemainingHealth -= damage;
+		tryUpdateAgentHealth(RemainingHealth);
 		if (IsDead) {
 			Kill();
 		}
 	}
 
-	public bool CanMoveTo (IMapTile tile) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanAttack (IUnit unit, AttackType attack) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanMeleeAttack (IUnit unit) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanMagicAttack (IUnit unit) {
-		throw new System.NotImplementedException();
+	bool tryUpdateAgentHealth(int health) {
+		if (HasAgentLink) {
+			this.agent.UpdateRemainingHealth(health);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void MoveTo (IMapTile tile) {
@@ -156,7 +160,7 @@ public abstract class Unit
 		parentModule.MagicAttack(this as IUnit, unit);
 	}
 
-	public void Kill () {
+	public virtual void Kill () {
 		parentModule.HandleUnitDestroyed(this);		
 		if (HasAgentLink) {
 			UnityEngine.Object.Destroy(agent.gameObject);

@@ -76,8 +76,7 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	protected override bool move (int deltaX, int deltaY)
 	{
 		if(base.move (deltaX, deltaY)) {
-			EventModule.Event("Movement")
-			;EventModule.Event("PlayerWalking");
+			EventModule.Event("PlayerWalking");
 			return true;
 		} else {
 			return false;

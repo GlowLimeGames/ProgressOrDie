@@ -44,6 +44,7 @@ public class EnemyNPC : Unit, IEnemyNPC, IComparable
 	{
 		base.Kill ();
 		parentModule.HandleUnitDestroyed(this);
+
 	}
 
 	public EnemyNPC(UnitModule parent, EnemyDescriptor descriptor, MapLocation location, Map map) :

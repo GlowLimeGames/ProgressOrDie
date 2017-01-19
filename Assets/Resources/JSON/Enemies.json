@@ -24,17 +24,20 @@
   "BossMonsters" : [
     {
       "Key" : "B1",
-      "JA_Types" : "BossLvl1,Ushi-Oni",
+      "Types" : [
+        "BossLvl1",
+        "Ushi-Oni"
+      ],
       "Speed" : 15,
       "Magic" : 7,
-      "Strength" : 60,
+      "Strength" : 45,
       "Skill" : 25,
-      "Constitution" : 75,
+      "Constitution" : 50,
       "TurnPriority" : 1,
       "SphereOfInfluence" : 7,
       "TerritoryRadius" : "EntireMap",
       "ChanceOfMelee" : 0.8,
-      "BreakPoint" : 202,
+      "BreakPoint" : 162,
       "ChancetoPickSpeed" : 0.1,
       "ChancetoPickMagic" : 0.05,
       "ChancetoPickStrength" : 0.3,
@@ -43,17 +46,20 @@
     },
     {
       "Key" : "B2",
-      "JA_Types" : "BossLvl2,Yuki-Onna",
+      "Types" : [
+        "BossLvl2",
+        "Yuki-Onna"
+      ],
       "Speed" : 20,
-      "Magic" : 47,
-      "Strength" : 40,
+      "Magic" : 100,
+      "Strength" : 20,
       "Skill" : 50,
-      "Constitution" : 100,
+      "Constitution" : 75,
       "TurnPriority" : 1,
       "SphereOfInfluence" : 12,
       "TerritoryRadius" : "EntireMap",
       "ChanceOfMelee" : 0.2,
-      "BreakPoint" : 297,
+      "BreakPoint" : 305,
       "ChancetoPickSpeed" : 0.1,
       "ChancetoPickMagic" : 0.4,
       "ChancetoPickStrength" : 0.05,
@@ -62,17 +68,20 @@
     },
     {
       "Key" : "B3",
-      "JA_Types" : "BossLvl3,Yamata_no_Orochi",
+      "Types" : [
+        "BossLvl3",
+        "Yamata_no_Orochi"
+      ],
       "Speed" : 25,
-      "Magic" : 74,
+      "Magic" : 75,
       "Strength" : 100,
       "Skill" : 50,
-      "Constitution" : 250,
+      "Constitution" : 150,
       "TurnPriority" : 1,
       "SphereOfInfluence" : 9,
       "TerritoryRadius" : "EntireMap",
       "ChanceOfMelee" : 0.6,
-      "BreakPoint" : 579,
+      "BreakPoint" : 480,
       "ChancetoPickSpeed" : 0.1,
       "ChancetoPickMagic" : 0.3,
       "ChancetoPickStrength" : 0.3,
@@ -125,14 +134,17 @@
   "EnemiesLV1" : [
     {
       "Key" : "SN",
-      "JA_Types" : "Small,Nimble",
+      "Types" : [
+        "Small",
+        "Nimble"
+      ],
       "Speed" : 10,
       "Magic" : 0,
       "Strength" : 4,
       "Skill" : 5,
       "Constitution" : 6,
       "TurnPriority" : 2,
-      "StatPointsonKill" : 5,
+      "StatPointsOnKill" : 5,
       "SphereofInfluenceRadius" : 4,
       "TerritoryRadius" : 6,
       "ChanceOfMelee" : 1,
@@ -140,14 +152,17 @@
     },
     {
       "Key" : "SP",
-      "JA_Types" : "Small,Powerful",
+      "Types" : [
+        "Small",
+        "Powerful"
+      ],
       "Speed" : 4,
       "Magic" : 0,
       "Strength" : 4,
       "Skill" : 1,
       "Constitution" : 18,
       "TurnPriority" : 3,
-      "StatPointsonKill" : 5,
+      "StatPointsOnKill" : 5,
       "SphereofInfluenceRadius" : 3,
       "TerritoryRadius" : 5,
       "ChanceOfMelee" : 1,
@@ -155,14 +170,17 @@
     },
     {
       "Key" : "SS",
-      "JA_Types" : "Small,Strong",
+      "Types" : [
+        "Small",
+        "Strong"
+      ],
       "Speed" : 6,
       "Magic" : 0,
       "Strength" : 10,
       "Skill" : 1,
       "Constitution" : 10,
       "TurnPriority" : 4,
-      "StatPointsonKill" : 5,
+      "StatPointsOnKill" : 5,
       "SphereofInfluenceRadius" : 3,
       "TerritoryRadius" : 5,
       "ChanceOfMelee" : 1,
@@ -170,14 +188,17 @@
     },
     {
       "Key" : "SA",
-      "JA_Types" : "Small,Agile",
+      "Types" : [
+        "Small",
+        "Agile"
+      ],
       "Speed" : 6,
       "Magic" : 0,
       "Strength" : 6,
       "Skill" : 10,
       "Constitution" : 2,
       "TurnPriority" : 5,
-      "StatPointsonKill" : 5,
+      "StatPointsOnKill" : 5,
       "SphereofInfluenceRadius" : 3,
       "TerritoryRadius" : 5,
       "ChanceOfMelee" : 1,
@@ -185,14 +206,17 @@
     },
     {
       "Key" : "SE",
-      "JA_Types" : "Small,Enlightened",
+      "Types" : [
+        "Small",
+        "Enlightened"
+      ],
       "Speed" : 4,
       "Magic" : 10,
       "Strength" : 0,
       "Skill" : 2,
       "Constitution" : 4,
       "TurnPriority" : 6,
-      "StatPointsonKill" : 5,
+      "StatPointsOnKill" : 5,
       "SphereofInfluenceRadius" : 6,
       "TerritoryRadius" : 8,
       "ChanceOfMelee" : 0,
@@ -200,14 +224,17 @@
     },
     {
       "Key" : "LN",
-      "JA_Types" : "Large,Nimble",
+      "Types" : [
+        "Large",
+        "Nimble"
+      ],
       "Speed" : 12,
       "Magic" : 0,
       "Strength" : 6,
       "Skill" : 10,
       "Constitution" : 10,
       "TurnPriority" : 7,
-      "StatPointsonKill" : 10,
+      "StatPointsOnKill" : 10,
       "SphereofInfluenceRadius" : 5,
       "TerritoryRadius" : 7,
       "ChanceOfMelee" : 1,
@@ -215,14 +242,17 @@
     },
     {
       "Key" : "LP",
-      "JA_Types" : "Large,Powerful",
+      "Types" : [
+        "Large",
+        "Powerful"
+      ],
       "Speed" : 6,
       "Magic" : 0,
       "Strength" : 6,
       "Skill" : 2,
       "Constitution" : 22,
       "TurnPriority" : 8,
-      "StatPointsonKill" : 10,
+      "StatPointsOnKill" : 10,
       "SphereofInfluenceRadius" : 4,
       "TerritoryRadius" : 6,
       "ChanceOfMelee" : 1,
@@ -230,14 +260,17 @@
     },
     {
       "Key" : "LS",
-      "JA_Types" : "Large,Strong",
+      "Types" : [
+        "Large",
+        "Strong"
+      ],
       "Speed" : 8,
       "Magic" : 0,
       "Strength" : 20,
       "Skill" : 2,
       "Constitution" : 14,
       "TurnPriority" : 9,
-      "StatPointsonKill" : 10,
+      "StatPointsOnKill" : 10,
       "SphereofInfluenceRadius" : 4,
       "TerritoryRadius" : 6,
       "ChanceOfMelee" : 1,
@@ -245,14 +278,17 @@
     },
     {
       "Key" : "LA",
-      "JA_Types" : "Large,Agile",
+      "Types" : [
+        "Large",
+        "Agile"
+      ],
       "Speed" : 8,
       "Magic" : 0,
       "Strength" : 12,
       "Skill" : 20,
       "Constitution" : 6,
       "TurnPriority" : 10,
-      "StatPointsonKill" : 10,
+      "StatPointsOnKill" : 10,
       "SphereofInfluenceRadius" : 4,
       "TerritoryRadius" : 6,
       "ChanceOfMelee" : 1,
@@ -260,14 +296,17 @@
     },
     {
       "Key" : "LE",
-      "JA_Types" : "Large,Enlightened",
+      "Types" : [
+        "Large",
+        "Enlightened"
+      ],
       "Speed" : 6,
       "Magic" : 20,
       "Strength" : 0,
       "Skill" : 3,
       "Constitution" : 8,
       "TurnPriority" : 11,
-      "StatPointsonKill" : 10,
+      "StatPointsOnKill" : 10,
       "SphereofInfluenceRadius" : 7,
       "TerritoryRadius" : 9,
       "ChanceOfMelee" : 0,
@@ -277,7 +316,10 @@
   "EnemiesLV2" : [
     {
       "Key" : "SN",
-      "JA_Types" : "Small,Nimble",
+      "Types" : [
+        "Small",
+        "Nimble"
+      ],
       "Speed" : 16,
       "Magic" : 0,
       "Strength" : 8,
@@ -292,7 +334,10 @@
     },
     {
       "Key" : "SP",
-      "JA_Types" : "Small,Powerful",
+      "Types" : [
+        "Small",
+        "Powerful"
+      ],
       "Speed" : 8,
       "Magic" : 0,
       "Strength" : 8,
@@ -307,7 +352,10 @@
     },
     {
       "Key" : "SS",
-      "JA_Types" : "Small,Strong",
+      "Types" : [
+        "Small",
+        "Strong"
+      ],
       "Speed" : 10,
       "Magic" : 0,
       "Strength" : 20,
@@ -322,7 +370,10 @@
     },
     {
       "Key" : "SA",
-      "JA_Types" : "Small,Agile",
+      "Types" : [
+        "Small",
+        "Agile"
+      ],
       "Speed" : 10,
       "Magic" : 0,
       "Strength" : 12,
@@ -337,7 +388,10 @@
     },
     {
       "Key" : "SE",
-      "JA_Types" : "Small,Enlightened",
+      "Types" : [
+        "Small",
+        "Enlightened"
+      ],
       "Speed" : 8,
       "Magic" : 20,
       "Strength" : 0,
@@ -352,7 +406,10 @@
     },
     {
       "Key" : "LN",
-      "JA_Types" : "Large,Nimble",
+      "Types" : [
+        "Large",
+        "Nimble"
+      ],
       "Speed" : 18,
       "Magic" : 0,
       "Strength" : 12,
@@ -367,7 +424,10 @@
     },
     {
       "Key" : "LP",
-      "JA_Types" : "Large,Powerful",
+      "Types" : [
+        "Large",
+        "Powerful"
+      ],
       "Speed" : 10,
       "Magic" : 0,
       "Strength" : 12,
@@ -382,7 +442,10 @@
     },
     {
       "Key" : "LS",
-      "JA_Types" : "Large,Strong",
+      "Types" : [
+        "Large",
+        "Strong"
+      ],
       "Speed" : 12,
       "Magic" : 0,
       "Strength" : 40,
@@ -397,7 +460,10 @@
     },
     {
       "Key" : "LA",
-      "JA_Types" : "Large,Agile",
+      "Types" : [
+        "Large",
+        "Agile"
+      ],
       "Speed" : 12,
       "Magic" : 0,
       "Strength" : 24,
@@ -412,7 +478,10 @@
     },
     {
       "Key" : "LE",
-      "JA_Types" : "Large,Enlightened",
+      "Types" : [
+        "Large",
+        "Enlightened"
+      ],
       "Speed" : 10,
       "Magic" : 40,
       "Strength" : 0,
@@ -429,7 +498,10 @@
   "EnemiesLV3" : [
     {
       "Key" : "SN",
-      "JA_Types" : "Small,Nimble",
+      "Types" : [
+        "Small",
+        "Nimble"
+      ],
       "Speed" : 22,
       "Magic" : 0,
       "Strength" : 16,
@@ -444,7 +516,10 @@
     },
     {
       "Key" : "SP",
-      "JA_Types" : "Small,Powerful",
+      "Types" : [
+        "Small",
+        "Powerful"
+      ],
       "Speed" : 12,
       "Magic" : 0,
       "Strength" : 16,
@@ -459,7 +534,10 @@
     },
     {
       "Key" : "SS",
-      "JA_Types" : "Small,Strong",
+      "Types" : [
+        "Small",
+        "Strong"
+      ],
       "Speed" : 14,
       "Magic" : 0,
       "Strength" : 40,
@@ -474,7 +552,10 @@
     },
     {
       "Key" : "SA",
-      "JA_Types" : "Small,Agile",
+      "Types" : [
+        "Small",
+        "Agile"
+      ],
       "Speed" : 14,
       "Magic" : 0,
       "Strength" : 24,
@@ -489,7 +570,10 @@
     },
     {
       "Key" : "SE",
-      "JA_Types" : "Small,Enlightened",
+      "Types" : [
+        "Small",
+        "Enlightened"
+      ],
       "Speed" : 12,
       "Magic" : 40,
       "Strength" : 0,
@@ -504,7 +588,10 @@
     },
     {
       "Key" : "LN",
-      "JA_Types" : "Large,Nimble",
+      "Types" : [
+        "Large",
+        "Nimble"
+      ],
       "Speed" : 24,
       "Magic" : 0,
       "Strength" : 24,
@@ -519,7 +606,10 @@
     },
     {
       "Key" : "LP",
-      "JA_Types" : "Large,Powerful",
+      "Types" : [
+        "Large",
+        "Powerful"
+      ],
       "Speed" : 14,
       "Magic" : 0,
       "Strength" : 24,
@@ -534,7 +624,10 @@
     },
     {
       "Key" : "LS",
-      "JA_Types" : "Large,Strong",
+      "Types" : [
+        "Large",
+        "Strong"
+      ],
       "Speed" : 16,
       "Magic" : 0,
       "Strength" : 80,
@@ -549,7 +642,10 @@
     },
     {
       "Key" : "LA",
-      "JA_Types" : "Large,Agile",
+      "Types" : [
+        "Large",
+        "Agile"
+      ],
       "Speed" : 16,
       "Magic" : 0,
       "Strength" : 48,
@@ -564,7 +660,10 @@
     },
     {
       "Key" : "LE",
-      "JA_Types" : "Large,Enlightened",
+      "Types" : [
+        "Large",
+        "Enlightened"
+      ],
       "Speed" : 14,
       "Magic" : 80,
       "Strength" : 0,

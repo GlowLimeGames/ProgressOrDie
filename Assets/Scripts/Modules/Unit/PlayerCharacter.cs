@@ -18,6 +18,12 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		setStatsToDefault();
 	}
 
+	PlayerCharacterBehaviour player {
+		get {
+			return agent as PlayerCharacterBehaviour;
+		}
+	}
+
 	void setStatsToDefault () {
 		speed = 0;
 		magic = 0;
@@ -29,7 +35,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 	public void PrintInfo(){
 		printStats();
 	}
-
+		
 	public bool HasUnspentSkillPoints() {
 		return unspentSkillPoints > 0;
 	}
@@ -47,8 +53,11 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		}
 	}
 
-	public void EarnSkillPoints(int delta) {
+	public void EarnStatPoints(int delta) {
 		unspentSkillPoints += delta;
+		if(HasAgentLink) {
+			player.EarnStatPoints(unspentSkillPoints);		
+		}
 	}
 
 	void printStats(){

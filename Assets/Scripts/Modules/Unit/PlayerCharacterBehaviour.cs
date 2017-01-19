@@ -10,6 +10,7 @@ public class PlayerCharacterBehaviour : PlayerAgent
 {	
 	MonoActionf onAgilityChange;
 	MonoActionInt onHPChange;
+	MonoActionInt onEarnStatPoints;
 
 	PlayerCharacter character;
 
@@ -30,6 +31,14 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		this.character = character;
 		this.SetUnit(character);
 		ReplenishAtTurnStart(AgentType.Player);
+	}
+
+	public void SubscribeToEarnStatPoints (MonoActionInt action){
+		onEarnStatPoints += action;
+	}
+
+	public void UnsubscribeFromEarnStatPoints (MonoActionInt action) {
+		onEarnStatPoints -= action;
 	}
 
 	public void SubscribeToHPChange (MonoActionInt action) {
@@ -94,6 +103,10 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
+	public void EarnStatPoints(int statPoints) {
+		callEarnStatPoints(statPoints);
+	}
+
 	public override bool MoveX (int dir)
 	{
 		if(dir > 0) {
@@ -138,6 +151,12 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	void callAgilityChange (float agility) {
 		if (onAgilityChange != null) {
 			onAgilityChange(agility);
+		}
+	}
+
+	void callEarnStatPoints(int statPoints) {
+		if(onEarnStatPoints != null) {
+			onEarnStatPoints(statPoints);
 		}
 	}
 

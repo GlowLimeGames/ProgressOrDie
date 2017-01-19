@@ -30,6 +30,8 @@ public class UIModule : Module, IUIModule
 	UIButton menuButton;
 	[SerializeField]
 	UIElement healthDisplay;
+	[SerializeField]
+	UIElement unspentStatPoints;
 
 	[Space(25)]
 	[SerializeField]
@@ -65,6 +67,10 @@ public class UIModule : Module, IUIModule
 		magicBar.SetText(playerUnit.GetMagic(), 1);
 		constitutionBar.SetText(playerUnit.GetConstitution(), 1);
 		speedBar.SetText(playerUnit.GetSpeed(), 1);
+	}
+
+	void updateStatPonts (int numStatPoints) {
+		unspentStatPoints.SetText(numStatPoints.ToString())	;
 	}
 
 	void updateHealthDisplay(int healthRemaining) { 

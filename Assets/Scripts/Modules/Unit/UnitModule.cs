@@ -41,6 +41,11 @@ public class UnitModule : Module
 		this.level = level;
 	}
 
+	public void EarnStatPoints(int statPointsCollected)
+	{
+		Player().EarnStatPoints(statPointsCollected);
+	}
+
 	public void Init(MapModule map, 
 		string[,] units,
 		EnemyData enemyInfo,

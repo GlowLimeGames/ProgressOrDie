@@ -5,8 +5,288 @@
 			"Groups":[],
 			"Events":["PlayTest"],
 			"StopEvents":["StopTest"],
+			"Loop": false,
+			"Type": "Music",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Death",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death A",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death B",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death C",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death D",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death E",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Footsteps",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": true,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee A",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee B",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee C",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee D",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Gui Click 4",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Magic Attack A",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Magic Attack B",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Movement Bar Depleting & Movement Confirm",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Movement Cancel",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Death",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Footsteps",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": true,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack A",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack B",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack C",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack D",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Progress or Die Soundtrack A 3",
+			"Groups":[],
+			"Events":["PlayMusic"],
+			"StopEvents":["StopMusic"],
 			"Loop": true,
 			"Type": "Music",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Toggle Attack Type",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Progress or Die Ambience",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "Music",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Ushi Oni Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Yamata no Orochi Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Yuka Onna Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
 			"Channel": 0,
 			"Volume": 100
 		}

@@ -366,7 +366,7 @@
     {
       "TileName" : "RuinedVillage1",
       "Key" : "RV1",
-      "Speed" : 1,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,
@@ -377,9 +377,9 @@
     {
       "TileName" : "RuinedVillage2",
       "Key" : "RV2",
-      "Speed" : 1,
+      "Speed" : 2,
       "Magic" : 0,
-      "Strength" : 3,
+      "Strength" : 0,
       "Constitution" : 0,
       "Skill" : 0,
       "PlayerPassable" : true,
@@ -388,7 +388,7 @@
     {
       "TileName" : "RuinedVillage3",
       "Key" : "RV3",
-      "Speed" : 1,
+      "Speed" : 2,
       "Magic" : 0,
       "Strength" : 0,
       "Constitution" : 0,

@@ -30,6 +30,7 @@ public static class AudioUtil {
 		switch (audioType) {
 
 		case "SFX":
+		case "FX":
 			return AudioType.FX;
 		case "Music":
 			return AudioType.Music;

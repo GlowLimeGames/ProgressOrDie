@@ -41,7 +41,12 @@ public class EventModule : Module, IEventModule {
 
 	protected override void SetReferences () {
 		base.SetReferences ();
-		Instance = this;
+		if(Instance == null){
+			DontDestroyOnLoad(gameObject);
+			Instance = this;
+		} else {
+			Destroy(gameObject);
+		}
 	}
 
 	#endregion

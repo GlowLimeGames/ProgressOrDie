@@ -21,7 +21,7 @@ public abstract class Agent : MobileObjectBehaviour {
 
 	protected bool canBeAttacked;
 
-	Color canAttackColor = Color.red;
+	Color canAttackColor = Color.Lerp(Color.red, Color.white, 0.25f);
 	SpriteRenderer spriteR;
 
 	protected int remainingAgilityForTurn;
@@ -54,7 +54,7 @@ public abstract class Agent : MobileObjectBehaviour {
 		turns.SubscribeToTurnSwitch(delegate(AgentType type)
 			{ReplenishAtTurnStart(type);});
 	}
-
+		
 	public int Health () {
 		return remainingHealth;
 	}
@@ -187,7 +187,7 @@ public abstract class Agent : MobileObjectBehaviour {
 		GetUnit().LeaveCurrentTile();
 	}
 
-	protected bool move (int deltaX, int deltaY) {
+	protected virtual bool move (int deltaX, int deltaY) {
 		if (movement.CanMove(this)) {
 			prevLoc = currentLoc;
 			MapLocation newLoc = currentLoc.Translate(deltaX, deltaY);

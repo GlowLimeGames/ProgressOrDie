@@ -114,12 +114,21 @@ public class CombatModule : Module, ICombatModule
 	}
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
+		if(attacker is PlayerCharacter) 
+		{
+			EventModule.Event("PlayerMeleeAttack");
+		}
+		else if (attacker is EnemyNPC)
+		{
+			EventModule.Event("EnemyMeleeAttack");
+		}
 		int damage = stats.GetMeleeDamage(attacker);
 		target.Damage(damage);
 		handleAttack(attacker, target, damage);
 	}
 
 	public void MagicAttack (IUnit attacker, IUnit target) {
+		EventModule.Event("MagicAttack");
 		int damage = stats.GetMagicDamage(attacker);
 		target.Damage(damage);
 		handleAttack(attacker, target, damage);

@@ -12,6 +12,8 @@ public class UIModule : Module, IUIModule
 {	
 	public StatsUIPanel StatsPanel;
 	[SerializeField]
+	UIElement levelText;
+	[SerializeField]
 	UIElement turnText;
 	[SerializeField]
 	UIButton endTurnButton;
@@ -46,7 +48,8 @@ public class UIModule : Module, IUIModule
 	PlayerCharacterBehaviour playerAgent;
 	PlayerCharacter playerUnit;
 
-	public void Init(TurnModule turn, UnitModule units, TuningModule Tuning, bool createWorld = true) {
+	public void Init(string levelName, TurnModule turn, UnitModule units, TuningModule Tuning, bool createWorld = true) {
+		levelText.SetText(levelName);
 		turnText.SetText(turn.CurrentTurnStr());
 		turn.SubscribeToTurnSwitchStr(handleTurnChange);
 		endTurnButton.SubscribeToClick(turn.NextTurn);

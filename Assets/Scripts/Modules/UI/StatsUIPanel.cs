@@ -8,60 +8,85 @@ using UnityEngine.UI;
 
 
 public class StatsUIPanel : UIElement
-	
 {
-	UnitModule units;
+	const int CHARACTER_CREATION = 1;
+	const int PLAYER_PROGRESSION = 0;
+
 	TuningModule Tuning;
 	public void initTuning (TuningModule Tuning, UnitModule units){
 		this.Tuning = Tuning;
-		this.units = units;
-		ChangeStat = units;
+		unitModule = units;
 	}
-
 	int Constitution = 0;
 	int Skill = 0;
 	int Strength = 0;
 	int Spirit = 0;
 	int Speed = 0;
-	int IfCreation = 1;
+	int StatsPanelMode = 1;
 	Text ConstitutionText = null;
 	Text SkillText = null;
 	Text StrengthText = null;
 	Text SpiritText = null;
 	Text SpeedText = null;
-	public UnitModule ChangeStat;
+	[SerializeField]
+	Text pointsRemainingText;
 
-	void Start ()
+	public UnitModule unitModule;
+
+	protected override void FetchReferences ()
 	{
-	ConstitutionText = GameObject.Find("TextConstitution").GetComponent<Text>();
-	SkillText = GameObject.Find("TextSkill").GetComponent<Text>();
-	StrengthText = GameObject.Find("TextStrength").GetComponent<Text>();
-	SpiritText = GameObject.Find("TextSpirit").GetComponent<Text>();
-	SpeedText = GameObject.Find("TextSpeed").GetComponent<Text>();
+		base.FetchReferences ();
+		ConstitutionText = GameObject.Find("TextConstitution").GetComponent<Text>();
+		SkillText = GameObject.Find("TextSkill").GetComponent<Text>();
+		StrengthText = GameObject.Find("TextStrength").GetComponent<Text>();
+		SpiritText = GameObject.Find("TextSpirit").GetComponent<Text>();
+		SpeedText = GameObject.Find("TextSpeed").GetComponent<Text>();
+		updateStats();
 	}
-
+		
 	public void SwapPlayMode()
 	{
-		if (IfCreation == 1) {
-			IfCreation = 0;
+		if (StatsPanelMode == 1) {
+			StatsPanelMode = 0;
 		}
 		else {
-			IfCreation = 1;
+			StatsPanelMode = 1;
 		}
 	}
-
+	void updateStats()
+	{
+		updateRemainingText();
+	}
+	void updateRemainingText()
+	{
+		pointsRemainingText.text = GetUnallocatedStatPoints().ToString();
+	}
+	bool HasUnllocatedStatPoints(){
+		return GetUnallocatedStatPoints() > 0;
+	}
+	int GetUnallocatedStatPoints()
+	{
+		if(StatsPanelMode == CHARACTER_CREATION) {
+			return Tuning.StartingStatPoints - SumAllocatedStatPoints();
+		} else {
+			return unitModule.GetAvailablePlayerSkillPoints();
+		}
+	}
+	int SumAllocatedStatPoints()
+	{
+		return Constitution + Skill + Strength + Spirit + Speed;
+	}
 	public void ConstitutionPlusClick()
 	{
-		if (IfCreation == 1) {
-			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
+		if (StatsPanelMode == 1) {
+			if (!HasUnllocatedStatPoints()) {
 				return;
 			}
 		}
 		Constitution = Constitution + 1;
 		ConstitutionText.text = Constitution.ToString();
-		ChangeStat.ChangePlayerConstitution (+1);
-		print (Constitution);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerConstitution (+1);
+		updateStats();
 	}
 	public void ConstitutionMinusClick()
 	{
@@ -69,24 +94,22 @@ public class StatsUIPanel : UIElement
 			return;}
 		Constitution = Constitution - 1;
 		ConstitutionText.text = Constitution.ToString();
-		ChangeStat.ChangePlayerConstitution (-1);
-		print (Constitution);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerConstitution (-1);
+		updateStats();
 	}
 	public void SkillPlusClick()
 	{
 		if (Skill == Tuning.MaxSkill){
 			return;}
-		if (IfCreation == 1) {
+		if (StatsPanelMode == 1) {
 			if (Constitution + Skill + Strength + Spirit + Speed > Tuning.StartingStatPoints) {
 				return;
 			}
 		}
 		Skill = Skill + 1;
 		SkillText.text = Skill.ToString();
-		ChangeStat.ChangePlayerSkill (Skill);
-		print (Skill);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerSkill (Skill);
+		updateStats();
 	}
 	public void SkillMinusClick()
 	{
@@ -94,22 +117,20 @@ public class StatsUIPanel : UIElement
 			return;}
 		Skill = Skill - 1;
 		SkillText.text = Skill.ToString();
-		ChangeStat.ChangePlayerSkill (Skill);
-		print (Skill);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerSkill (Skill);
+		updateStats();
 	}
 	public void StrengthPlusClick()
 	{
-		if (IfCreation == 1) {
+		if (StatsPanelMode == 1) {
 			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
 				return;
 			}
 		}
 		Strength = Strength + 1;
 		StrengthText.text = Strength.ToString();
-		ChangeStat.ChangePlayerStrength (Strength);
-		print (Strength);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerStrength (Strength);
+		updateStats();
 	}
 	public void StrengthMinusClick()
 	{
@@ -117,22 +138,20 @@ public class StatsUIPanel : UIElement
 			return;}
 		Strength = Strength - 1;
 		StrengthText.text = Strength.ToString();
-		ChangeStat.ChangePlayerStrength (Strength);
-		print (Strength);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerStrength (Strength);
+		updateStats();
 	}
 	public void SpiritPlusClick()
 	{
-		if (IfCreation == 1) {
+		if (StatsPanelMode == 1) {
 			if (Constitution + Skill + Strength + Spirit + Speed == Tuning.StartingStatPoints) {
 				return;
 			}
 		}
 		Spirit = Spirit + 1;
 		SpiritText.text = Spirit.ToString();
-		ChangeStat.ChangePlayerMagic (Spirit);
-		print (Spirit);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerMagic (Spirit);
+		updateStats();
 	}
 	public void SpiritMinusClick()
 	{
@@ -140,13 +159,12 @@ public class StatsUIPanel : UIElement
 			return;}
 		Spirit = Spirit - 1;
 		SpiritText.text = Spirit.ToString();
-		ChangeStat.ChangePlayerMagic (Spirit);
-		print (Spirit);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerMagic (Spirit);
+		updateStats();
 	}
 	public void SpeedPlusClick()
 	{
-		if (IfCreation == 1) {
+		if (StatsPanelMode == 1) {
 			if (Speed == Tuning.MaxSpeedInCharacterCreation) {
 				return;
 			}
@@ -158,9 +176,8 @@ public class StatsUIPanel : UIElement
 			return;}
 		Speed = Speed + 1;
 		SpeedText.text = Speed.ToString();
-		ChangeStat.ChangePlayerSpeed (Speed);
-		print (Speed);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerSpeed (Speed);
+		updateStats();
 	}
 	public void SpeedMinusClick()
 	{
@@ -168,8 +185,7 @@ public class StatsUIPanel : UIElement
 			return;}
 		Speed = Speed - 1;
 		SpeedText.text = Speed.ToString();
-		ChangeStat.ChangePlayerSpeed (Speed);
-		print (Speed);
-		print (Constitution + Skill + Strength + Spirit + Speed);
+		unitModule.ChangePlayerSpeed (Speed);
+		updateStats();
 	}
 }

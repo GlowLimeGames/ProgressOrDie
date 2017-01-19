@@ -183,11 +183,16 @@ public abstract class Agent : MobileObjectBehaviour {
 		}
 	}
 
+	protected void leaveCurrentTile() {
+		GetUnit().LeaveCurrentTile();
+	}
+
 	protected bool move (int deltaX, int deltaY) {
 		if (movement.CanMove(this)) {
 			prevLoc = currentLoc;
 			MapLocation newLoc = currentLoc.Translate(deltaX, deltaY);
 			if (mapModule.CanTravelTo(this, newLoc)) {
+				leaveCurrentTile();
 				int agilityCost = map.TravelTo(this, newLoc);
 				if (trySpendAgility(agilityCost)) {
 					movement.Move(this);

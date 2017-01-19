@@ -231,10 +231,10 @@
 			"Volume": 100
 		},
 		{
-			"Name":"Progress or Die Soundtrack A 1",
+			"Name":"Progress or Die Soundtrack A 3",
 			"Groups":[],
-			"Events":["WIP"],
-			"StopEvents":["WIP"],
+			"Events":["PlayMusic"],
+			"StopEvents":["StopMusic"],
 			"Loop": true,
 			"Type": "Music",
 			"Channel": 0,
@@ -289,18 +289,7 @@
 			"Type": "FX",
 			"Channel": 0,
 			"Volume": 100
-		},
-		{
-			"Name":"WIP",
-			"Groups":[],
-			"Events":["WIP"],
-			"StopEvents":["WIP"],
-			"Loop": false,
-			"Type": "FX",
-			"Channel": 0,
-			"Volume": 100
 		}
 	],
 	"Groups": []
 }
-

@@ -26,9 +26,6 @@ public class ModuleController : SingletonController<ModuleController> {
 	AudioModule sound;
 
 	[SerializeField]
-	EventModule events;
-
-	[SerializeField]
 	SpriteModule sprites;
 
 	[SerializeField]

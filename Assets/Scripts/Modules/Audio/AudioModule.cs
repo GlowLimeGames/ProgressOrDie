@@ -51,10 +51,12 @@ public class AudioModule : Module, IAudioModule {
 	public float LongestSweetenerPlayFrequenecy = 25;
 
 	protected override void SetReferences () {
+		base.SetReferences();
 		Init();
 	}
 
 	protected override void FetchReferences () {
+		base.FetchReferences();
 		// NOTHING
 	}
 
@@ -395,7 +397,7 @@ public class AudioModule : Module, IAudioModule {
 			try {
 				audioFile.SetClip((AudioClip) request.asset);
 			} catch (Exception e) {
-				Debug.LogError(e + ": " + request.asset + " is not a valid AudioClip");
+				Debug.LogError(e + ": " + audioFile.Name + " is not a valid AudioClip");
 			}
 		}
 	}

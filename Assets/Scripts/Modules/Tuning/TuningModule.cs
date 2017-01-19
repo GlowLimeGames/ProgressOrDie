@@ -54,6 +54,18 @@ public class TuningModule : Module
 		}
 	}
 
+	public float BaseCriticalHitRate {
+		get {
+			return data.BaseCriticalHitRate;
+		}
+	}
+
+	public float BaseCriticalHitDamageMultiplier {
+		get {
+			return data.BaseCriticalHitDamageMultiplier;
+		}
+	}
+
 	public int StartingStatPoints {
 		get {
 			return data.StartingStatPoints;
@@ -69,12 +81,6 @@ public class TuningModule : Module
 	public int VisionRange {
 		get {
 			return data.VisionRange;
-		}
-	}
-
-	public float CriticalHitDamageMod {
-		get {
-			return data.CriticalHitDamageMod;
 		}
 	}
 
@@ -102,9 +108,15 @@ public class TuningModule : Module
 		}
 	}
 
-	public int BossMosnterHealingAmount {
+	public int BossMonsterHealingAmount {
 		get {
 			return data.BossMonsterHealingAmount;
+		}
+	}
+
+	public float DamageAddedToCriticalHitMultiplierPerSkillPoint {
+		get {
+			return data.DamageAddedToCriticalHitMultiplierPerSkillPoint;
 		}
 	}
 
@@ -138,13 +150,12 @@ public class TuningData : SerializableData
 	public float DamagePerStrengthPoint;
 	public int MaxSkill;
 	public float CriticalHitRatePerSkillPoint;
-	public float BaseCriticalHiteRate;
+	public float BaseCriticalHitRate;
 	public float BaseCriticalHitDamageMultiplier;
-	public float DamageAddedToCriticalHItMultiplierPerSkillPoint;
+	public float DamageAddedToCriticalHitMultiplierPerSkillPoint;
 	public int StartingStatPoints;
 	public int StartingHealthPotions;
 	public int VisionRange;
-	public float CriticalHitDamageMod;
 	public float SpeedToMovementPoints;
 	public float HealthPercentGainFromPotion;
 	public int MeleeAttackMaxRange;

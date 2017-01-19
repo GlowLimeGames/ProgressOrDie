@@ -8,7 +8,7 @@
      "CriticalHitRatePerSkillPoint" : 0.015,
      "BaseCriticalHitRate" : 0,
      "BaseCriticalHitDamageMultiplier" : 2,
-     "DamageAddedToCriticalHItMultiplierPerSkillPoint" : 0.04,
+     "DamageAddedToCriticalHitMultiplierPerSkillPoint" : 0.04,
      "VisionRange" : 12,
      "SpeedToSpeedMovementPoints" : 1,
      "StrengthtoStrengthMovementPoints" : 1,

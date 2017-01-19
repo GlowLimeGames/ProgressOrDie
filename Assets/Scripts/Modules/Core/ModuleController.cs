@@ -97,7 +97,7 @@ public class ModuleController : SingletonController<ModuleController> {
 			movement.Init (turn, tuning, map);
 			combat.Init (unit, map, abilities, stats, gameEnd);
 		}
-		ui.Init (turn, unit, tuning, createWorld);
+		ui.Init (levelName, turn, unit, tuning, createWorld);
 		LegendData legendData = parser.ParseJSONFromResources<LegendData>("Legends");
 		legends.Init(stats, unit, legendData);
 

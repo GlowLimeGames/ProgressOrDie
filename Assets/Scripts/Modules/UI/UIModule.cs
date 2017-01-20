@@ -95,6 +95,7 @@ public class UIModule : Module, IUIModule
 
 	void updateHealthDisplay(int healthRemaining) { 
 		healthDisplay.SetText(healthRemaining.ToString());
+		Debug.Log(playerAgent.Health());
 	}
 
 	void handleAgilityChange(float newAgility) {

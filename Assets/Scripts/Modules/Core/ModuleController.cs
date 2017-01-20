@@ -186,9 +186,17 @@ public class ModuleController : SingletonController<ModuleController> {
 		if(Input.GetKeyDown(KeyCode.Q)) {
 			EventModule.Event(PODEvent.BossKilled);
 		}
+		if(Input.GetKeyDown(KeyCode.Z)) {
+			EventModule.Event(PODEvent.PlayerKilled);
+		}
 	}
 
 	#endif
+
+	void OnApplicationQuit() 
+	{
+		newCharacter = true;
+	}
 
 	string getNextLevelName () {
 		switch(levelName) 

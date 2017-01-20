@@ -113,6 +113,7 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		constitution = 0;
 		strength = 0;
 		skill = 0;
+		unspentStatPoints = getDefaultStatPoints();
 	}
 		
 	public void PrintInfo(){

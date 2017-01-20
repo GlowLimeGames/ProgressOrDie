@@ -31,11 +31,13 @@ public class StatsUIPanel : UIElement
 	[SerializeField]
 	UIButton battleButton;
 	UnitModule unitModule;
+	bool newCharacter;
 
 	public void Init (UIModule ui, TuningModule Tuning, UnitModule units){
 		this.parentModule = ui;
 		this.Tuning = Tuning;
 		unitModule = units;
+		this.newCharacter = units.NewCharacter;
 	}
 
 	protected override void SetReferences ()

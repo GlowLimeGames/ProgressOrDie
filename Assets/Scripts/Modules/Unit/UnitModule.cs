@@ -11,6 +11,8 @@ using UnityEngine;
 
 public class UnitModule : Module 
 {	
+	public bool NewCharacter {get; private set;}
+
 	PlayerCharacterBehaviour mainPlayer;
 
 	[SerializeField]
@@ -68,6 +70,7 @@ public class UnitModule : Module
 		this.tuning = tuning;
 		this.turns = turns;
 		this.movement = movement;
+		this.NewCharacter = newCharacter;
 		if (createWorld) {
 			movement.SubscribeToAgentMove (handleAgentMove);
 			turns.SubscribeToTurnSwitch (handleTurnSwitch);

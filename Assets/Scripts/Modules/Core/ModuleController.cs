@@ -9,6 +9,16 @@ using System.IO;
 public class ModuleController : SingletonController<ModuleController> {
 	const string UNITS = "Units";
 	const string TILES = "Tiles";
+	const string NEW_CHARACTER = "NewCharacter";
+	bool newCharacter {
+		get {
+			return PlayerPrefsUtil.GetBool(NEW_CHARACTER, true);
+		}
+
+		set {
+			PlayerPrefsUtil.SetBool(NEW_CHARACTER, value);
+		}
+	}
 
 	[SerializeField]
 	bool createWorld = true;
@@ -91,7 +101,8 @@ public class ModuleController : SingletonController<ModuleController> {
 
 		EnemyData enemyData = parser.ParseJSONFromResources<EnemyData>("Enemies");
 		string[,] units = parser.ParseCSVFromResources(getUnitsCSVPath(levelName));
-		unit.Init (map, units, enemyData, turn, movement, combat, stats, abilities, tuning, prefabs, createWorld);
+		unit.Init (map, units, enemyData, turn, movement, combat, stats, abilities, 
+			tuning, prefabs, createWorld, newCharacter);
 		if (createWorld) {
 			cam.StartFollowing (unit.GetMainPlayer ());
 			movement.Init (turn, tuning, map);

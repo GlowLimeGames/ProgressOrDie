@@ -6,6 +6,27 @@
 
 public class TuningModule : Module
 {
+	static TuningModule _instance;
+	public static TuningModule Get 
+	{
+		get {
+			return _instance;
+		}
+	}
+	public static bool Exists 
+	{
+		get 
+		{
+			return _instance != null;
+		}
+	}
+
+	protected override void SetReferences ()
+	{
+		base.SetReferences ();
+		_instance = this;
+	}
+
 	public int MaxMagicRange {
 		get {
 			return data.RangeAttackMaxRange;

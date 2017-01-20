@@ -60,7 +60,8 @@ public class UnitModule : Module
 		AbilitiesModule abilities,
 		TuningModule tuning,
 		PrefabModule prefabs,
-		bool createWorld
+		bool createWorld,
+		bool newCharacter
 	){
 		this.combat = combat;
 		this.stats = stats;
@@ -70,12 +71,13 @@ public class UnitModule : Module
 		if (createWorld) {
 			movement.SubscribeToAgentMove (handleAgentMove);
 			turns.SubscribeToTurnSwitch (handleTurnSwitch);
-			createUnits(map.Map, units, enemyInfo);
+			createUnits(map.Map, units, enemyInfo, newCharacter);
 			placeUnits (map, this.units.ToArray (), turns, movement, combat, stats, abilities, prefabs);
 		} else {
 			GameObject go = new GameObject ();
 			mainPlayer = go.AddComponent<PlayerCharacterBehaviour> ();
-			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), map.Map, tuning.StartingStatPoints));
+			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), 
+				map.Map, tuning.StartingStatPoints, newCharacter:true));
 		}
 	}
 		
@@ -169,7 +171,7 @@ public class UnitModule : Module
 		return inRange.ToArray();
 	}
 
-	void createUnits(Map map, string[,] units, EnemyData enemyInfo) {
+	void createUnits(Map map, string[,] units, EnemyData enemyInfo, bool newCharacter) {
 		Dictionary<string, EnemyDescriptor> lookup = getEnemyLookup(enemyInfo);
 		for (int x = 0; x < map.Width; x++) {	
 			for (int y = 0; y < map.Width; y++) {
@@ -178,7 +180,7 @@ public class UnitModule : Module
 					Unit unit = null;
 					MapLocation startLocation = new MapLocation(x, y);
 					if(isPlayer(tileUnit)) {
-						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints);
+						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints, newCharacter);
 					} else {
 						EnemyDescriptor descr;
 						if(lookup.TryGetValue(tileUnit, out descr)) {

@@ -179,7 +179,13 @@ public class UnitModule : Module
 		Dictionary<string, EnemyDescriptor> lookup = getEnemyLookup(enemyInfo);
 		for (int x = 0; x < map.Width; x++) {	
 			for (int y = 0; y < map.Width; y++) {
-				string tileUnit = string.Concat(units[x, y], level);
+				string rawUnit = units[x,y];
+				string tileUnit;
+				if(isBoss(rawUnit)) {
+					tileUnit = rawUnit;
+				} else {
+					tileUnit = string.Concat(rawUnit, level);
+				}
 				if (isUnit(tileUnit)) {
 					Unit unit = null;
 					MapLocation startLocation = new MapLocation(x, y);
@@ -187,8 +193,14 @@ public class UnitModule : Module
 						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints, newCharacter);
 					} else {
 						EnemyDescriptor descr;
+						if(tileUnit.Length > 1)
 						if(lookup.TryGetValue(tileUnit, out descr)) {
-							unit = new EnemyNPC(this, descr, startLocation, map);
+							if(descr.IsBoss) {
+								descr.TerritoryRadius = map.Width;
+								unit = new BossNPC(this, descr, startLocation, map);
+							} else {
+								unit = new EnemyNPC(this, descr, startLocation, map);
+							}
 						}
 					}
 					if (unit != null) {
@@ -248,12 +260,26 @@ public class UnitModule : Module
 		return unitKey.Equals(string.Concat(tuning.PlayerKey, level));
 	}
 
+	bool isBoss(string unitKey) {
+		return unitKey.Equals(string.Concat(tuning.BossKey, level));
+	}
+
 	Dictionary<string, EnemyDescriptor> getEnemyLookup (EnemyData enemyInfo) {
 		Dictionary<string, EnemyDescriptor> lookup = new Dictionary<string, EnemyDescriptor>();
 		foreach (EnemyDescriptor descriptor in enemyInfo.Enemies) {
-			lookup.Add(string.Concat(descriptor.Key, descriptor.Level), descriptor);
+			string key = getEnemyKey(descriptor);
+			lookup.Add(key, descriptor);
 		}
 		return lookup;
+	}
+
+	string getEnemyKey(EnemyDescriptor desc) 
+	{
+		if(desc.IsBoss) {
+			return desc.Key;
+		} else {
+			return string.Concat(desc.Key, desc.Level);
+		}
 	}
 
 	public void ChangePlayerUnspentStatPoints(int delta) {

@@ -153,6 +153,12 @@ public class TuningModule : Module
 		}
 	}
 
+	public string BossKey {
+		get {
+			return data.BossSymbolonMap;
+		}
+	}
+
 	TuningData data;
 
 	public void Init (TuningData data) {
@@ -186,4 +192,6 @@ public class TuningData : SerializableData
 	public int BossMonsterHealingAmount;
 	public string PlayerSymbolOnMap;
 	public int NumberOfPotions;
+	public string BossSymbolonMap;
+
 }

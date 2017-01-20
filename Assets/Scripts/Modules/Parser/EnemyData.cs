@@ -14,7 +14,11 @@ public class EnemyData : SerializableData
 	public EnemyDescriptor[] EnemiesLV3;
 	public EnemyDescriptor[] Enemies {
 		get {
-			return ArrayUtil.Concat(ArrayUtil.Concat(EnemiesLV1, EnemiesLV2), EnemiesLV3);
+			return 
+				ArrayUtil.Concat(
+				ArrayUtil.Concat(
+				ArrayUtil.Concat(EnemiesLV1, EnemiesLV2), EnemiesLV3),
+				BossMonsters);
 		}
 	}
 	public BossDescriptor[] BossMonsters;
@@ -38,6 +42,18 @@ public class EnemyDescriptor : SerializableData
 	public int TerritoryRadius;
 	public float ChanceOfMelee;
 	public int Level;
+	public bool IsBoss;
+
+	#region Boss Stats Only
+
+	public int BreakPoint;
+	public float ChanceToPickSpeed;
+	public float ChancetoPickMagic;
+	public float ChancetoPickStrength;
+	public float ChancetiPickConstitution;
+	public float ChancetoPickSkill;
+
+	#endregion
 
 	public EnemyDescriptor GetInstance()
 	{

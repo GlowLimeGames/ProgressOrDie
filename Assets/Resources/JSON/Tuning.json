@@ -5,7 +5,7 @@
      "DamagePerMagicPoint" : 3,
      "DamagePerStrengthPoint" : 5,
      "MaxSkill" : 50,
-     "CriticalHitRatePerSkillPoint" : 0.015,
+     "CriticalHitRatePerSkillPoint" : 0.01,
      "BaseCriticalHitRate" : 0,
      "BaseCriticalHitDamageMultiplier" : 2,
      "DamageAddedToCriticalHitMultiplierPerSkillPoint" : 0.02,
@@ -22,6 +22,7 @@
      "RangeAttackMaxRange" : 5,
      "TimeToMove" : 1,
      "TurnsBeforeBossMonsterHeals" : 5,
-     "BossMonsterHealingAmount" : 10,
-     "PlayerSymbolOnMap" : "PL"
+     "BossMonsterHealingAmount" : 0,
+     "PlayerSymbolOnMap" : "PL",
+     "BossSymbolonMap" : "B"
 }

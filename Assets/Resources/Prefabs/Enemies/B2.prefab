@@ -20,9 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4772176546616308}
   - component: {fileID: 212450686662537434}
-  - component: {fileID: 114553062318433220}
   - component: {fileID: 61869131459145778}
   - component: {fileID: 95542060310879920}
+  - component: {fileID: 114782707849327866}
   m_Layer: 0
   m_Name: B2
   m_TagString: Untagged
@@ -85,7 +85,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1420527430669412}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.5, z: -0.1}
+  m_LocalPosition: {x: -0.17, y: 2.77, z: -0.1}
   m_LocalScale: {x: 0.25, y: 0.24999994, z: 2}
   m_Children:
   - {fileID: 224254327004275760}
@@ -150,7 +150,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBarFill: {fileID: 224708695084200184}
---- !u!114 &114553062318433220
+--- !u!114 &114782707849327866
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1145470109676356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67fa0b626045f4cd697c2330c4fecadb, type: 3}
+  m_Script: {fileID: 11500000, guid: 79486e449e3d64aa8a94039b8a553dfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212242069153150946
@@ -191,7 +191,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: c212651ef3798421da437f79f5103779, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -227,7 +227,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 2326c443adc264a98b5535e0fd3d7f53, type: 3}
+  m_Sprite: {fileID: 21300004, guid: 91e690d79956c4911aa974f38ebdf478, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -261,7 +261,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300002, guid: c212651ef3798421da437f79f5103779, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

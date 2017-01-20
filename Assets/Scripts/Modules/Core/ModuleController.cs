@@ -5,10 +5,21 @@
 
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class ModuleController : SingletonController<ModuleController> {
 	const string UNITS = "Units";
 	const string TILES = "Tiles";
+	const string NEW_CHARACTER = "NewCharacter";
+	bool newCharacter {
+		get {
+			return PlayerPrefsUtil.GetBool(NEW_CHARACTER, true);
+		}
+
+		set {
+			PlayerPrefsUtil.SetBool(NEW_CHARACTER, value);
+		}
+	}
 
 	[SerializeField]
 	bool createWorld = true;
@@ -91,7 +102,8 @@ public class ModuleController : SingletonController<ModuleController> {
 
 		EnemyData enemyData = parser.ParseJSONFromResources<EnemyData>("Enemies");
 		string[,] units = parser.ParseCSVFromResources(getUnitsCSVPath(levelName));
-		unit.Init (map, units, enemyData, turn, movement, combat, stats, abilities, tuning, prefabs, createWorld);
+		unit.Init (map, units, enemyData, turn, movement, combat, stats, abilities, 
+			tuning, prefabs, createWorld, newCharacter);
 		if (createWorld) {
 			cam.StartFollowing (unit.GetMainPlayer ());
 			movement.Init (turn, tuning, map);
@@ -118,6 +130,24 @@ public class ModuleController : SingletonController<ModuleController> {
 		}
 	}
 
+	public void HandleGameOver() 
+	{
+		newCharacter = true;
+	}
+		
+	public void HandleLevelCleared()
+	{
+		newCharacter = false;
+		if(hasNextLevel()) {
+			PlayerPrefs.SetString(LEVEL, getNextLevelName());
+			SceneManager.LoadScene(GAME_INDEX);
+		} 
+		else 
+		{
+			SceneManager.LoadScene(MAIN_MENU_INDEX);
+		}
+	}
+
 	string getUnitsCSVPath(string levelName)
 	{
 		return Path.Combine(levelName, UNITS);
@@ -128,4 +158,52 @@ public class ModuleController : SingletonController<ModuleController> {
 		return Path.Combine(levelName, TILES);
 	}
 		
+	protected override void SubscribeEvents ()
+	{
+		base.SubscribeEvents ();
+		EventModule.Subscribe(handlePODEvent);
+	}
+
+	protected override void UnsubscribeEvents ()
+	{
+		base.UnsubscribeEvents ();
+		EventModule.Unsubscribe(handlePODEvent);
+	}
+
+	void handlePODEvent(PODEvent gameEvent) {
+		if(gameEvent == PODEvent.PlayerKilled) {
+			HandleGameOver();
+		} else if (gameEvent == PODEvent.BossKilled) {
+			HandleLevelCleared();
+		}
+	}
+
+	#if UNITY_EDITOR
+
+	// DEBUGGING ONLY
+	void Update()
+	{
+		if(Input.GetKeyDown(KeyCode.Q)) {
+			EventModule.Event(PODEvent.BossKilled);
+		}
+	}
+
+	#endif
+
+	string getNextLevelName () {
+		switch(levelName) 
+		{
+			case "Level1":
+				return "Level2";
+			case "Level2":
+				return "Level3";
+			default: return string.Empty;
+		}
+	}
+
+	bool hasNextLevel() 
+	{
+		return !string.IsNullOrEmpty(getNextLevelName());
+	}
+
 }

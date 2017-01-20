@@ -60,7 +60,8 @@ public class UnitModule : Module
 		AbilitiesModule abilities,
 		TuningModule tuning,
 		PrefabModule prefabs,
-		bool createWorld
+		bool createWorld,
+		bool newCharacter
 	){
 		this.combat = combat;
 		this.stats = stats;
@@ -70,12 +71,13 @@ public class UnitModule : Module
 		if (createWorld) {
 			movement.SubscribeToAgentMove (handleAgentMove);
 			turns.SubscribeToTurnSwitch (handleTurnSwitch);
-			createUnits(map.Map, units, enemyInfo);
+			createUnits(map.Map, units, enemyInfo, newCharacter);
 			placeUnits (map, this.units.ToArray (), turns, movement, combat, stats, abilities, prefabs);
 		} else {
 			GameObject go = new GameObject ();
 			mainPlayer = go.AddComponent<PlayerCharacterBehaviour> ();
-			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), map.Map, tuning.StartingStatPoints));
+			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), 
+				map.Map, tuning.StartingStatPoints, newCharacter:true));
 		}
 	}
 		
@@ -94,6 +96,9 @@ public class UnitModule : Module
 			EnemyNPC enemy = unit as EnemyNPC;
 			Player().EarnStatPoints(enemy.StatPointsOnKill);
 			EventModule.Event("EnemyDeath");
+			if(unit is BossNPC) {
+				EventModule.Event(PODEvent.BossKilled);
+			}
 		}
 	}
 
@@ -154,6 +159,7 @@ public class UnitModule : Module
 	public void HandlePlayerKilled()
 	{
 		loadGameOver();
+		EventModule.Event(PODEvent.PlayerKilled);
 	}
 
 	public EnemyNPC[] GetEnemiesInRange (PlayerCharacter player) {
@@ -169,20 +175,32 @@ public class UnitModule : Module
 		return inRange.ToArray();
 	}
 
-	void createUnits(Map map, string[,] units, EnemyData enemyInfo) {
+	void createUnits(Map map, string[,] units, EnemyData enemyInfo, bool newCharacter) {
 		Dictionary<string, EnemyDescriptor> lookup = getEnemyLookup(enemyInfo);
 		for (int x = 0; x < map.Width; x++) {	
 			for (int y = 0; y < map.Width; y++) {
-				string tileUnit = string.Concat(units[x, y], level);
+				string rawUnit = units[x,y];
+				string tileUnit;
+				if(isBoss(rawUnit)) {
+					tileUnit = rawUnit;
+				} else {
+					tileUnit = string.Concat(rawUnit, level);
+				}
 				if (isUnit(tileUnit)) {
 					Unit unit = null;
 					MapLocation startLocation = new MapLocation(x, y);
 					if(isPlayer(tileUnit)) {
-						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints);
+						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints, newCharacter);
 					} else {
 						EnemyDescriptor descr;
+						if(tileUnit.Length > 1)
 						if(lookup.TryGetValue(tileUnit, out descr)) {
-							unit = new EnemyNPC(this, descr, startLocation, map);
+							if(descr.IsBoss) {
+								descr.TerritoryRadius = map.Width;
+								unit = new BossNPC(this, descr, startLocation, map);
+							} else {
+								unit = new EnemyNPC(this, descr, startLocation, map);
+							}
 						}
 					}
 					if (unit != null) {
@@ -242,12 +260,26 @@ public class UnitModule : Module
 		return unitKey.Equals(string.Concat(tuning.PlayerKey, level));
 	}
 
+	bool isBoss(string unitKey) {
+		return unitKey.Equals(string.Concat(tuning.BossKey, level));
+	}
+
 	Dictionary<string, EnemyDescriptor> getEnemyLookup (EnemyData enemyInfo) {
 		Dictionary<string, EnemyDescriptor> lookup = new Dictionary<string, EnemyDescriptor>();
 		foreach (EnemyDescriptor descriptor in enemyInfo.Enemies) {
-			lookup.Add(string.Concat(descriptor.Key, descriptor.Level), descriptor);
+			string key = getEnemyKey(descriptor);
+			lookup.Add(key, descriptor);
 		}
 		return lookup;
+	}
+
+	string getEnemyKey(EnemyDescriptor desc) 
+	{
+		if(desc.IsBoss) {
+			return desc.Key;
+		} else {
+			return string.Concat(desc.Key, desc.Level);
+		}
 	}
 
 	public void ChangePlayerUnspentStatPoints(int delta) {

@@ -21,6 +21,7 @@
      "RangeAttackMaxRange" : 5,
      "TimeToMove" : 1,
      "TurnsBeforeBossMonsterHeals" : 5,
-     "BossMonsterHealingAmount" : 10,
-     "PlayerSymbolOnMap" : "PL"
+     "BossMonsterHealingAmount" : 0,
+     "PlayerSymbolOnMap" : "PL",
+     "BossSymbolonMap" : "B"
 }

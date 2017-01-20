@@ -11,8 +11,8 @@ public static class PlayerPrefsUtil {
 	 * PlayerPrefs has no bool class
 	 * This wrapped provides that functionality
 	*/
-	public static bool GetBool (string key) {
-		return IntToBool(PlayerPrefs.GetInt(key, 0));
+	public static bool GetBool (string key, bool defaultValue = default(bool)) {
+		return IntToBool(PlayerPrefs.GetInt(key, BoolToInt(defaultValue)));
 	}
 
 	public static void SetBool (string key, bool value) {

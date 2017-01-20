@@ -4,18 +4,92 @@
  * Usage: [no notes]
  */
 
+using UnityEngine;
+
 public class PlayerCharacter : Unit, IPlayerCharacter
 {
-	int speed;
-	int magic;
-	int constitution;
-	int strength;
-	int skill;
-	int unspentStatPoints = 0;
+	const string SPEED = "Speed";
+	const string MAGIC = "Magic";
+	const string CONST = "Constitution";
+	const string STRENGTH = "Strength";
+	const string SKILL = "Skill";
+	const string UNSPENT_STAT_POINTS = "UnspentPoints";
+	int speed
+	{
+		get 
+		{
+			return PlayerPrefs.GetInt(SPEED, 0);
+		}
+		set 
+		{
+			PlayerPrefs.SetInt(SPEED, value);
+		}
+	}
+
+	int magic
+	{
+		get 
+		{
+			return PlayerPrefs.GetInt(SPEED, 0);
+		}
+		set 
+		{
+			PlayerPrefs.SetInt(SPEED, value);
+		}
+	}
+
+	int constitution
+	{
+		get 
+		{
+			return PlayerPrefs.GetInt(SPEED, 0);
+		}
+		set 
+		{
+			PlayerPrefs.SetInt(SPEED, value);
+		}
+	}
+
+	int strength
+	{
+		get 
+		{
+			return PlayerPrefs.GetInt(SPEED, 0);
+		}
+		set 
+		{
+			PlayerPrefs.SetInt(SPEED, value);
+		}
+	}
+
+	int skill
+	{
+		get 
+		{
+			return PlayerPrefs.GetInt(SPEED, 0);
+		}
+		set 
+		{
+			PlayerPrefs.SetInt(SPEED, value);
+		}
+	}
+
+	int unspentStatPoints {
+		get {
+			return PlayerPrefs.GetInt(UNSPENT_STAT_POINTS, getDefaultStatPoints());
+		}
+		set {
+			PlayerPrefs.SetInt(UNSPENT_STAT_POINTS, value);
+		}
+	}
+
 	bool debuggingEnabled = false;
-	public PlayerCharacter(UnitModule parent, MapLocation location, Map map, int startingStatPoints) : 
+	public PlayerCharacter(UnitModule parent, MapLocation location, Map map,
+		int startingStatPoints, bool newCharacter) : 
 	base (parent, location, map) {
-		setStatsToDefault();
+		if(newCharacter) {
+			setStatsToDefault();
+		}
 		this.unspentStatPoints = startingStatPoints;
 	}
 
@@ -63,6 +137,16 @@ public class PlayerCharacter : Unit, IPlayerCharacter
 		} else {
 			return false;	
 		}
+	}
+
+	int getDefaultStatPoints() {
+		int defaultVal;
+		if(TuningModule.Exists) {
+			defaultVal = TuningModule.Get.StartingStatPoints;
+		} else {
+			defaultVal = default(int);
+		}
+		return defaultVal;
 	}
 
 	public void EarnStatPoints(int delta) {

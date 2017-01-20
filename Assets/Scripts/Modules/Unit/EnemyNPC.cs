@@ -53,7 +53,8 @@ public class EnemyNPC : Unit, IEnemyNPC, IComparable
 
 	}
 
-	public EnemyNPC(UnitModule parent, EnemyDescriptor descriptor, MapLocation location, Map map) :
+	public EnemyNPC(UnitModule parent, EnemyDescriptor descriptor, 
+		MapLocation location, Map map) :
 	base (parent, location, map) {
 		this.Descriptor = descriptor.GetInstance();
 	}

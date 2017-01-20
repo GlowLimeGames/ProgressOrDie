@@ -177,9 +177,9 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		EventModule.Subscribe(handlePODGameEvent);
 	}
 
-	protected override void UnusbscribeEvents ()
+	protected override void UnsubscribeEvents ()
 	{
-		base.UnusbscribeEvents ();
+		base.UnsubscribeEvents ();
 		EventModule.Unsubscribe(handlePODGameEvent);
 	}
 

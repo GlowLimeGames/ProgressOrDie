@@ -32,13 +32,13 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 	}
 
 	void Start () {
-		FetchReferences();
 		SubscribeEvents();
+		FetchReferences();
 	}
 
 	void OnDestroy () {
 		CleanupReferences();
-		UnusbscribeEvents();
+		UnsubscribeEvents();
 		StopAllCoroutines();
 	}
 
@@ -104,7 +104,7 @@ public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable 
 		EventModule.Subscribe(HandleNamedEvent);
 	}
 
-	protected virtual void UnusbscribeEvents () {
+	protected virtual void UnsubscribeEvents () {
 		EventModule.Unsubscribe(HandleNamedEvent);
 	}
 

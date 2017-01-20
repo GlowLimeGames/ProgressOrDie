@@ -6,7 +6,9 @@
 
 using UnityEngine;
 
-public class LevelSelectUI : UIElement 
-{	
-
+public class LevelSelectUI : UIElement
+{
+	public void LoadTutorial () {
+		Application.LoadLevel ("Tutorial");
+	}
 }

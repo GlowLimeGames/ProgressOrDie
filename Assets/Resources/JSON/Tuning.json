@@ -1,5 +1,6 @@
 {
      "MaxSpeed" : 30,
+	 "MaxSpeedInCharacterCreation" : 10,
      "DamagePerMagicPoint" : 3,
      "DamagePerStrengthPoint" : 5,
      "MaxSkill" : 50,

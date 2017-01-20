@@ -23,6 +23,10 @@ public abstract class Unit : IUnit
 		}
 	}
 
+	public void LeaveCurrentTile() {
+		Map.VacateTile(this.GetLocation());
+	}
+
 	public void LinkToAgent (Agent agent) {
 		this.agent = agent;
 	}
@@ -35,6 +39,10 @@ public abstract class Unit : IUnit
 		get {
 			return (int) (parentModule.BulkToHPRatio * (float) GetConstitution()); 
 		}
+	}
+
+	int getHealthPointsForConstitution(int constPoints) {
+		return (int) (parentModule.BulkToHPRatio * (float) constPoints);
 	}
 
 	public abstract int GetSpeed();
@@ -52,6 +60,8 @@ public abstract class Unit : IUnit
 	}
 
 	public virtual int ModConstitution(int delta) {
+		RemainingHealth += getHealthPointsForConstitution(delta);
+		tryUpdateAgentHealth(RemainingHealth);
 		return GetConstitution();
 	}
 
@@ -61,6 +71,10 @@ public abstract class Unit : IUnit
 
 	public virtual int ModSkill (int delta) {
 		return GetSkill();
+	}
+		
+	public virtual void Heal (float percent) {
+		RemainingHealth = (int) ((float) getMaxHealth * percent);
 	}
 
 	public int X {
@@ -109,31 +123,25 @@ public abstract class Unit : IUnit
 		return this.occupiedTile.GetLocation();
 	}
 
-	public AttackType[] GetAvailableAttacks() {
-		throw new System.NotImplementedException();
+	public virtual AttackType[] GetAvailableAttacks() {
+		return new AttackType[]{GetPrimaryAttack()};
 	}
 
 	public virtual void Damage (int damage) {
 		this.RemainingHealth -= damage;
+		tryUpdateAgentHealth(RemainingHealth);
 		if (IsDead) {
 			Kill();
 		}
 	}
 
-	public bool CanMoveTo (IMapTile tile) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanAttack (IUnit unit, AttackType attack) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanMeleeAttack (IUnit unit) {
-		throw new System.NotImplementedException();
-	}
-
-	public bool CanMagicAttack (IUnit unit) {
-		throw new System.NotImplementedException();
+	bool tryUpdateAgentHealth(int health) {
+		if (HasAgentLink) {
+			this.agent.UpdateRemainingHealth(health);
+			return true;
+		} else {
+			return false;
+		}
 	}
 
 	public void MoveTo (IMapTile tile) {

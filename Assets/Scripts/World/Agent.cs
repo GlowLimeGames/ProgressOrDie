@@ -21,11 +21,13 @@ public abstract class Agent : MobileObjectBehaviour {
 
 	protected bool canBeAttacked;
 
-	Color canAttackColor = Color.red;
+	Color canAttackColor = Color.Lerp(Color.red, Color.white, 0.25f);
 	SpriteRenderer spriteR;
 
 	protected int remainingAgilityForTurn;
+	protected int remainingHealth;
 
+	protected MapModule mapModule;
 	protected TurnModule turns;
 	protected MovementModule movement;
 	protected CombatModule combat;
@@ -36,12 +38,14 @@ public abstract class Agent : MobileObjectBehaviour {
 	public abstract AgentType GetAgentType();
 
 	public void Init (
+		MapModule map,
 		TurnModule turns,
 		MovementModule movement,
 		CombatModule combat,
 		StatModule stats,
 		AbilitiesModule abilities
 	){
+		this.mapModule = map;
 		this.turns = turns;
 		this.movement = movement;
 		this.combat = combat;
@@ -51,10 +55,23 @@ public abstract class Agent : MobileObjectBehaviour {
 			{ReplenishAtTurnStart(type);});
 	}
 		
+	public int Health () {
+		return remainingHealth;
+	}
+
+	public virtual void UpdateRemainingHealth(int healthRemaing) {
+		this.remainingHealth = healthRemaing;
+	}
+
 	public bool HasUnit {
 		get {
 			return GetUnit() != null;
 		}
+	}
+
+	public virtual void SetUnit(Unit unit) {
+		this.remainingHealth = unit.RemainingHealth;	
+		unit.LinkToAgent(this);
 	}
 
 	public virtual bool ReplenishAtTurnStart (AgentType type) {
@@ -117,7 +134,23 @@ public abstract class Agent : MobileObjectBehaviour {
 			return false;
 		}
 	}
-		
+
+	protected bool isNorthKeyDown() {
+		return Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow);
+	}
+
+	protected bool isSouthKeyDown() {
+		return Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow);
+	}
+
+	protected bool isWestKeyDown() {
+		return Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.LeftArrow);
+	}
+
+	protected bool isEastKeyDown() {
+		return Input.GetKeyDown(KeyCode.D) || Input.GetKeyDown(KeyCode.RightArrow);
+	}
+
 	protected virtual void stopMoving(){
 		// NOTHING
 	}
@@ -150,11 +183,16 @@ public abstract class Agent : MobileObjectBehaviour {
 		}
 	}
 
-	protected bool move (int deltaX, int deltaY) {
+	protected void leaveCurrentTile() {
+		GetUnit().LeaveCurrentTile();
+	}
+
+	protected virtual bool move (int deltaX, int deltaY) {
 		if (movement.CanMove(this)) {
 			prevLoc = currentLoc;
 			MapLocation newLoc = currentLoc.Translate(deltaX, deltaY);
-			if (map.CoordinateIsInBounds(newLoc)) {
+			if (mapModule.CanTravelTo(this, newLoc)) {
+				leaveCurrentTile();
 				int agilityCost = map.TravelTo(this, newLoc);
 				if (trySpendAgility(agilityCost)) {
 					movement.Move(this);

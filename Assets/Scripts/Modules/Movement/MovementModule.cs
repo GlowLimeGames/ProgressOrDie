@@ -4,6 +4,9 @@
  * Usage: [no notes]
  */
 
+using System;
+using System.Collections.Generic;
+
 public class MovementModule : Module
 {
 	AgentAction onAgentMove;
@@ -54,8 +57,37 @@ public class MovementModule : Module
 	}
 
 	public void DetermineEnemyMovement(EnemyNPC enemy) {
-		MapTile newTile = map.RandomTileInRadius(enemy.StartingLocation, enemy.TerritoryRadius);
-		newTile.PlaceUnit(enemy.GetAgent());
+		HashSet<MapTile> checkedTiles = new HashSet<MapTile>();
+		bool foundSuitableTile = false;
+		int tileTimeout = (int) Math.Pow(enemy.TerritoryRadius, 2) - 1;
+		MapTile potentialDestination = null;
+		while (!foundSuitableTile && checkedTiles.Count < tileTimeout) {
+			potentialDestination = map.RandomTileInRadius(enemy.StartingLocation, enemy.TerritoryRadius);
+			checkedTiles.Add(potentialDestination);
+			foundSuitableTile = CanMoveToTile(enemy, potentialDestination);
+		}
+		if(foundSuitableTile) {
+			enemy.LeaveCurrentTile();
+			potentialDestination.PlaceUnit(enemy.GetAgent());
+		}
+	}
+
+	public bool CanMoveToTile(Unit unit, MapTile tile)
+	{
+		if(tile.IsOccupiedByUnit())
+		{
+			return false;
+		}
+		else 
+		{
+			if(unit is PlayerCharacter) {
+				return tile.PlayerPassable;
+			} else if (unit is EnemyNPC) {
+				return tile.EnemyPassable;
+			} else {
+				return true;
+			}
+		}
 	}
 
 }

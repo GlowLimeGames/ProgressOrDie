@@ -12,7 +12,7 @@ public class SplashTriggers : MonoBehaviour {
 
 	private IEnumerator SplashTime()
 	{
-		yield return new WaitForSeconds (5);
+		yield return new WaitForSeconds (7);
 		SceneManager.LoadScene (1);
 	}
 }

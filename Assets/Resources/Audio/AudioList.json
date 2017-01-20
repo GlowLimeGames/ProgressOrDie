@@ -1,15 +1,326 @@
 {
 	"Files": [
 		{
-			"Name":"test",
+			"Name":"Boss Death",
 			"Groups":[],
-			"Events":["PlayTest"],
-			"StopEvents":["StopTest"],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death A",
+			"Groups":["EnemyDeath"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death B",
+			"Groups":["EnemyDeath"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death C",
+			"Groups":["EnemyDeath"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death D",
+			"Groups":["EnemyDeath"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Death E",
+			"Groups":["EnemyDeath"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Footsteps",
+			"Groups":[],
+			"Events":["EnemyFootsteps"],
+			"StopEvents":["StopEnemyFootsteps"],
+			"Loop": true,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee A",
+			"Groups":["EnemyMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee B",
+			"Groups":["EnemyMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee C",
+			"Groups":["EnemyMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Enemy Melee D",
+			"Groups":["EnemyMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 3,
+			"Volume": 100
+		},
+		{
+			"Name":"Gui Click 4",
+			"Groups":[],
+			"Events":["Click"],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 4,
+			"Volume": 100
+		},
+		{
+			"Name":"Magic Attack A",
+			"Groups":["MagicAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 5,
+			"Volume": 100
+		},
+		{
+			"Name":"Magic Attack B",
+			"Groups":["MagicAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 5,
+			"Volume": 100
+		},
+		{
+			"Name":"Movement Bar Depleting & Movement Confirm",
+			"Groups":[],
+			"Events":["Movement"],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 5,
+			"Volume": 100
+		},
+		{
+			"Name":"Movement Cancel",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Death",
+			"Groups":[],
+			"Events":["PlayerDeath"],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 6,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Footsteps",
+			"Groups":[],
+			"Events":["PlayerWalking"],
+			"StopEvents":["StopPlayerWalking"],
+			"Loop": true,
+			"Type": "FX",
+			"Channel": 6,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack A",
+			"Groups":["PlayerMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 6,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack B",
+			"Groups":["PlayerMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 6,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack C",
+			"Groups":["PlayerMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 6,
+			"Volume": 100
+		},
+		{
+			"Name":"Player Melee Attack D",
+			"Groups":["PlayerMeleeAttack"],
+			"Events":[],
+			"StopEvents":[],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 6,
+			"Volume": 100
+		},
+		{
+			"Name":"Progress or Die Soundtrack A 3",
+			"Groups":[],
+			"Events":["PlayMenuMusic"],
+			"StopEvents":["PlayInGameMusic"],
 			"Loop": true,
 			"Type": "Music",
 			"Channel": 0,
 			"Volume": 100
+		},
+		{
+			"Name":"Progress or Die Soundtrack B 2",
+			"Groups":[],
+			"Events":["PlayInGameMusic"],
+			"StopEvents":["PlayMenuMusic"],
+			"Loop": true,
+			"Type": "Music",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Toggle Attack Type",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 6,
+			"Volume": 100
+		},
+		{
+			"Name":"Progress or Die Ambience",
+			"Groups":[],
+			"Events":["Ambience"],
+			"StopEvents":["StopAmbience"],
+			"Loop": true,
+			"Type": "Music",
+			"Channel": 10,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Ushi Oni Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Yamata no Orochi Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
+		},
+		{
+			"Name":"Boss Yuka Onna Ability",
+			"Groups":[],
+			"Events":["WIP"],
+			"StopEvents":["WIP"],
+			"Loop": false,
+			"Type": "FX",
+			"Channel": 0,
+			"Volume": 100
 		}
 	],
-	"Groups": []
+	"Groups": [
+		{
+			"Name":"PlayerMeleeAttack",
+			"Type":"Random",
+			"Events":["PlayerMeleeAttack"],
+			"StopEvents":[]
+		},
+		{
+			"Name":"MagicAttack",
+			"Type":"Random",
+			"Events":["MagicAttack"],
+			"StopEvents":[]
+		},
+		{
+			"Name":"PlayerMagicAttack",
+			"Type":"Random",
+			"Events":["PlayerMagicAttack"],
+			"StopEvents":[]
+		},
+		{
+			"Name":"EnemyMeleeAttack",
+			"Type":"Random",
+			"Events":["EnemyMeleeAttack"],
+			"StopEvents":[]
+		},
+		{
+			"Name":"EnemyDeath",
+			"Type":"Random",
+			"Events":["EnemyDeath"],
+			"StopEvents":[]
+		}
+	]
 }

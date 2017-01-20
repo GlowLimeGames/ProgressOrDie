@@ -83,6 +83,7 @@ public class UIButton : UIElement
 
 	protected virtual void executeClick() 
 	{
+		EventModule.Event("Click");
 		if(clickAction != null) 
 		{
 			clickAction();

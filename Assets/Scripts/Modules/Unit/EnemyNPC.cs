@@ -23,12 +23,18 @@ public class EnemyNPC : Unit, IEnemyNPC, IComparable
 
 	public EnemyDescriptor Descriptor{get; private set;}
 
+	public int StatPointsOnKill {
+		get {
+			return Descriptor.StatPointsOnKill;
+		}
+	}
+
 	int turnPriority {
 		get {
 			return Descriptor.TurnPriority;
 		}
 	}
-
+		
 	public override AttackType GetPrimaryAttack() {
 		if(GetStrength() >= GetMagic())
 		{
@@ -38,6 +44,13 @@ public class EnemyNPC : Unit, IEnemyNPC, IComparable
 		{
 			return AttackType.Magic;
 		}
+	}
+
+	public override void Kill ()
+	{
+		base.Kill ();
+		parentModule.HandleUnitDestroyed(this);
+
 	}
 
 	public EnemyNPC(UnitModule parent, EnemyDescriptor descriptor, MapLocation location, Map map) :

@@ -5,6 +5,7 @@
 
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public abstract class Module : MonoBehaviourExtended {
 	protected const string SPRITE_DIR = "Sprites";
@@ -20,21 +21,20 @@ public abstract class Module : MonoBehaviourExtended {
 	public virtual string GetId () {
 		return id;
 	}
-
-	protected override void SetReferences () {
-		// Nothing
+		
+	protected void loadGameOver()
+	{
+		SceneManager.LoadScene(GAME_OVER_INDEX);
+	}
+		
+	protected override void CleanupReferences ()
+	{
+		// NOTHING
 	}
 
-	protected override void FetchReferences () {
-		// Nothing
-	}
-
-	protected override void HandleNamedEvent (string eventName) {
-		// Nothing
-	}
-
-	protected override void CleanupReferences () {
-		// Nothing
+	protected override void HandleNamedEvent (string eventName)
+	{
+		// NOTHING
 	}
 
 	protected string spritePath(string fileName)

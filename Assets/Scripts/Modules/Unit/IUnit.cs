@@ -17,11 +17,6 @@ public interface IUnit {
 
 	AttackType[] GetAvailableAttacks();
 
-	bool CanMoveTo (IMapTile tile);
-	bool CanAttack (IUnit unit, AttackType attack);
-	bool CanMeleeAttack (IUnit unit);
-	bool CanMagicAttack (IUnit unit);
-
 	void Damage (int damage);
 	void MoveTo (IMapTile tile);
 	void Attack(IUnit unit, AttackType attack);

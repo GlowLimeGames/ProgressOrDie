@@ -10,10 +10,14 @@ using UnityEngine.UI;
 
 public class UIModule : Module, IUIModule
 {	
+	public StatsUIPanel StatsPanel;
+	[SerializeField]
+	UIElement levelText;
 	[SerializeField]
 	UIElement turnText;
 	[SerializeField]
 	UIButton endTurnButton;
+
 	[Space(25)]
 	[SerializeField]
 	UIFillBar strengthBar;
@@ -26,11 +30,15 @@ public class UIModule : Module, IUIModule
 	[SerializeField]
 	UIFillBar speedBar;
 	[SerializeField]
-	UIButton menuButton;
+	UIFillBar critBar;
 
 	[Space(25)]
 	[SerializeField]
-	UIFillBar critBar;
+	UIButton menuButton;
+	[SerializeField]
+	UIElement healthDisplay;
+	[SerializeField]
+	UIElement unspentStatPoints;
 
 	[Space(25)]
 	[SerializeField]
@@ -40,15 +48,53 @@ public class UIModule : Module, IUIModule
 
 	PlayerCharacterBehaviour playerAgent;
 	PlayerCharacter playerUnit;
+	UnitModule units;
 
-	public void Init(TurnModule turn, UnitModule units) {
+	public void Init(string levelName, TurnModule turn, UnitModule units, TuningModule Tuning, bool createWorld = true) {
+		this.units = units;
+		levelText.SetText(levelName);
 		turnText.SetText(turn.CurrentTurnStr());
 		turn.SubscribeToTurnSwitchStr(handleTurnChange);
 		endTurnButton.SubscribeToClick(turn.NextTurn);
-		menuButton.SubscribeToClick(quitToMenu);
-		this.playerAgent = units.GetMainPlayer();
-		this.playerAgent.SubscribeToAgilityChange(handleAgilityChange);
-		this.playerUnit = playerAgent.GetUnit() as PlayerCharacter;
+		menuButton.SubscribeToClick(OpenMenuPopUp);
+		if (createWorld) {
+			this.playerAgent = units.GetMainPlayer ();
+			this.playerAgent.SubscribeToAgilityChange (handleAgilityChange);
+			this.playerUnit = playerAgent.GetUnit () as PlayerCharacter;
+			updateHealthDisplay(playerAgent.Health());
+			playerAgent.SubscribeToHPChange(updateHealthDisplay);
+			playerAgent.SubscribeToEarnStatPoints(updateStatPonts);
+			updateStatPonts(playerUnit.GetUnspentStatPoints());
+		}
+		if(StatsPanel) {
+			StatsPanel.Init (this, Tuning, units);
+			OpenMenuPopUp();
+		}
+	}
+
+	public void UsePotion() {
+		units.UsePotionOnPlayer();
+	}
+
+	public void OpenMenuPopUp () {
+		StatsPanel.Show();
+	}
+
+	public void RefreshStats() {
+		skillBar.SetText(playerUnit.GetSkill(), 1);
+		strengthBar.SetText(playerUnit.GetStrength(), 1);
+		magicBar.SetText(playerUnit.GetMagic(), 1);
+		constitutionBar.SetText(playerUnit.GetConstitution(), 1);
+		speedBar.SetText(playerUnit.GetSpeed(), 1);
+		critBar.HandleUpdateFill(playerUnit.GetPlayerCritChanceAsPercentf());
+	}
+
+	void updateStatPonts (int numStatPoints) {
+		unspentStatPoints.SetText(numStatPoints.ToString())	;
+	}
+
+	void updateHealthDisplay(int healthRemaining) { 
+		healthDisplay.SetText(healthRemaining.ToString());
 	}
 
 	void handleAgilityChange(float newAgility) {
@@ -66,12 +112,12 @@ public class UIModule : Module, IUIModule
 		EventModule.Subscribe(handlePODEvent);
 	}
 
-	protected override void UnusbscribeEvents ()
+	protected override void UnsubscribeEvents ()
 	{
-		base.UnusbscribeEvents ();
+		base.UnsubscribeEvents ();
 		EventModule.Unsubscribe(handlePODEvent);
 	}
-
+		
 	void handlePODEvent(PODEvent gameEvent) {
 		switch(gameEvent) {
 			case PODEvent.PlayerAttacked:

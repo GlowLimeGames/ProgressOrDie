@@ -80,12 +80,6 @@ public class StatModule : Module
 		}
 	}
 
-	public float CriticalHitDamageMod {
-		get {
-			return tuning.CriticalHitDamageMod;
-		}
-	}
-
 	public float SpeedToMovementRatio {
 		get {
 			return tuning.SpeedToMovementRatio;
@@ -98,16 +92,52 @@ public class StatModule : Module
 		}
 	}
 
+	public string GetPlayerCritChanceAsPercentStr(PlayerCharacter player) {
+		return string.Format("{0}%", getChanceOfCrit(player) * 100);
+	}
+
+	public float GetPlayerCritChanceAsPercentf(PlayerCharacter player) {
+		return getChanceOfCrit(player);
+	}
+
 	public int GetMeleeDamage (IUnit unit) {
-		return (int) (unit.GetStrength() * DamagePerStrengthPoint);
+		int damage = (int) (unit.GetStrength() * DamagePerStrengthPoint);
+		return applyDamageMods(unit, damage);
 	}
 
 	public int GetMagicDamage (IUnit unit) {
-		return (int) (unit.GetMagic() * DamagePerMagicPoint);
+		int damage = (int) (unit.GetMagic() * DamagePerMagicPoint);
+		return applyDamageMods(unit, damage);
 	}
 
+	int applyDamageMods(IUnit unit, int baseDamage)
+	{
+		int totalDamage;
+		if(CriticalHit(unit)) {
+			totalDamage = (int) ((float) baseDamage * getCritDamageModifier(unit));
+			EventModule.Event(PODEvent.Notification, getCritNotification(unit));
+		} else {
+			totalDamage = baseDamage;
+		}
+		return totalDamage;
+	}
+
+	float getChanceOfCrit(IUnit unit) {
+		return CriticalHitRatePerSkillPoint * unit.GetSkill() + tuning.BaseCriticalHitRate;
+	}
+
+	float getCritDamageModifier(IUnit unit) {
+		return (float) unit.GetSkill() * tuning.DamageAddedToCriticalHitMultiplierPerSkillPoint + tuning.BaseCriticalHitDamageMultiplier;
+	}
+
+	string getCritNotification(IUnit unit) 
+	{
+		return string.Format("{0} dealt a critical hit for {1}% damage", unit, getCritDamageModifier(unit) * 100);
+	}
+
+
 	public bool CriticalHit (IUnit unit) {
-		float critChance = CriticalHitRatePerSkillPoint * unit.GetSkill();
+		float critChance = getChanceOfCrit(unit);
 		return Random.Range(0.0f, 1.0f) < critChance;
 	}
 

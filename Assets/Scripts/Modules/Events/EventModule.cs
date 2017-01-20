@@ -41,7 +41,12 @@ public class EventModule : Module, IEventModule {
 
 	protected override void SetReferences () {
 		base.SetReferences ();
-		Instance = this;
+		if(Instance == null){
+			DontDestroyOnLoad(gameObject);
+			Instance = this;
+		} else {
+			Destroy(gameObject);
+		}
 	}
 
 	#endregion
@@ -231,5 +236,7 @@ public enum PODEvent {
 	EnemyTurnStart,
 	EnemyTurnEnd,
 	PlayerMagicAttack,
-	PlayerMeleeAttack
+	PlayerMeleeAttack,
+	StatPanelClosed,
+
 }

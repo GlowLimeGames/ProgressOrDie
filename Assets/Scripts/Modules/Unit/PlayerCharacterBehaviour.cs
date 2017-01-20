@@ -9,6 +9,9 @@ using UnityEngine;
 public class PlayerCharacterBehaviour : PlayerAgent 
 {	
 	MonoActionf onAgilityChange;
+	MonoActionInt onHPChange;
+	MonoActionInt onUnallocatedStatPointsChange;
+
 	PlayerCharacter character;
 
 	public override AgentType GetAgentType()
@@ -26,8 +29,24 @@ public class PlayerCharacterBehaviour : PlayerAgent
 
 	public void SetCharacter (PlayerCharacter character) {
 		this.character = character;
-		this.character.LinkToAgent(this);
+		this.SetUnit(character);
 		ReplenishAtTurnStart(AgentType.Player);
+	}
+
+	public void SubscribeToEarnStatPoints (MonoActionInt action){
+		onUnallocatedStatPointsChange += action;
+	}
+
+	public void UnsubscribeFromEarnStatPoints (MonoActionInt action) {
+		onUnallocatedStatPointsChange -= action;
+	}
+
+	public void SubscribeToHPChange (MonoActionInt action) {
+		onHPChange += action;
+	}
+
+	public void UnsubscribeFromHPChange (MonoActionInt action) {
+		onHPChange -= action;
 	}
 
 	public void SubscribeToAgilityChange (MonoActionf action) {
@@ -54,23 +73,50 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
+	protected override bool move (int deltaX, int deltaY)
+	{
+		if(base.move (deltaX, deltaY)) {
+			EventModule.Event("Movement")
+			;EventModule.Event("PlayerWalking");
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	protected override void stopMoving ()
 	{
 		base.stopMoving ();
 		QueryAnimator(AnimParam.Bool, IS_MOVING, false);
+		EventModule.Event("StopPlayerWalking");
 	}
 
 	void Update () {
-		if (Input.GetKeyDown(KeyCode.W)) {
+		if (isNorthKeyDown()) {
 			MoveY(1);
-		} else if (Input.GetKeyDown(KeyCode.S)) {
+		} else if (isSouthKeyDown()) {
 			MoveY(-1);
 		}
-		if (Input.GetKeyDown(KeyCode.A)) {
+		if (isWestKeyDown()) {
 			MoveX(-1);
-		} else if (Input.GetKeyDown(KeyCode.D)) {
+		} else if (isEastKeyDown()) {
 			MoveX(1);
 		}
+	}
+	
+	public override void UpdateRemainingHealth (int healthRemaing) {
+		base.UpdateRemainingHealth (healthRemaing);
+		callOnHPChange(healthRemaing);
+	}
+
+	void callOnHPChange(int healthRemaining) {
+		if(onHPChange != null) {
+			onHPChange(healthRemaining);
+		}
+	}
+
+	public void UpdateStatPoints(int statPoints) {
+		callUpdateStatPoints(statPoints);
 	}
 
 	public override bool MoveX (int dir)
@@ -120,15 +166,21 @@ public class PlayerCharacterBehaviour : PlayerAgent
 		}
 	}
 
+	void callUpdateStatPoints(int statPoints) {
+		if(onUnallocatedStatPointsChange != null) {
+			onUnallocatedStatPointsChange(statPoints);
+		}
+	}
+
 	protected override void SubscribeEvents ()
 	{
 		base.SubscribeEvents ();
 		EventModule.Subscribe(handlePODGameEvent);
 	}
 
-	protected override void UnusbscribeEvents ()
+	protected override void UnsubscribeEvents ()
 	{
-		base.UnusbscribeEvents ();
+		base.UnsubscribeEvents ();
 		EventModule.Unsubscribe(handlePODGameEvent);
 	}
 
@@ -150,6 +202,9 @@ public class PlayerCharacterBehaviour : PlayerAgent
 	void handlePODGameEvent(PODEvent gameEvent) {
 		if(playerAttackEvent(gameEvent)) {
 			QueryAnimator(AnimParam.Trigger, getAttackKey(getAttackType(gameEvent)));
+		} else if (gameEvent == PODEvent.StatPanelClosed) {
+			ReplenishAtTurnStart(AgentType.Player);
+
 		}
 	}
 

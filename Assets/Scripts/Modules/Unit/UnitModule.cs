@@ -41,6 +41,15 @@ public class UnitModule : Module
 		this.level = level;
 	}
 
+	public void EarnStatPoints(int statPointsCollected)
+	{
+		Player().EarnStatPoints(statPointsCollected);
+	}
+
+	public void UsePotionOnPlayer() {
+		Player().Heal(tuning.HealthPerecentGainFromPotion);
+	}
+
 	public void Init(MapModule map, 
 		string[,] units,
 		EnemyData enemyInfo,
@@ -50,21 +59,42 @@ public class UnitModule : Module
 		StatModule stats,
 		AbilitiesModule abilities,
 		TuningModule tuning,
-		PrefabModule prefabs
+		PrefabModule prefabs,
+		bool createWorld
 	){
 		this.combat = combat;
 		this.stats = stats;
 		this.tuning = tuning;
 		this.turns = turns;
 		this.movement = movement;
-		movement.SubscribeToAgentMove(handleAgentMove);
-		turns.SubscribeToTurnSwitch(handleTurnSwitch);
-		createUnits(map.Map, units, enemyInfo);
-		placeUnits(map, this.units.ToArray(), turns, movement, combat, stats, abilities, prefabs);
+		if (createWorld) {
+			movement.SubscribeToAgentMove (handleAgentMove);
+			turns.SubscribeToTurnSwitch (handleTurnSwitch);
+			createUnits(map.Map, units, enemyInfo);
+			placeUnits (map, this.units.ToArray (), turns, movement, combat, stats, abilities, prefabs);
+		} else {
+			GameObject go = new GameObject ();
+			mainPlayer = go.AddComponent<PlayerCharacterBehaviour> ();
+			mainPlayer.SetCharacter (new PlayerCharacter (this, new MapLocation(0, 0), map.Map, tuning.StartingStatPoints));
+		}
 	}
 		
+	public string GetPlayerCritChanceAsPercentStr(PlayerCharacter player){
+		return stats.GetPlayerCritChanceAsPercentStr(player);
+	}
+
+	public float GetPlayerCritChanceAsPercentf(PlayerCharacter player){
+		return stats.GetPlayerCritChanceAsPercentf(player);
+	}
+
 	public void HandleUnitDestroyed(Unit unit) {
-		// TODO: Implement real functionality
+		units.Remove(unit);
+		if(unit is EnemyNPC) 
+		{
+			EnemyNPC enemy = unit as EnemyNPC;
+			Player().EarnStatPoints(enemy.StatPointsOnKill);
+			EventModule.Event("EnemyDeath");
+		}
 	}
 
 	void handleAgentMove (Agent agent) {
@@ -100,6 +130,14 @@ public class UnitModule : Module
 			handleEnemyTurn();
 		}
 	}
+		
+	public bool PlayerHasUnspentSkillPoints() {
+		return Player().HasUnspentStatPoints();
+	}
+
+	public int GetAvailablePlayerSkillPoints() {
+		return Player().GetUnspentStatPoints();
+	}
 
 	public void MeleeAttack (IUnit attacker, IUnit target) {
 		combat.MeleeAttack(attacker, target);
@@ -111,6 +149,11 @@ public class UnitModule : Module
 
 	public PlayerCharacterBehaviour GetMainPlayer () {
 		return this.mainPlayer;
+	}
+
+	public void HandlePlayerKilled()
+	{
+		loadGameOver();
 	}
 
 	public EnemyNPC[] GetEnemiesInRange (PlayerCharacter player) {
@@ -135,7 +178,7 @@ public class UnitModule : Module
 					Unit unit = null;
 					MapLocation startLocation = new MapLocation(x, y);
 					if(isPlayer(tileUnit)) {
-						unit = new PlayerCharacter(this, startLocation, map);
+						unit = new PlayerCharacter(this, startLocation, map, tuning.StartingStatPoints);
 					} else {
 						EnemyDescriptor descr;
 						if(lookup.TryGetValue(tileUnit, out descr)) {
@@ -173,7 +216,7 @@ public class UnitModule : Module
 				// Skip this unit: it's not supported
 				continue;
 			}
-			agent.Init(turns, movement, combat, stats, abilities);
+			agent.Init(map, turns, movement, combat, stats, abilities);
 			map.PlaceUnit(agent);
 		}
 	}
@@ -205,6 +248,14 @@ public class UnitModule : Module
 			lookup.Add(string.Concat(descriptor.Key, descriptor.Level), descriptor);
 		}
 		return lookup;
+	}
+
+	public void ChangePlayerUnspentStatPoints(int delta) {
+		if(delta > 0) {
+			Player().EarnStatPoints(delta);
+		} else if (delta < 0) {
+			Player().TrySpendStatPoints(Mathf.Abs(delta));
+		}
 	}
 
 	public void ChangePlayerStrength(int delta) {
@@ -257,7 +308,13 @@ public class UnitModule : Module
 	{
 		EventModule.Event(PODEvent.EnemyTurnStart);
 		EnemyNPC[] enemiesSorted = sortEnemiesByTurnPriority(this.units);
-		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, tuning.TimeToMove, handleEndEnemyTurn));
+		float turnTimerPerEnemy = getEnemyTurnTimePerEnemy(enemiesSorted);
+		StartCoroutine(takeEnemiesTurnInOrder(enemiesSorted, turnTimerPerEnemy, handleEndEnemyTurn));
+	}
+
+	float getEnemyTurnTimePerEnemy(EnemyNPC[] enemies)
+	{
+		return tuning.TimeToMove / (float) enemies.Length;
 	}
 
 	EnemyNPC[] sortEnemiesByTurnPriority(List<Unit> units) {
@@ -273,6 +330,7 @@ public class UnitModule : Module
 
 	IEnumerator takeEnemiesTurnInOrder(EnemyNPC[] enemyOrder, float timerPerTurn, MonoAction callback = null)
 	{
+		EventModule.Event("EnemyFootsteps");
 		foreach(EnemyNPC enemy in enemyOrder)
 		{
 			handleIndividualEnemyTurn(enemy);
@@ -281,6 +339,7 @@ public class UnitModule : Module
 		if(callback != null) {
 			callback();
 		}
+		EventModule.Event("StopEnemyFootsteps");
 	}
 
 	void handleIndividualEnemyTurn(EnemyNPC enemy)

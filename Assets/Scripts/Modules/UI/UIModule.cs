@@ -112,9 +112,9 @@ public class UIModule : Module, IUIModule
 		EventModule.Subscribe(handlePODEvent);
 	}
 
-	protected override void UnusbscribeEvents ()
+	protected override void UnsubscribeEvents ()
 	{
-		base.UnusbscribeEvents ();
+		base.UnsubscribeEvents ();
 		EventModule.Unsubscribe(handlePODEvent);
 	}
 		

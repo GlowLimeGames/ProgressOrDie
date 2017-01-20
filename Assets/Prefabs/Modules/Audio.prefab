@@ -54,6 +54,6 @@ MonoBehaviour:
   id: Audio
   isAudioListener: 0
   playMusicOnInit: 1
-  mainMusicEventName: PlayMusic
+  mainMusicEventName: PlayMenuMusic
   ShortestSweetenerPlayFrequenecy: 10
   LongestSweetenerPlayFrequenecy: 25

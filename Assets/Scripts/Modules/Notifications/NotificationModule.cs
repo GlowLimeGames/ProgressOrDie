@@ -54,9 +54,9 @@ public class NotificationModule : Module
 		EventModule.Subscribe(handlePODMessageEvent);
 	}
 
-	protected override void UnusbscribeEvents ()
+	protected override void UnsubscribeEvents ()
 	{
-		base.UnusbscribeEvents ();
+		base.UnsubscribeEvents ();
 		EventModule.Unsubscribe(handlePODMessageEvent);
 	}
 		

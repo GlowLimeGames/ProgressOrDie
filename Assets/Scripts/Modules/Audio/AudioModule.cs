@@ -55,24 +55,22 @@ public class AudioModule : Module, IAudioModule {
 		Init();
 	}
 
-	protected override void FetchReferences () {
-		base.FetchReferences();
-		// NOTHING
-	}
-
-	protected override void CleanupReferences () {
-		UnsubscribeEvents();
+	protected override void FetchReferences ()
+	{
+		base.FetchReferences ();
+		checkToPlayMusicOnInit();
 	}
 
 	protected override void HandleNamedEvent (string eventName) {
+		if (stopEvents.ContainsKey(eventName)) {
+			Debug.Log(stopEvents[eventName][0]);
+			StopAudioList(
+				stopEvents[eventName]
+			);
+		}
 		if (playEvents.ContainsKey(eventName)) {
 			PlayAudioList(
 				playEvents[eventName]
-			);
-		}
-		if (stopEvents.ContainsKey(eventName)) {
-			StopAudioList(
-				stopEvents[eventName]
 			);
 		}
 	}
@@ -161,16 +159,18 @@ public class AudioModule : Module, IAudioModule {
 			fileList.PopulateGroups();
 			InitFileDictionary(fileList);
 			AddAudioEvents();
-			SubscribeEvents();
 			if (isAudioListener) {
 				AddAudioListener();
 			}
 			PreloadFiles(fileList.Files);
 			// TODO: Enable after tracks have been delivered
 			// initCyclingAudio();
-			if (playMusicOnInit) {
-				playMainMusic();
-			}
+		}
+	}
+
+	void checkToPlayMusicOnInit() {
+		if (playMusicOnInit) {
+			playMainMusic();
 		}
 	}
 
@@ -236,8 +236,9 @@ public class AudioModule : Module, IAudioModule {
 		EventModule.Subscribe(HandleAudioEvent);
 	}
 
-	protected void UnsubscribeEvents () {
-		base.UnusbscribeEvents();
+	protected override void UnsubscribeEvents ()
+	{
+		base.UnsubscribeEvents();
 		EventModule.Unsubscribe(HandleAudioEvent);
 	}
 

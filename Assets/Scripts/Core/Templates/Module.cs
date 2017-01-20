@@ -27,20 +27,14 @@ public abstract class Module : MonoBehaviourExtended {
 		SceneManager.LoadScene(GAME_OVER_INDEX);
 	}
 		
-	protected override void SetReferences () {
-		// Nothing
+	protected override void CleanupReferences ()
+	{
+		// NOTHING
 	}
 
-	protected override void FetchReferences () {
-		// Nothing
-	}
-
-	protected override void HandleNamedEvent (string eventName) {
-		// Nothing
-	}
-
-	protected override void CleanupReferences () {
-		// Nothing
+	protected override void HandleNamedEvent (string eventName)
+	{
+		// NOTHING
 	}
 
 	protected string spritePath(string fileName)

@@ -103,6 +103,19 @@ public class ModuleController : SingletonController<ModuleController> {
 
 		AbilityData abilityData = parser.ParseJSONFromResources<AbilityData>("Abilities");
 		abilities.Init(abilityData);
+		if(createWorld) {
+			EventModule.Event("Ambience");
+			EventModule.Event("PlayInGameMusic");
+		}
+	}
+
+	protected override void CleanupReferences ()
+	{
+		base.CleanupReferences ();
+		if(createWorld) {
+			EventModule.Event("StopAmbience");
+			EventModule.Event("PlayMenuMusic");
+		}
 	}
 
 	string getUnitsCSVPath(string levelName)

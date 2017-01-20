@@ -238,5 +238,6 @@ public enum PODEvent {
 	PlayerMagicAttack,
 	PlayerMeleeAttack,
 	StatPanelClosed,
-
+	PlayerKilled,
+	BossKilled,
 }

@@ -146,5 +146,4 @@ public class CombatModule : Module, ICombatModule
 	public void KillUnit (IUnit unit) {
 
 	}
-
 }

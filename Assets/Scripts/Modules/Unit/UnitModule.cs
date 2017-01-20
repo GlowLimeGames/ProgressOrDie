@@ -96,6 +96,9 @@ public class UnitModule : Module
 			EnemyNPC enemy = unit as EnemyNPC;
 			Player().EarnStatPoints(enemy.StatPointsOnKill);
 			EventModule.Event("EnemyDeath");
+			if(unit is BossNPC) {
+				EventModule.Event(PODEvent.BossKilled);
+			}
 		}
 	}
 
@@ -156,6 +159,7 @@ public class UnitModule : Module
 	public void HandlePlayerKilled()
 	{
 		loadGameOver();
+		EventModule.Event(PODEvent.PlayerKilled);
 	}
 
 	public EnemyNPC[] GetEnemiesInRange (PlayerCharacter player) {

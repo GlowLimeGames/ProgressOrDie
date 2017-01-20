@@ -8,6 +8,7 @@ using System.Collections;
 
 public abstract class MonoBehaviourExtended : MonoBehaviour, System.IComparable {
 	protected const int MAIN_MENU_INDEX = 1;
+	protected const int GAME_INDEX = 2;
 	protected const int CREDITS_INDEX = 3;
 	protected const int GAME_OVER_INDEX = 4;
 

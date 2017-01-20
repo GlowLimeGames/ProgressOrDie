@@ -1,11 +1,9 @@
 {
-     "ConstitutionToHPRatio" : 15,
-     "MaxSpeedInCharacterCreation" : 15,
      "MaxSpeed" : 30,
      "DamagePerMagicPoint" : 3,
      "DamagePerStrengthPoint" : 5,
      "MaxSkill" : 50,
-     "CriticalHitRatePerSkillPoint" : 0.015,
+     "CriticalHitRatePerSkillPoint" : 0.01,
      "BaseCriticalHitRate" : 0,
      "BaseCriticalHitDamageMultiplier" : 2,
      "DamageAddedToCriticalHitMultiplierPerSkillPoint" : 0.02,

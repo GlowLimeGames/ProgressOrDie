@@ -1,5 +1,5 @@
 ﻿/*
- * Author(s): Isaiah Mann
+ * Author(s): Ian Macpherson, Isaiah Mann
  * Description: [to be added]
  * Usage: [no notes]
  */

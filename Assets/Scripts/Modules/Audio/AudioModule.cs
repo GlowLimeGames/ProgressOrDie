@@ -63,7 +63,6 @@ public class AudioModule : Module, IAudioModule {
 
 	protected override void HandleNamedEvent (string eventName) {
 		if (stopEvents.ContainsKey(eventName)) {
-			Debug.Log(stopEvents[eventName][0]);
 			StopAudioList(
 				stopEvents[eventName]
 			);

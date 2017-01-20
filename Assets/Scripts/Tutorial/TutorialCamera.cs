@@ -12,14 +12,14 @@ public class TutorialCamera : MonoBehaviour {
 	void Update () {
 		if (transform.position.y == 135) {
 			if (Input.GetMouseButtonDown (1)) {
-				print ("Level 1");
+				Application.LoadLevel ("LevelSelect");
 			}
 		}
 		if (Input.GetMouseButtonDown (0)) {
-			if (transform.position.y == 0) {
-				print ("Level 1");
+			if (transform.position.y == 15) {
+				Application.LoadLevel ("LevelSelect");
 			}
-			if (transform.position.y > 0) {
+			if (transform.position.y > 15) {
 				transform.position = transform.position - new Vector3 (0, 15, 0);
 			}
 		}

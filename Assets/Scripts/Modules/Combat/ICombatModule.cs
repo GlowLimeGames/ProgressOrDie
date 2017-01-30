@@ -5,13 +5,13 @@
 
 public interface ICombatModule {
 
-	bool IsTargetInRange (IUnit attacker, IUnit target);
+	bool IsTargetInRange (IUnit attacker, IUnit target, AttackType attackType);
 
 	bool IsTargetAdjacent (IUnit attacker, IUnit target);
 
 	void MeleeAttack (IUnit attacker, IUnit target);
 
-	void RangedAttack (IUnit attacker, IUnit target);
+	void MagicAttack (IUnit attacker, IUnit target);
 
 	void FleeAttempt (IStatModule playerstats, IUnit unit);
 

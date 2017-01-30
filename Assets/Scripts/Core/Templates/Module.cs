@@ -5,12 +5,15 @@
 
 using UnityEngine;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public abstract class Module : MonoBehaviourExtended {
 	protected const string SPRITE_DIR = "Sprites";
 	protected const string JSON_DIR = "JSON";
 	protected const string CSV_DIR = "CSV";
 	protected const string AUDIO_DIR = "Audio";
+	protected const string PREFABS_DIR = "Prefabs";
+	protected const string ENEMIES_DIR = "Enemies";
 
 	[SerializeField]
 	protected string id;
@@ -18,21 +21,20 @@ public abstract class Module : MonoBehaviourExtended {
 	public virtual string GetId () {
 		return id;
 	}
-
-	protected override void SetReferences () {
-		// Nothing
+		
+	protected void loadGameOver()
+	{
+		SceneManager.LoadScene(GAME_OVER_INDEX);
+	}
+		
+	protected override void CleanupReferences ()
+	{
+		// NOTHING
 	}
 
-	protected override void FetchReferences () {
-		// Nothing
-	}
-
-	protected override void HandleNamedEvent (string eventName) {
-		// Nothing
-	}
-
-	protected override void CleanupReferences () {
-		// Nothing
+	protected override void HandleNamedEvent (string eventName)
+	{
+		// NOTHING
 	}
 
 	protected string spritePath(string fileName)

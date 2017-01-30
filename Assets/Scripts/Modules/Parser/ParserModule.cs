@@ -33,7 +33,8 @@ public class ParserModule : Module, IParserModule {
 		result = new string[width, height];
 		for (int x = 0; x < width; x++) {
 			for (int y = 0; y < height; y++) {
-				result[x, y] = allStringsByWord[y][x].Trim();
+				// Need to reverse the x-axis so the file reads in correctly
+				result[x, y] = allStringsByWord[height - y - 1][x].Trim();
 			}
 		}
 		return result;

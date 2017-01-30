@@ -1,0 +1,121 @@
+{
+  "Abilities" : [
+    {
+      "Ability" : "HealingSong",
+      "StrengthRequirement" : 0,
+      "SoulRequirement" : 45,
+      "AgilityRequirement" : 0,
+      "BulkRequirement" : 0,
+      "PrecisionRequirement" : 0,
+      "TraitToll" : -10
+    },
+    {
+      "Ability" : "LightofDestruction",
+      "StrengthRequirement" : 0,
+      "SoulRequirement" : 45,
+      "AgilityRequirement" : 0,
+      "BulkRequirement" : 0,
+      "PrecisionRequirement" : 0,
+      "TraitToll" : -5
+    },
+    {
+      "Ability" : "SongofDissonance",
+      "StrengthRequirement" : 0,
+      "SoulRequirement" : 60,
+      "AgilityRequirement" : 0,
+      "BulkRequirement" : 0,
+      "PrecisionRequirement" : 0,
+      "TraitToll" : -15
+    },
+    {
+      "Ability" : "BulkUp",
+      "StrengthRequirement" : 0,
+      "SoulRequirement" : 0,
+      "AgilityRequirement" : 0,
+      "BulkRequirement" : 150,
+      "PrecisionRequirement" : 0,
+      "TraitToll" : -10
+    },
+    {
+      "Ability" : "Battlecry",
+      "StrengthRequirement" : 0,
+      "SoulRequirement" : 0,
+      "AgilityRequirement" : 0,
+      "BulkRequirement" : 150,
+      "PrecisionRequirement" : 0,
+      "TraitToll" : -10
+    },
+    {
+      "Ability" : "Nature'sArmor",
+      "StrengthRequirement" : 0,
+      "SoulRequirement" : 0,
+      "AgilityRequirement" : 0,
+      "BulkRequirement" : 350,
+      "PrecisionRequirement" : 0,
+      "TraitToll" : -15
+    },
+    {
+      "Ability" : "FlyingSlash",
+      "StrengthRequirement" : "",
+      "SoulRequirement" : "",
+      "AgilityRequirement" : "",
+      "BulkRequirement" : "",
+      "PrecisionRequirement" : "",
+      "TraitToll" : ""
+    },
+    {
+      "Ability" : "FocusStrength",
+      "StrengthRequirement" : "",
+      "SoulRequirement" : "",
+      "AgilityRequirement" : "",
+      "BulkRequirement" : "",
+      "PrecisionRequirement" : "",
+      "TraitToll" : ""
+    },
+    {
+      "Ability" : "MasterSwordsman",
+      "StrengthRequirement" : "",
+      "SoulRequirement" : "",
+      "AgilityRequirement" : "",
+      "BulkRequirement" : "",
+      "PrecisionRequirement" : "",
+      "TraitToll" : ""
+    },
+    {
+      "Ability" : "AncestralBlessing",
+      "StrengthRequirement" : "",
+      "SoulRequirement" : "",
+      "AgilityRequirement" : "",
+      "BulkRequirement" : "",
+      "PrecisionRequirement" : "",
+      "TraitToll" : ""
+    },
+    {
+      "Ability" : "YokaiPossession",
+      "StrengthRequirement" : "",
+      "SoulRequirement" : "",
+      "AgilityRequirement" : "",
+      "BulkRequirement" : "",
+      "PrecisionRequirement" : "",
+      "TraitToll" : ""
+    },
+    {
+      "Ability" : "Satsujinki",
+      "StrengthRequirement" : "",
+      "SoulRequirement" : "",
+      "AgilityRequirement" : "",
+      "BulkRequirement" : "",
+      "PrecisionRequirement" : "",
+      "TraitToll" : ""
+    },
+    {
+      "Ability" : "Zone",
+      "StrengthRequirement" : "",
+      "SoulRequirement" : "",
+      "AgilityRequirement" : "",
+      "BulkRequirement" : "",
+      "PrecisionRequirement" : "",
+      "TraitToll" : ""
+    }
+  ]
+}

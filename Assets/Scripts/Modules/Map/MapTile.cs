@@ -9,7 +9,7 @@ public class MapTile : WorldData, IMapTile
 {
 	public static MapTile Default {
 		get {
-			return new MapTile(0, 0, new TileType());
+			return new MapTile(0, 0, TileType.Default);
 		}
 	}
 
@@ -22,6 +22,18 @@ public class MapTile : WorldData, IMapTile
 	public TileType TileType {
 		get {
 			return this.type;
+		}
+	}
+
+	public bool EnemyPassable {
+		get {
+			return type.MonsterPassable;
+		}
+	}
+
+	public bool PlayerPassable {
+		get {
+			return type.PlayerPassable;
 		}
 	}
 

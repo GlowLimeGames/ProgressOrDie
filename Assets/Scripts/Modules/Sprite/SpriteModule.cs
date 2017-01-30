@@ -5,10 +5,14 @@
  */
 
 using UnityEngine;
+using System.IO;
 using System.Collections.Generic;
 
 public class SpriteModule : Module 
 {	
+	const string TILE_DIR = "Tiles";
+	const string ENEMY_DIR = "Enemies";
+
 	const string TILES_SUFFIX = "Tile";
 
 	Dictionary<string, Sprite> spriteLookup = new Dictionary<string, Sprite>();
@@ -45,15 +49,16 @@ public class SpriteModule : Module
 
 	Sprite loadSpriteFromResources(string fileName)
 	{
-		return Resources.Load<Sprite>(spritePath(fileName));
+		Sprite sprite = Resources.Load<Sprite>(spritePath(fileName));
+		return sprite;
 	}
 
 	string getTileFileName(TileType type)
 	{
-		return string.Format("{0}{1}", type.TileName, TILES_SUFFIX);
+		return Path.Combine(TILE_DIR, string.Format("{0}{1}", type.TileName.Trim(), TILES_SUFFIX));
 	}
 
 	string getEnemyFileName(EnemyDescriptor descriptor) {
-		return descriptor.Key;
+		return Path.Combine(ENEMY_DIR, descriptor.Key.Trim());
 	}
 }

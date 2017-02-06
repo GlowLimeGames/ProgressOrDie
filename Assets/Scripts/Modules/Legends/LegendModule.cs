@@ -15,6 +15,7 @@ public class LegendModule : Module
 	public void Init(StatModule stats, UnitModule units, LegendData legends) {
 		this.units = units;
 		this.legends = legends;
+		print("The player has " + getPlayer().GetSpeed() + " speed");
 	}
 
 	void changePlayerSkill(int change) {
@@ -24,15 +25,15 @@ public class LegendModule : Module
 	void changePlayerStrength(int change) {
 		units.ChangePlayerStrength(change);
 	}
-		
+
 	void changePlayerMagic(int change) {
 		units.ChangePlayerMagic(change);
 	}
-		
+
 	void changePlayerSpeed(int change) {
 		units.ChangePlayerSpeed(change);
 	}
-		
+
 	void changePlayerConstitution(int change) {
 		units.ChangePlayerConstitution(change);
 	}
@@ -69,6 +70,18 @@ public class LegendModule : Module
 		return legends.Get(legendType, legendStreak);
 	}
 
+	public void changeStats(string type, int levelCount) {
+		int modStrength = getLegend(type, levelCount).GetStrengthMod();
+		int modSkill = getLegend(type, levelCount).GetSkillMod();
+		int modMagic = getLegend(type, levelCount).GetMagicMod();
+		int modConstitution = getLegend(type, levelCount).GetConstitutionMod();
+		changePlayerStrength(modStrength);
+		changePlayerSkill(modSkill);
+		changePlayerMagic(modMagic);
+		changePlayerConstitution(modConstitution);
+
+	}
+
 }
 
 [System.Serializable]
@@ -99,14 +112,16 @@ public class LegendData : SerializableData
 
 	void checkLegends() {
 		if(legendLookup == null) {
+			legendLookup = new Dictionary<string, Dictionary<int, PlayerLegend>>();
 			foreach (string gameEndKey in System.Enum.GetNames(typeof(GameEndType))) {
 				legendLookup.Add(gameEndKey, new Dictionary<int, PlayerLegend>());
 			}
 			foreach (PlayerLegend legend in Legends) {
-
+				legendLookup[legend.Type].Add(legend.LevelCount, legend);
 			}
 		}
 	}
+
 
 }
 
@@ -120,4 +135,25 @@ public class PlayerLegend : SerializableData
 	public int ConstitutionMod;
 	public int SkillMod;
 	public int MagicMod;
+	public bool TakesEnemyName;
+
+	public string FormatLegendWithEnemyName(EnemyNPC enemy) {
+		return string.Format(Legend, enemy.Descriptor.Types[0]);
+	}
+
+	public int GetStrengthMod() {
+		return StrengthMod;
+	}
+
+	public int GetConstitutionMod() {
+		return ConstitutionMod;
+	}
+
+	public int GetSkillMod() {
+		return SkillMod;
+	}
+
+	public int GetMagicMod() {
+		return MagicMod;
+	}
 }
